@@ -88,7 +88,7 @@ exports.render = data => (/*html*/`
     </li>
     <li>
       <a href="/flask-tutorial">
-        <h2>Flask 2 Tutorial</h2>
+        <h2>Flask 2 Tutorials</h2>
       </a>
     </li>
   </ul>

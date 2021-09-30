@@ -7,7 +7,7 @@ exports.render = data => (/*html*/`
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Codecookies ${data.title ? `| ${data.title}` : ''}</title>
+  <title>Code Cookies ${data.title ? `| ${data.title}` : ''}</title>
   <meta name="description" content="Short and friendly tutorials attempting to explain development topics in simple terms and with beginenrs in mind.">
 
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/apple-touch-icon-57x57.png" />
