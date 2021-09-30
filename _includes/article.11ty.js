@@ -9,7 +9,7 @@ const htmlStyles = /*css*/`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #78909C;
+  background-color: #0066A8;
 }
 #video p {
   display: block;
@@ -46,10 +46,10 @@ article ul,
 article ol {
   padding-left: 20px;
 }
-article h3 {
+article h2 {
   margin: 30px 0 10px 0;
 }
-article h4 {
+article h3 {
   margin: 20px 0 10px 0;
 }
 `
@@ -76,7 +76,7 @@ exports.render = data => (/*html*/`
   <div id="video">
     <p>
       <button onClick="showVideo('${data.videoId}')" name="Play" title="Play YouTube Video">&#9658;</button>
-      <small>⚠️ Clicking the <i>Play</i> button above will load a video from YouTube. For playing YouTube videos, <a href="https://policies.google.com/privacy" target="_blank">Google's privacy policy</a> applies.</small>
+      <small>⚠️ Clicking the <i>Play</i> button above will load a video from YouTube. For playing YouTube videos, <a rel="noreferrer" href="https://policies.google.com/privacy" target="_blank">Google's privacy policy</a> applies.</small>
     </p>
   </div>
   

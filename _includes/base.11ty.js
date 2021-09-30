@@ -25,7 +25,7 @@ exports.render = data => (/*html*/`
       line-height: 1.5;
     }
     a {
-      color: #0094E8;
+      color: #0066A8;
     }
     code {
       background-color: #f5f5f5;

@@ -3,7 +3,7 @@ title: Basic Routing
 videoId: DnyukDK3pGA
 ---
 
-### Import modules
+## Import modules
 
 In Python, you can import packages using the `import` keyword. 
 
@@ -11,7 +11,7 @@ If you want to import a specific class or function from a package or file you wr
 
 In the case of Flask, we actually import the class `Flask` from the package `flask`. 
 
-### Initialize Flask application
+## Initialize Flask application
 
 To initialize your flask application, create a variable and assign it to an instance of the `Flask` class with `__name__` as the parameter:
 
@@ -21,7 +21,7 @@ app = Flask(__name__)
 
 `__name__` helps Flask find other files and modules related to your project.
 
-#### Aside: Python classes
+### Aside: Python classes
 
 If you're not too familiar with what classes look like in Python have a quick look at this example: 
 
@@ -45,11 +45,11 @@ print(my_cookie.description())
 # > This cookie is a oatmeal raisin cookie.
 ```
 
-#### Aside: \_\_name__
+### Aside: \_\_name__
 
 `__name__` is a predefined variable by Python. In the file that's executed with e.g. `python app.py` it returns a string `__main__`. In another modules that's possibly imported into your main file it returns the name of the module. So in a separate `config.py` file, for example, it would return the string "config". 
 
-### Creating routes
+## Creating routes
 
 In order to create a route in Flask you first define a function that's meant to be executed when a route is accessed. 
 
@@ -69,7 +69,7 @@ def index():
   return 'Hello World'
 ```
 
-#### Aside: decorators
+### Aside: decorators
 
 A decorator function let's you pass the result of one function to another and execute some code before and after it. Imagine for example the following situation in Python: 
 
@@ -108,7 +108,7 @@ In Flask, this pattern is used to connect Flask's own function for routing incom
 
 This way, whenever someone accesses a specific route defined with `@app.get()`, the connected function is executed. And whatever your function returns is returned to the users who access the given route. 
 
-### More Routes
+## More Routes
 
 To add additional routes, you can just define new functions and attach decorator methods to them: 
 
@@ -142,11 +142,11 @@ You can easily define alternative HTTP methods as well:
 @app.post('contact')
 ```
 
-### Flask Server
+## Flask Server
 
 To run Flask's own built-in server, just run `flask run`. This will allow you to access your website in the web browser under the URL: [http://localhost:5000]()
 
-### Environment variables
+## Environment variables
 
 Right now your Flask application server has to restart every time you make a change. That's because Flask thinks it's running on a production environment.
 
@@ -184,6 +184,6 @@ app.config.from_object('config')
 
 That's it. 
 
-#### Aside: .gitignore
+### Aside: .gitignore
 
 Make sure to add `.env` and `__pycache__` to your .gitignore file. Those shouldn't show up in your git repository either.
