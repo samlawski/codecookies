@@ -49,9 +49,6 @@ body > main a:hover {
     transform: rotate(0deg);
   }
 }
-
-
-
 `
 
 
@@ -87,7 +84,7 @@ exports.render = data => (/*html*/`
       </a>
     </li>
     <li>
-      <a href="/flask-tutorial">
+      <a href="/flask-2-tutorial">
         <h2>Flask 2 Tutorials</h2>
       </a>
     </li>
