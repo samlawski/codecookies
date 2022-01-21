@@ -11,7 +11,7 @@ body > main ol {
   list-style: none;
 }
 
-body > main a {
+body > main ol a {
   padding: 10px;
   display: block;
   margin-bottom: 10px;
@@ -22,7 +22,7 @@ body > main a {
   color: black;
 }
 
-body > main a:hover {
+body > main ol a:hover {
   background-color: #0094E8;
   background-image: linear-gradient(to left, #0094E8, #00FFAF);
 }
@@ -42,7 +42,10 @@ exports.render = data => (/*html*/`
   ${data.content}
 
   <ol>
-    ${data.collections[data.tag].map((article, i) => `<li><a href="${article.url}">${i + 1}. ${article.data.title}</a></li>`).join("\n")}
+    ${data.collections[data.tag]
+      .sort((a, b) => (a.filePathStem > b.filePathStem) ? 1 : -1)
+      .map((article, i) => `<li><a href="${article.url}">${i + 1}. ${article.data.title}</a></li>`).join("\n")
+    }
   </ol>
 </main>
 `)
