@@ -84,6 +84,11 @@ exports.render = data => (/*html*/`
       </a>
     </li>
     <li>
+      <a href="/python">
+        <h2>Python Short-Tutorials</h2>
+      </a>
+    </li>
+    <li>
       <a href="/flask-2-tutorial">
         <h2>Flask 2 Tutorials</h2>
       </a>
