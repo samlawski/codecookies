@@ -5,6 +5,8 @@ const htmlStyles = /*css*/`
   padding-top: 0;
   height: 0;
   overflow: hidden;
+  
+  margin-bottom: 20px;
 
   display: flex;
   align-items: center;
@@ -39,9 +41,6 @@ const htmlStyles = /*css*/`
   height: 100%;
 }
 
-article {
-  margin-top: 20px;
-}
 article ul,
 article ol {
   padding-left: 20px;
@@ -62,6 +61,15 @@ const htmlScripts = /*html*/`
 </script>
 `
 
+const videoEmbed = videoId => (/*html*/`
+<div id="video">
+  <p>
+    <button onClick="showVideo('${videoId}')" name="Play" title="Play YouTube Video">&#9658;</button>
+    <small>Clicking the <i>Play</i> button above will load a video from YouTube. For playing YouTube videos, <a rel="noreferrer" href="https://policies.google.com/privacy" target="_blank">Google's privacy policy</a> applies.</small>
+  </p>
+</div>
+`)
+
 
 exports.render = data => (/*html*/`
 <nav>
@@ -73,18 +81,19 @@ exports.render = data => (/*html*/`
 </header>
 
 <main>
-  <div id="video">
-    <p>
-      <button onClick="showVideo('${data.videoId}')" name="Play" title="Play YouTube Video">&#9658;</button>
-      <small>⚠️ Clicking the <i>Play</i> button above will load a video from YouTube. For playing YouTube videos, <a rel="noreferrer" href="https://policies.google.com/privacy" target="_blank">Google's privacy policy</a> applies.</small>
-    </p>
-  </div>
-  
+  ${data.videoId ? videoEmbed(data.videoId) : ''}
 
   <article>
     ${data.content}
   </article>
 </main>
+
+<footer>
+  <nav>
+    Back to <a href="/${data.page.url.split('/')[1]}">${data.name}</a> 
+  </nav>
+</footer>
+
 `)
 
 

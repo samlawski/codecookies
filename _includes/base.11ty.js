@@ -67,9 +67,14 @@ exports.render = data => (/*html*/`
       overflow-x: auto;
       margin-top: 10px;
       margin-bottom: 10px;
+
+      border: 1px solid #ccc;
+      box-shadow: inset 0 0 3px #ccc;
+      
     }
     pre code {
       padding: 0;
+      background-color: transparent;
     }
 
     /* Layout */
@@ -95,6 +100,7 @@ exports.render = data => (/*html*/`
       line-height: 1.5;
       color: rgba(0, 0, 0, .7);
       margin-top: 20px;
+      text-align: center;
     }
 
     /* Cookie Animation */
