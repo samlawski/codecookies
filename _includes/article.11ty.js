@@ -51,6 +51,10 @@ article h2 {
 article h3 {
   margin: 20px 0 10px 0;
 }
+article img {
+  max-width: 100%;
+  margin: auto;
+}
 `
 
 const htmlScripts = /*html*/`
