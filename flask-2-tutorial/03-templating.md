@@ -117,7 +117,8 @@ def index():
 </html>
   '''
 
-app.run()
+if __name__ == '__main__':
+  app.run()
 ```
 
 Try it out. This is a complete and functioning way of returning a full HTML document. But you will probably agree that this is going to have our Python code get out of hand pretty soon. And it's not very convenient. 

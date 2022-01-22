@@ -122,3 +122,5 @@ To practice what you've learned in this exercise:
 1. Create a CSS and maybe a JavaScript file for your project and add them to the static folder.
 2. Load the CSS and JavaScript files correctly in your HTML templates
 3. Add a downloadable file to your application. 
+
+This can be a good opportunity to spend some time with the layout of your application. Make it look nice and spend some time writing out your CSS code. 

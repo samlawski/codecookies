@@ -82,6 +82,17 @@ Now that we have a route defined, the last step is to actually run our app as a 
 
 Now, you can just execute the python file with `python app.py` and should see a server running. It'll tell you that you can now access your server using the link [127.0.0.1:5000](http://127.0.0.1:5000). You can just type in that IP in the browser and should see "Hello World" show up.
 
+Very nice. But this part isn't completely done, yet. It's common practice to hide the `app.run()` behind a condition to check if the `__name__` variable is equal to the string `"__main__"` like this: 
+
+```py
+if __name__ == '__main__':
+  app.run()
+```
+
+Remember the `__name__` variable from above? The variable will always equal the string `__main__` in the file that's being executed. For example, if you had a separate file in your project called **test.py** and added to it `print(__name__)`, then you'd import the **test.py** file in your **app.py** file with `import test`. Then, you execute the **app.py** file with `python app.py`. In that case, you'd see the word "test" printed out in the command line. If instead, you add `print(__name__)` now in the **app.py** file, you'll see `"__main__"` printed out. Try it to get a feel for it!
+
+This gives you an idea for why we added the condition above. The condition makes sure the server is only started if the **app.py** file is executed directly and **not** executed whenever we access the the file by e.g. importing it. This will be more relevant later on.
+
 ## Config and Environment Variables
 
 Right now, you'd have to restart your server every time you make a change in your code. That's a little tedious. Also, you may have noticed a little warning that tells you not to use the server in production. You see that warning because your Flask app doesn't know yet that it's being executed on a development environment (your local computer).

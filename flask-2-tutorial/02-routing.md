@@ -29,7 +29,7 @@ Other routes are usually defined by different strings following after the slash 
 To define more routes in Flask, you can just add more functions and decorator methods and change the parameter of the `.route('/')` method to whatever route you would like to define. 
 It's **important**, though, that the function name is a different one for each route!
 
-Let's try it out. Add another route to your **app.py** file below the existing route but _above_ the `app.run()`.
+Let's try it out. Add another route to your **app.py** file below the existing route but _above_ the `app.run()` and its condition.
 
 ```py
 @app.route('/about')
@@ -173,7 +173,8 @@ def index():
 
   return '<p>A random number between 1 and 100 is <b>' + str(random_number) + '</b></p>'
 
-app.run()
+if __name__ == '__main__':
+  app.run()
 ```
 
 The code example above is very much like our very first, simple Flask application. Additionally we import the function `random` from Python's standard library `randint`. Then, in our `index()` function we have an extra line to use `randint()` to generate a random number between 1 and 100 and store that in the variable `random_number`.
