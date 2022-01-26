@@ -267,7 +267,17 @@ If you choose to just remove the migration file, you can just delete it, make wh
 
 ## Using another database
 
-Everything you learned about in this exercise works exactly the same for another SQL database such as Postgres or MySQL. With those, your configuration `app.config['SQLALCHEMY_DATABASE_URI']` will not point to `sqlite`. Instead, you'd install the software, e.g. Postgres. Then, you'd set up a database and in the end get a URL to that database. That URL you could insert in the configuration instead of `'sqlite:///database.db'`. We will do exactly that in a later exercise and when you have to deploy the application to a server.
+Everything you learned about in this exercise works exactly the same for another SQL database such as Postgres or MySQL. With those, your configuration `SQLALCHEMY_DATABASE_URI` will not point to `sqlite`. Instead, you'd install the software, e.g. Postgres. Then, you'd set up a database and in the end get a URL to that database. That URL you could insert in the configuration instead of `'sqlite:///database.db'`. We will do exactly that in a later exercise and when you have to deploy the application to a server.
+
+## Temporary side note: SQL_ALCHEMY_TRACK_MODIFICATIONS
+
+Other tutorials may tell you to set a variable called `SQL_ALCHEMY_TRACK_MODIFICATIONS`. I purposely excluded that in this tutorial because this feature is being deprecated and the variable is not relevant to be set in the future. That's why you may also see this warning sometimes: 
+
+```
+FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+```
+
+For smaller applications, this warning can be savely ignored. 
 
 ## 🛠  Practice 
 
