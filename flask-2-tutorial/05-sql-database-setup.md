@@ -75,12 +75,18 @@ Similarly to `Flask`, `SQLAlchemy` is a class that needs to be initialized. As a
 db = SQLAlchemy(app)
 ```
 
-Add the lien you see above right below the config function ands till above the model you created. 
+Add the line you see above right below the config function and still above the model you created. 
 
-Lastly, we should tell SQLAlchemy where to find out database. By default it'll use `sqlite` in the memory. But we want it to create an **sqlite** database file in our project directory. To do that you can add this line right below your other `app.config` line: 
+Lastly, we should tell SQLAlchemy where to find out database. By default it'll use `sqlite` in the memory. But we want it to create an **sqlite** database file in our project directory. To do that you can add another configuration to Flask. Normally, you would do that by writing:
 
 ```py
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+```
+
+But don't do that! Remember, we actually have this line in our project `app.config.from_object('config')` to load our config file? We can use this file any time a tutorial tells use to define a configuration with `app.config[]`. Open your **config.py** file and add this line at the bottom: 
+
+```py
+SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
 ```
 
 `SQLALCHEMY_DATABASE_URI` is a predefined configuration variable used by SQLAlchemy to know the URL to your database. Here we tell SQLAlchemy to use **sqlite** and store it in a file called **database.db**. 
