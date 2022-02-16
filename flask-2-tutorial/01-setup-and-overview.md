@@ -28,6 +28,8 @@ Make sure to create a .gitignore file and include the `venv` folder in it.
 
 Don't forget to **activate** the environment. Then, install Flask with `pip install flask`.
 
+_Side note: If you're on macOS or work with someone who uses macOS it's a good idea to also add `.DS_Store` to the **.gitignore** file. That's a file auotmatically created by macOS containing some meta information. It's really annoying and useless in our repository code, though._
+
 ## Create a Flask app
 
 A Flask app can be as simple as a single Python file. Most larger projects benefit from multiple files. But as we just start learning it can be helpful to have it all in one place to understand how everything is connected a little better. Later in the course, you'll learn to split up your application into multiple files. That's actually considered best practice and will help you a lot as your project grows. 
@@ -106,7 +108,7 @@ Install it, running `pip install python-dotenv`. To make use of the package, we'
 Create a file called **config.py**. In it, import `load_dotenv` from `dotenv` and execute that function. It should look like this: 
 
 ```py
-from dotenv import load_env
+from dotenv import load_dotenv
 
 load_dotenv()
 ```

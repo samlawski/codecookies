@@ -28,13 +28,13 @@ We're going to go with [Gunicorn](https://gunicorn.org/).
 
 To install it run `pip install gunicorn` while your virtual environment is active. (Don't forget to freeze the requirements.txt file.)
 
-To use _Gunicorn_ to run your web server, instead of running `python app.py` in the terminal, you just run: 
+To use _Gunicorn_ to run your web server, instead of running `python run.py` in the terminal, you just run: 
 
 ```sh
-gunicorn app:app
+gunicorn run:app
 ```
 
-That's it. Now you have your application running with the _Gunicorn_ web server instead of the built-in Flask server. 
+That's it. Now you have your application running with the _Gunicorn_ web server instead of the built-in Flask server. (Note that the port of the IP might be different. Instead of 127.0.0.1:5000 it might be 127.0.0.1:8000. Check the output in the Terminal to see the link to your application.)
 
 While you develop your application that doesn't really matter much. You can continue to use the built-in Flask server. But you can also use it locally. In larger applications, it can be a good idea to use the same software on you computer as you do on the server. This way you catch issues specific to e.g. the web server early. 
 
@@ -44,32 +44,19 @@ As mentioned in previous exercises, you can't use _sqlite_ on providers like Her
 
 Instead, we're going to use Postgres on Heroku. Postgres is a separate piece of software running on your server. You can think of it as another mini web app with its own web server and URL. For Flask to interact with it you don't actually need much except for telling _SQLAlchemy_ what the URL is to the database. 
 
-Remember, in our **config.py** file we defined the `SQLALCHEMY_DATABASE_URI` to be `'sqlite:///database.db'`. That's the URL of our _sqlite_ database. So that's the URL we want to be different on Heroku. 
+Remember, in our **.env** file we defined the `DATABASE_URL` to be `'sqlite:///database.db'`. That's the URL of our _sqlite_ database. So that's the URL we want to be different on Heroku.
 
-One way to do that is to use **environment variables**. Remember, **environment variables** let us define variables for a specific environment. That allows us to define the same variable as something else on _our computer_ than on _the server_.
+Because we're already using an **environment variable** here, there isn't actually much we need to do here. Heroku will automatically set the **environment variable** `DATABASE_URL` to be the URL of our database on Heroku. 
 
-If you remember, we created a **.env** file back in the first exercise. That file includes our **environment variables**. Let's use it to also store the URL to our database. Add `DATABASE_URL=sqlite:///database.db` to it. So it should look like this now: 
-
-```
-FLASK_ENV=development
-DATABASE_URL=sqlite:///database.db
-```
-
-We used `DATABASE_URL` because that's the default environment variable _Heroku_ will automatically set when installing _Postgres_ on _Heroku_.
-
-Back in the **config.py** file we want to use the environment variable now. You access environment variables in Python using the `os` package - specifically the `environ` object of the `os` package. At the top of the **config.py** file, add a new import statement: 
+There is, however, one thing we need to do and it's a little bit silly. Postgres made an update to the default prefix for its databases. In the past it was `postgres://` (remember: just like `sqlite://`). They changed it in newer versions to `postgresql://`. _SQLAlchemy_ has adjusted their code accordingly. But _Heroku_ has not. That will lead to your database not being recognized by default. You can write a little "hack" to fix that issue. In your **/a[[/config.py** change the line of `SQLALCHEMY_DATABASE_URI` to look like this: 
 
 ```py
-from os import environ
+SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL').replace('postgres://', 'postgresql://', 1)
 ```
 
-Now, change the variable definition of `SQLALCHEMY_DATABASE_URI` to this: 
+We use Python's native `.replace()` method to check the environment variable if it includes the string `'postgres://'`. The nice thing about this method is that it just doesn't do anything with our `sqlite` URL because it doesn't include that string. On Heroku, however, it'll replace the string with `'postgresql://'` and fix the issue. Hopefully this issue will be fixed by Heroku at some point. But as of _Feb 16th, 2022_ it's not. 
 
-```py
-SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
-```
-
-This will cause the value of `SQLALCHEMY_DATABASE_URI` to now be determined by the **environment variable** `DATABASE_URL`. 
+Also note, that if you ever want to use Postgres locally on your computer you should adjust that logic and make sure to call the `replace` method only on Heroku. A simple condition should do the trick. 
 
 _Side Note: Because the database and the web application are both on the same server, it's totally fine to just use a URL to connect the application with the database. It's, however, also possible to host the database on a separate server from the actual application. In that case, you cannot just use the URL to connect. That would be extremely insecure! Instead, you need some secret keys or other credentials to verify the connection._
 
@@ -125,6 +112,30 @@ Replace `your-app-name-123` with the name of your app that you got in the previo
 
 Great! Now you have an app and Postgres setup in Heroku (you can actually see the current configuration if you login on heroku.com).
 
+### Setting Environment Variables on Heroku
+
+Remember, we said Heroku will set the `DATABASE_URL` environment variable for us? You can check and see all environment variables by running the following: 
+
+```sh
+heroku config
+```
+
+You'll see that only one variable is set so far. That's the variable of the database we just created in the previous step. But if you look at your **.env** file you'll see that we have a couple more variables defined. So we need to make sure to set those also on Heroku. 
+
+Setting them is just as easy as getting them. Write:
+
+```sh
+heroku config:set FLASK_APP=run.py
+```
+
+and
+
+```sh
+heroku config:set FLASK_ENV=production
+```
+
+If you run `heroku config` now, you'll see the updated environment variables. 
+
 ### Prepare the application for deployment
 
 There are still a couple of adjustments we have to make to our code before we can deploy our application. 
@@ -132,7 +143,7 @@ There are still a couple of adjustments we have to make to our code before we ca
 Heroku requires a file with the name **Procfile** in our project's root. This file includes instructions on how to run the web server. So create a file with that exact name (and no file extension!) and add to it just a single line: 
 
 ```
-web: gunicorn app:app
+web: gunicorn run:app
 ```
 
 Next, we need to install the **psycopg2** package because it's used by Heroku to interact with the Postgres database. It's extremely important that this package is listed in the **requirements.txt** file so that Heroku knows to install it. Just run these two commands:
@@ -141,16 +152,6 @@ Next, we need to install the **psycopg2** package because it's used by Heroku to
 pip install psycopg2
 pip freeze > requirements.txt
 ```
-
-The last step is a little silly but necessary. Postgres made an update to the default prefix for its databases. In the past it was `postgres://` (remember: just like `sqlite://`). They changed it in newer versions to `postgresql://`. _SQLAlchemy_ has adjusted their code accordingly. But _Heroku_ has not. That will lead to your database not being recognized by default. You can write a little "hack" to fix that issue. In your **config.py** change the line of `SQLALCHEMY_DATABASE_URI` to look like this: 
-
-```py
-SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL').replace('postgres://', 'postgresql://', 1)
-```
-
-We use Python's native `.replace()` method to check the environment variable if it includes the string `'postgres://'`. The nice thing about this method is that it just doesn't do anything with our `sqlite` URL because it doesn't include that string. On Heroku, however, it'll replace the string with `'postgresql://'` and fix the issue. Hopefully this issue will be fixed by Heroku at some point. But as of now it's not. 
-
-Also note, that if you ever want to use Postgres locally on your computer you should adjust that logic and make sure to call the `replace` method only on Heroku. A simple condition should do the trick. 
 
 ### Deployment to Heroku
 
@@ -209,21 +210,27 @@ Let's start by running the migrations:
 heroku run flask db upgrade
 ```
 
+_(It's important that your environment variables are set correctly for this step.)_
+
 Once that's done running, you can also execute the seed file: 
 
 ```sh
-heroku run python seed.py
+heroku run python -m app.scripts.seed
 ```
 
 If you go to the /cookies route on Heroku now, you should see our cookies! 
 
-You can use the same command to even run the python console on Heroku by runing
+You can use the same command to even run the python console on Heroku by running
 
 ```sh
 heroku run python
 ```
 
-This can be quite handy if you want to quickly query, create, update, or delete records using the python console on the server. 
+If you quickly `import` your models and just run simple queries or CRUD operations, you can also use the `flask shell` for the by running:
+
+```sh
+heroku run flask shell
+```
 
 ## Side Note on localhost and 127.0.0.1
 

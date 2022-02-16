@@ -205,7 +205,7 @@ mycookieshop.com/cookies/
 mycookieshop.com/cookies/chocolate-chip
 mycookieshop.com/cookies/oatmeal-raisin
 mycookieshop.com/cookies/sugar
-mycookieshop.com/cookies/peanut Butter
+mycookieshop.com/cookies/peanut-butter
 mycookieshop.com/cookies/oatmeal
 mycookieshop.com/cookies/salted-caramel
 ```
@@ -237,7 +237,7 @@ cookies_data = {
   'chocolate-chip' : {'name': 'Chocolate Chip', 'price': '$1.50'},
   'oatmeal-raisin' : {'name': 'Oatmeal Raisin', 'price': '$1.00'},
   'sugar' : {'name': 'Sugar', 'price': '$0.75'},
-  'peanut Butter' : {'name': 'Peanut Butter', 'price': '$0.50'},
+  'peanut-butter' : {'name': 'Peanut Butter', 'price': '$0.50'},
   'oatmeal' : {'name': 'Oatmeal', 'price': '$0.25'},
   'salted-caramel' : {'name': 'Salted Caramel', 'price': '$1.00'},
 }

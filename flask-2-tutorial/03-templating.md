@@ -209,7 +209,7 @@ cookies_data = {
   'chocolate-chip' : {'name': 'Chocolate Chip', 'price': '$1.50'},
   'oatmeal-raisin' : {'name': 'Oatmeal Raisin', 'price': '$1.00'},
   'sugar' : {'name': 'Sugar', 'price': '$0.75'},
-  'peanut Butter' : {'name': 'Peanut Butter', 'price': '$0.50'},
+  'peanut-butter' : {'name': 'Peanut Butter', 'price': '$0.50'},
   'oatmeal' : {'name': 'Oatmeal', 'price': '$0.25'},
   'salted-caramel' : {'name': 'Salted Caramel', 'price': '$1.00'},
 }
@@ -311,7 +311,7 @@ The new part here is this:
 {% endif %}
 ```
 
-Again, this works just like any condition. It just looks a little different in terms of syntax and requires the `endif` in the end to signal the end of your conditional statement. Logically, it works the way you'd expect it to work, though. it only inserts the content into the HTML template if the condition is true. In our case, if the price property of the `cookie` dictionary is equal to `'$0.25'` we don't render it as a link. Instead we render it as strikethough HTML element.
+Again, this works just like any condition. It just looks a little different in terms of syntax and requires the `endif` in the end to signal the end of your conditional statement. Logically, it works the way you'd expect it to work, though. It only inserts the content into the HTML template if the condition is true. In our case, if the price property of the `cookie` dictionary is equal to `'$0.25'` we don't render it as a link. Instead we render it as strikethough HTML element.
 
 ## Jinja: Template inheritance
 
@@ -400,9 +400,9 @@ The code above won't work right now because we don't have any CSS files in our p
 
 This was a lot. And there is a lot more to discover. We just scratched the surface and covered some of the most important features of Jinja. But there are a lot more you could learn about. One important feature we haven't looked at is for example **filters**. I suggest you take some time scrolling through [this page](https://jinja.palletsprojects.com/en/3.0.x/templates/#template-designer-documentation) to get a general overview of what all is possible. You now know enough to get started and learn more as you need to. 
 
-## 🛠  Practice 
+## 🛠  Practice
 
-To practice what you have learned, try to do the following tasks:
+For further practice, apply what you have learned again in an entirely separate project:
 
 1. Use templates for all your routes. 
 2. Use one or more base templates in combination with blocks for all pages of your application. 

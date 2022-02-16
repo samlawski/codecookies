@@ -40,7 +40,7 @@ The first option uses a variable in the **path** of the URL (just like we did wi
 The first URL could be defined in Flask for example like this: 
 
 ```py
-@app.route('/cookies/page-<int:page_number>')
+@blueprint.route('/cookies/page-<int:page_number>')
 def cookies(page_number)
 ```
 
@@ -56,10 +56,10 @@ _Side note on offsets: Some people recommend not defining pages in the URL but a
 
 ## Getting Query Parameters in Flask
 
-To read the query parameters in Flask, you can use the `request` object built into Flask. `request` contains all sorts of interesting information about the request a user is making. To use it you first have to add it to the list of imported items. 
+To read the query parameters in Flask, you can use the `request` object built into Flask. `request` contains all sorts of interesting information about the request a user is making. To use it you first have to add it to the list of imported items. In **/app/cookies/routes.py** add `request` to the imported functions:
 
 ```py
-from flask import Flask, redirect, url_for, render_template, send_file, request
+from flask import Blueprint, render_template, request
 ```
 
 Now, you can use the `request` object within the route functions. The `request` contains all sorts of information such as the current path but also information abou the client, their IP address or browser version. The request also contains information abou the query parameters. That's what we are interested in right now. You can access the `page` parameter by writing:
@@ -73,12 +73,12 @@ The method we use is `request.args.get()`. The first argument is the name of the
 Add this line to your `/cookies` route. You can use a `print()` statement to see if it worked.
 
 ```py
-@app.route('/cookies')
+@blueprint.route('/cookies')
 def cookies():
   page_number = request.args.get('page', 1, type=int)
   print('=> Page number:', page_number)
   all_cookies = Cookie.query.all()
-  return render_template('cookies.html', cookies=all_cookies)
+  return render_template('cookies/index.html', cookies=all_cookies)
 ```
 
 Try going to [http://127.0.0.1:5000/cookies](http://127.0.0.1:5000/cookies), then go to [http://127.0.0.1:5000/cookies?page=2](http://127.0.0.1:5000/cookies?page=2), and finally maybe try something like [http://127.0.0.1:5000/cookies?page=test](http://127.0.0.1:5000/cookies?page=test). Keep an eye on the output in your server's console. With the `print` statement in there, you should see what the `page_number` is every time. 
@@ -114,7 +114,7 @@ items_per_page = 5
 cookies = Cookie.query.offset(page_number * items_per_page).limit(items_per_page).all()
 ```
 
-This would work perfectly fine. But `flask_sqlalchemy` has actually some functionality for pagination already built in. 
+This would work perfectly fine. But `flask_sqlalchemy` has actually some functionality for pagination already built in: the `.paginate()` method.
 
 ## Configure Pagination
 
@@ -123,15 +123,23 @@ First, let's define the number of cookies per page in our **config.py** file. Th
 Add this line: 
 
 ```py
-COOKIES_PER_PAGE = 5
+COOKIES_PER_PAGE = 4
 ```
 
-Back in your **app.py** file, you can now access this variable with `app.config['POSTS_PER_PAGE']`. We'll do that in just a second.
+It's good practice to keep configuration values separate from your logic and import it later.
+
+In your **app.py** file you could access the config variables with `app.config['POSTS_PER_PAGE']`. But that's not possible in a blueprint. So instead, we can make use of the `current_app` object provided by Flask. Add it to your imports in **/app/cookies/routes.py**:
+
+```py
+from flask import Blueprint, render_template, request, current_app
+```
+
+With that we can access the config variables with `current_app.config['POSTS_PER_PAGE']`.
 
 Next, we'll make use of the `paginate` method built into `flask_sqlalchemy`. Add the `paginate` method to the line where you define `Cookie.query.all()` like this: 
 
 ```py
-all_cookies = Cookie.query.paginate(page_number, app.config['COOKIES_PER_PAGE']).items
+all_cookies = Cookie.query.paginate(page_number, current_app.config['COOKIES_PER_PAGE'])
 ```
 
 The first argument defines the current page number. We have defined that above using the query parameters. 
@@ -149,11 +157,11 @@ TypeError: 'Pagination' object is not iterable
 That's because the `.paginate()` method doesn't return a list of objects (like `.all()` would do). Instead it returns an object in itself with more helper methods. We'll fix the error in just a second. But to make it more explicit to other developers on the team or my future self what the variable `all_cookies` represents, I'm going to rename it to `cookies_pagination` both in the route and in the views. This is what my `cookies()` function now looks like: 
 
 ```py
-@app.route('/cookies')
+@blueprint.route('/cookies')
 def cookies():
   page_number = request.args.get('page', 1, type=int)
-  cookies_pagination = Cookie.query.paginate(page_number, app.config['COOKIES_PER_PAGE'])
-  return render_template('cookies.html', cookies_pagination=cookies_pagination)
+  cookies_pagination = Cookie.query.paginate(page_number, current_app.config['COOKIES_PER_PAGE'])
+  return render_template('cookies/index.html', cookies_pagination=cookies_pagination)
 ```
 
 The views are still broken. But we'll fix that now. 
@@ -224,22 +232,63 @@ In this example, we hard-coded the `/cookies` path. This may or may not be fine 
 ```html
 <nav>
   {% if cookies_pagination.prev_num %}
-    <a href="{{ url_for('cookies', page=cookies_pagination.prev_num) }}">Previous Page</a>
+    <a href="{{ url_for('cookies.cookies', page=cookies_pagination.prev_num) }}">Previous Page</a>
   {% else %}
     <span>Previous Page</span>
   {% endif %}
   <span> - </span>
   {% if cookies_pagination.next_num %}
-    <a href="{{ url_for('cookies', page=cookies_pagination.next_num) }}">Next Page</a>
+    <a href="{{ url_for('cookies.cookies', page=cookies_pagination.next_num) }}">Next Page</a>
   {% else %}
     <span>Next Page</span>
   {% endif %}
 </nav>
 ```
 
-You see, you can pass query parameters to the `url_for` method by simply defining them as extra variables. 
+You see, you can pass query parameters to the `url_for` method by simply defining them as extra variables. Also, note, that because we're using blueprints we have to write `cookies.cookies`. The first `cookies` refers to `cookies` blueprint. The second `cookies` refers to the `cookies()` route function. (The index page of the simple pages blueprint would be e.g. `simple_pages.index`.)
 
 There are a lot more things you can do with the methods and properties shown in [the documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/#flask_sqlalchemy.Pagination). Feel free to use it to dive deeper.
+
+## Testing Routes Including Models
+
+Just like in the previous exercises, let's add some tests to make sure our code is stable and working as expected. 
+
+Create a new file: **/app/tests/cookies/test_routes.py**
+
+We'll need our `Cookie` model again. So add: 
+
+```py
+from app.cookies.models import Cookie
+```
+
+First, let's test our `cookies()` function. Create a test function with a failing test:
+
+```py
+def test_cookies_renders_cookies(client):
+  # Page loads and renders cookies
+  response = client.get('/cookies')
+
+  assert b'Chocolate Chip' in response.data
+```
+
+This test shouldn't include anything that you don't know yet already. The test will load the `/cookies` route and check if the page includes the word `Chocolate Chip`. But since every test starts with a blank database, this test should fail. Try it! Run `pytest -v`.
+
+To get the test to actually pass, we need to add the **Arrange** step before we **act** and **assess**. In your test, you should first create the cookie: 
+
+```py
+def test_cookies_renders_cookies(client):
+  # Page loads and renders cookies
+  new_cookie = Cookie(slug='chocolate-chip', name='Chocolate Chip', price=1.50)
+  new_cookie.save()
+
+  response = client.get('/cookies')
+  
+  assert b'Chocolate Chip' in response.data
+```
+
+If you run the test with `pytest -v` and set up your views correctly before, the tests should pass now. 
+
+With this knowledge, you should be able to add another test for the `cookie()` method now that renders a single cookie. Just keep in mind to keep your test function name and comment descriptive and remember to change the route to include whatever `slug` you defined for the cookie. 
 
 ## Side note on code organization
 
@@ -249,3 +298,4 @@ This goes way beyond the scope of this exercise. But you may have been asking yo
 
 1. Apply pagination to a collection in your application.
 2. Add some logic to the view so that pagination links only work if they are supposed to. 
+3. Don't forget to test your new code!
