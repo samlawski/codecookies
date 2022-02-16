@@ -79,11 +79,6 @@ exports.render = data => (/*html*/`
 <main>
   <ul role="list">
     <li>
-      <a href="/command-line-basics">
-        <h2>Command Line Basics</h2>
-      </a>
-    </li>
-    <li>
       <a href="/python">
         <h2>Python Short-Tutorials</h2>
       </a>
