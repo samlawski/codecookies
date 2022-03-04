@@ -5,7 +5,7 @@ slug: "crud"
 templateEngineOverride: md
 ---
 
-In the previous exercises you learned to set up a database and models. But we haven't really done anything with the data yet. How do we do that?
+In the previous exercises, you learned to set up a database and models. But we haven't really done anything with the data yet. How do we do that?
 
 You may have heard of **CRUD**. It stands for Create, Read, Update, Delete. Those are the four ways you can interact with your data. Reading data means getting it from the database. Creating data writes a new record to your database table.
 
@@ -13,9 +13,9 @@ Let's go through each one of them at a time.
 
 ## Create
 
-Right now we have an empty database. In order to read anything we first need to create something. Let's create a bunch of our cookies as records in the database. 
+Right now, we have an empty database. To read anything, we first need to create something. Let's create a bunch of our cookies as records in the database. 
 
-When developers want to add a bunch of data to a database at once they usually do that with a **seed** script file. So let's do exactly that. Create a file and folder at the following path: 
+When developers want to add a bunch of data to a database, they usually do that with a **seed** script file. So let's do exactly that. Create a file and folder at the following path: 
 
 * **/app/scripts/seed.py**
 
@@ -58,17 +58,17 @@ cookies_data = {
 }
 ```
 
-👀  _Attention: The price was a string in our old data set. I adjusted it here to be a number. If it would be a string, our script would break as we defined `price` to be a `db.Numeric` value._
+👀  _Attention: The price was a string in our old data set. I adjusted it here to be a number. If it were a string, our script would break as we defined `price` to be a `db.Numeric` value._
 
-Now, add a for-loop that loops over each data point. This might look different depending on whether you loop over a dictionary or a list. In our example we want to loop over a diciotnary. So this is what it would look like: 
+Now, add a for-loop that loops over each data point. This might look different depending on whether you loop over a dictionary or a list. In our example, we want to loop over a dictionary. So this is what it would look like: 
 
 ```py
 for slug, cookie in cookies_data.items():
 ```
 
-Now, within that loop we want to create a new record for each item and assign the slug, name, and price. Remember, the `id` is set automatically by SQLAlchemy. 
+Now, within that loop, we want to create a new record for each item and assign the slug, name, and price. Remember, the `id` is set automatically by SQLAlchemy. 
 
-There are different ways to accomplish this. But first we need to create an instance of each cookie using the `Cookie` class:
+There are different ways to accomplish this. But first, we need to create an instance of each cookie using the `Cookie` class:
 
 ```py
 for slug, cookie in cookies_data.items():
@@ -88,9 +88,9 @@ db.session.commit()
 ```
 
 The `db.session` represents a temporary version of your database. With `db.session.add()` you say: "Remember this record for a moment in your temporary storage. I'll do something with it later."
-After you have looped through all the records, you then run `db.session.commit()` and with that save all the records at once instead of individually. 
+After you have looped through all the records, you then run `db.session.commit()` and with that, save all the records at once instead of individually. 
 
-Whenever you want to **create**, **update**, or **delete** records in the database, you need to **commit database sessions**. Think of a **database session** as of a temporary version of your database. It's a working draft of your database and it's only saved once you use the `commit` command. 
+Whenever you want to **create**, **update**, or **delete** records in the database, you need to **commit database sessions**. Think of a **database session** as a temporary version of your database. It's a working draft of your database, and it's only saved once you use the `commit` command. 
 
 Run this script executing `python -m app.scripts.seed` in the command line. The `-m` makes sure that all the paths and `import` statements are understood correctly. `app.scripts.seed` is the same way of writing it as we would with import statements.
 
@@ -115,14 +115,14 @@ def cookies():
   return render_template('cookies/index.html', cookies=all_cookies)
 ```
 
-_(We're calling the `Cookie` model here. You should have already imported it in an earlier exericse. But if not, do it now.)_
+_(We're calling the `Cookie` model here. You should have already imported it in an earlier exercise. But if not, do it now.)_
 
-That's only the first step, though. Previously our cookies were all dictionaries. But now they are all class instances. That means, their properties are accessed using **dot-notation** and not **square brackets** anymore (like with dictionaries). Thus, we need to open our **/app/templates/cookies/index.html** file and make some changes. 
+That's only the first step, though. Previously our cookies were all dictionaries. But now, they are all class instances. That means their properties are accessed using **dot-notation** and not **square brackets** anymore (like with dictionaries). Thus, we need to open our **/app/templates/cookies/index.html** file and make some changes. 
 
 First of all, `cookies.items()` will fail because `cookies` is just a list now. 
 So the for-loop should be changed to `{% for cookie in cookies %}`.
 
-Secondly, all the square bracket notation neets to be replaced with **dot-notation**. `cookie['price']` becomes `cookie.price`, `cookie['name']` becomes `cookie.name` and `slug` is now `cookie.slug`. Also, the condition to check for the price now needs to be adjusted to compare to a numerical value. Here is what all the changes look like: 
+Secondly, all the square bracket notation needs to be replaced with **dot-notation**. `cookie['price']` becomes `cookie.price`, `cookie['name']` becomes `cookie.name` and `slug` is now `cookie.slug`. Also, the condition to check for the price now needs to be adjusted to compare to a numerical value. Here is what all the changes look like: 
 
 ```html
 <h1>Cookies</h1>
@@ -143,13 +143,13 @@ If you save all the files and everything went well, your website should look the
 
 ### Query one:
 
-Let's also fix the individual cookie page and with that learn how to get a specific cookie. To grab an individual record based on it's `id`, you would use this method: 
+Let's also fix the individual cookie page and, with that, learn how to get a specific cookie. To grab an individual record based on it's `id`, you would use this method: 
 
 ```py
 cookie = Cookie.query.get(id)
 ```
 
-This would be helpful, if the routes wouldn't use a `slug` but instead the `id`. You could change the link on the `cookies` page to this: 
+This would be helpful if the routes wouldn't use a `slug` but instead the `id`. You could change the link on the `cookies` page to this: 
 
 ```html
 <a href="/cookies/{{ cookie.id }}">{{ cookie.name }}</a>
@@ -161,7 +161,7 @@ That would allow you to use the `id` to get an individual cookie in the `cookie`
 cookie = Cookie.query.filter_by(slug=slug).first()
 ```
 
-The `filter_by` method let's me filter by a specific parameter of my records. It will return a list (even if there is only one item that matches the filter). So To make sure we only get a single cookie record here, we use the `first()` method. 
+The `filter_by` method let's me filter by a specific parameter of my records. It will return a list (even if only one item matches the filter). So To make sure we only get a single cookie record here, we use the `first()` method. 
 
 Here is what all this together looks like: 
 
@@ -172,7 +172,7 @@ def cookie(slug):
   return render_template('cookies/show.html', cookie=cookie)
 ```
 
-You may not have the template for this route yet. So this might be a good opportunity to add one. Note, that I called the file **show.html**. Just like `index` is often used as the file name for a page that shows the whole collection `show` is often used as the file name for the page that shows an individual collection item. 
+You may not have the template for this route yet. So this might be a good opportunity to add one. Note that I called the file **show.html**. Just like the name `index` is often used as the file name for a page that shows the whole collection, `show` is often used as the file name for the page that shows an individual collection item. 
 
 Here is what the **/app/templates/cookies/show.html** file could look like: 
 
@@ -194,9 +194,9 @@ Here is what the **/app/templates/cookies/show.html** file could look like:
 
 (Assuming you created a base.html file in the exercise before.)
 
-Try this out and you should see all the values show up correctly. 
+Try this out, and you should see all the values show up correctly. 
 
-Now, there is one thing we had before in the `cookie` reoute that we just removed. That's a validation that makes sure a cookie actually exists. We could add another condition like `if cookie:` that checks whether or not a cookie was found and conditionally render a different template. 
+Now, there is one thing we had before in the `cookie` route that we just removed. That's a validation that makes sure a cookie actually exists. We could add another condition like `if cookie:` that checks whether or not a cookie was found and conditionally render a different template. 
 
 An easier solution is to use a function provided by SQLAlchemy itself. That's `.first_or_404()`. We can use that instead of `first()` to throw a 404 error in case a record wasn't found. Here is what it'll look like: 
 
@@ -207,17 +207,17 @@ def cookie(slug):
   return render_template('cookies/show.html', cookie=cookie)
 ```
 
-Now, try accessing the page of a cookie that doesn't exist, for example: [127.0.0.1:5000/cookies/banana-bread](127.0.0.1:5000/cookies/banana-bread). You should receive a 404 error. That's good. Because that's the standard way of how your webserver should handle routes you don't want to exist. 
+Now, try accessing the page of a cookie that doesn't exist, for example: [127.0.0.1:5000/cookies/banana-bread](127.0.0.1:5000/cookies/banana-bread). You should receive a 404 error. That's good because that's the standard way of how your webserver should handle routes you don't want to exist. 
 
-Let's briefly cover the last two of the **CRUD** methods. While we won't be implementing them in our example application just yet, you'll learn how to use them. This way you can use this page as a reference in case you need to use the methods later on. 
+Let's briefly cover the last two of the **CRUD** methods. While we won't be implementing them in our example application just yet, you'll learn how to use them. This way, you can use this page as a reference in case you need to use the methods later on. 
 
 ## Update
 
-We have created our list of cookies and our application can access them. Let's assume we like to change the price of one of our cookies. How would we do that? 
+We have created our list of cookies, and our application can access them. Let's assume we like to change the price of one of our cookies. How would we do that? 
 
-As mentioned above, to make any changes to the database, you need to call the `db.session` and `commit` it. Since this is a very common task and we may have to do that more often in the future, it makes sense to add an **instance method** to our `Cookie` class for `commit`ting or "saving" our cookie. In fact, it's so common that we may even need it for our other models. So instead of adding it as method to our `Cookie` model, we're going to create a **mixin class** that all our models can **inherit** from in order to have access to those methods.
+As mentioned above, to make any changes to the database, you need to call the `db.session` and `commit` it. Since this is a very common task and we may have to do that more often in the future, it makes sense to add an **instance method** to our `Cookie` class for `commit`ting or "saving" our cookie. In fact, it's so common that we may even need it for our other models. So instead of adding it as a method to our `Cookie` model, we're going to create a **mixin class** that all our models can **inherit** from in order to have access to those methods.
 
-A good place to put it is the **/app/extensions/database.py** file. Since we want a mixin class for all our **CRUD** operations let's add a class at the bottom of the file and call it `CRUDMixin`. Then, we'll add an **instance method** and call it `save`. This method will **save** the current state of the model with all its properties. 
+A good place to put it is the **/app/extensions/database.py** file. Since we want a mixin class for all our **CRUD** operations, let's add a class at the bottom of the file and call it `CRUDMixin`. Then, we'll add an **instance method** and call it `save`. This method will **save** the model's current state with all its properties. 
 
 Here is what it'll look like: 
 
@@ -230,9 +230,9 @@ class CRUDMixin():
     return self
 ```
 
-If you're familiar with Python classes (which you really should be by now!), you'll know that `self` just refers to the model instance and represents e.g. an individual cookie object. This could be for example an object with the slug `chocolate-chip` and the price `1.50`. 
+If you're familiar with Python classes (which you really should be by now!), you'll know that `self` just refers to the model instance and represents e.g., an individual cookie object. This could be, for example, an object with the slug `chocolate-chip` and the price `1.50`. 
 
-`db.session.add(self)` just adds that model (e.g. cookie) object to the session, including it's ID (if it has one). If it doesn't have an ID, SQLAlchemy automatically knows to create a new record from the instance. 
+`db.session.add(self)` just adds that model (e.g., cookie) object to the session, including it's ID (if it has one). If it doesn't have an ID, SQLAlchemy automatically knows to create a new record from the instance. 
 
 With `db.session.commit()` we **save** the whole thing to the actual database. Until it's `commit`ted, nothing is saved in the database. 
 
@@ -250,7 +250,7 @@ class Cookie(db.Model, CRUDMixin):
   price = db.Column(db.Numeric(10, 2))
 ```
 
-Now we can use the method with our `Cookie` class instance. Let's write a test to see if it worked. Create a new folder: **/app/tests/cookies** and in it a **__init__.py** file. Also add a file called **test_models.py** in there.
+Now we can use the method with our `Cookie` class instance. Let's write a test to see if it worked. Create a new folder: **/app/tests/cookies** and in it a **__init__.py** file. Also, add a file called **test_models.py** in there.
 
 In that file, we need to `import` our model and `db`. So add:
 
@@ -266,7 +266,7 @@ def test_cookie_update(client):
   # updates cookie's properties
 ```
 
-Remember the pattern: **Arrange-Act-Assess**. If we want to check if we can **update** a record a record first has to exist. So in the **Arrange** step, we need to create a new record:
+Remember the pattern: **Arrange-Act-Assess**. If we want to check if we can **update** a record, a record first has to exist. So in the **Arrange** step, we need to create a new record:
 
 ```py
 def test_cookie_update(client):
@@ -276,7 +276,7 @@ def test_cookie_update(client):
   db.session.commit()
 ```
 
-This will jsut create a cookie. Next, we want to **Act**, which means we want to execute the function that we're actually testing: 
+This will just create a cookie. Next, we want to **Act**, which means we want to execute the function that we're actually testing: 
 
 ```py
 def test_cookie_update(client):
@@ -305,15 +305,15 @@ def test_cookie_update(client):
   assert updated_cookie.name == 'Peanut Butter'
 ```
 
-Note that we query the cookie record here again instead of just using the `cookie` variable set before. That's because we assigned `cookie.name` to be `Peanut Butter` bevore and the test result would be positive even if `save()` didn't work. That's why we query the variable from the database again. 
+Note that we query the cookie record here again instead of just using the `cookie` variable set before. That's because we assigned `cookie.name` to be `Peanut Butter` before, and the test result would be positive even if `save()` didn't work. That's why we query the variable from the database again. 
 
 Run `pytest -v`. If everything went well, you'll see all tests passing.
 
 ## Delete
 
-Raising the price of our chocolate chip cookie hasn't reduced the demand. To the contrary. It's sold out and we want to delete it from our database. 
+Raising the price of our chocolate chip cookie hasn't reduced the demand. To the contrary. It's sold out, and we want to delete it from our database. 
 
-Let's add a another instance method called **delete** to our `CRUDMixin` class:
+Let's add another instance method called **delete** to our `CRUDMixin` class:
 
 ```py
 def delete(self):
@@ -322,7 +322,7 @@ def delete(self):
   return
 ```
 
-You can just add it below the `save` method (but not inside of it). You may have already guessed. Just like `db.session.add(self)` **added** the current cookie object to the datbase session, `db.session.delete(self)` removes it from the session. If you `commit` the session with the cookie object removed, it will also be deleted from the actual database. 
+You can just add it below the `save` method (but not inside of it). You may have already guessed. Just like `db.session.add(self)` **added** the current cookie object to the database session, `db.session.delete(self)` removes it from the session. If you `commit` the session with the cookie object removed, it will also be deleted from the actual database. 
 
 To test whether this function works, let's add another test. Back in **/app/tests/cookies/models.py** add: 
 
@@ -351,7 +351,7 @@ def test_cookie_delete(client):
 
 We expect the query to find no cookie. Therefore we `assert` `deleted_cookie` to be `None`.
 
-That's it. That is how you do CRUD operations on your models. In future exercises we're going to implement more of them directly in your application code.
+That's it. That is how you do CRUD operations on your models. In future exercises, we will implement more of them directly in your application code.
 
 
 ## 🛠  Practice 
@@ -359,4 +359,4 @@ That's it. That is how you do CRUD operations on your models. In future exercise
 1. Create a `CRUDMixin` class and make sure your models inherit from it.
 2. Add a `save` and `delete` method to the class.
 3. Create a seed file to fill your database with some initial data and create a bunch of records. 
-4. Adjust the routes of your application. One page should query all database records. Your dynamic pages should get an individual records based on the URL. (If a user tries to access a page that doesn't exist they should get a 404 error.)
+4. Adjust the routes of your application. One page should query all database records. Your dynamic pages should get an individual record based on the URL. (If a user tries to access a page that doesn't exist, they should get a 404 error.)
