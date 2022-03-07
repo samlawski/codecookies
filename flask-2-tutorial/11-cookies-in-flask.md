@@ -2,6 +2,7 @@
 title: Intro to Cookies in Flask
 videoId:
 slug: "cookies-in-flask"
+templateEngineOverride: md
 ---
 
 Sometimes you'd like to store some data for or about users, but the database is not quite the right place for it. Maybe it's data you only need temporarily, and it's not something you need to store indefinitely. Or maybe it's data that should be stored on the client-side of your application because it's tied to the specific device a user is on, but it doesn't need to be synced across devices.
