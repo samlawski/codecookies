@@ -70,13 +70,15 @@ Our application is ready to go in terms of the webserver and the database. But w
 
 The Heroku CLI uses **git** for deployment. So if you haven't already, make sure to create a `git commit` of your current project version. 
 
-Navigate to your project in the command line. Then run: 
+Navigate to your project in the command line. Then run:
 
 ```
 git init
 git add .
 git commit -am 'initial commit'
 ```
+
+_(If you have `git` already set up for your project, you can skip these steps. Instead, make sure that the current version of your code is committed.)_
 
 This will commit everything as it currently is using `git`. If you're not familiar with git, it's quite important that you learn about it now as it's relevant for the deployment from now on. 
 
