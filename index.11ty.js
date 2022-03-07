@@ -54,6 +54,7 @@ body > main a:hover {
 
 const htmlScripts = /*html*/`
 <script>
+  console.info('Welcome fellow developer! Here, have a cookie 🍪.')
   // Hand Animation
   document.getElementById('jsHand').addEventListener('click', function(e){
     e.target.classList.add('hand--animated')
