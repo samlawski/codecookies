@@ -177,7 +177,7 @@ if __name__ == '__main__':
   app.run()
 ```
 
-The code example above is very much like our very first, simple Flask application. Additionally, we import the function `random` from Python's standard library `randint`. Then, in our `index()` function, we have an extra line to use `randint()` to generate a random number between 1 and 100 and store that in the variable `random_number`.
+The code example above is very much like our very first, simple Flask application. Additionally, we import the function `randint` from Python's standard library `random`. Then, in our `index()` function, we have an extra line to use `randint()` to generate a random number between 1 and 100 and store that in the variable `random_number`.
 
 The `return` statement includes some HTML to display the result as a paragraph and the random number in **bold**. Notice, how in `randint()` will return a `number` type. That's why in Python, we need to use `str()` to convert that number to a string before we can _add_ it to the rest of our return string. 
 
