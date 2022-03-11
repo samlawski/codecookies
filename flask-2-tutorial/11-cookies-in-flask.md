@@ -210,7 +210,7 @@ document.querySelector('.shoppingCart__add--js').addEventListener('click', funct
 })
 ```
 
-We also should add the same logic to the button that removes cookies from the shopping cart: 
+We also should add the same logic to the button that removes cookies from the shopping cart. You can just copy over the code to update the cookie. But we'll add one more line. If the number of items is decreased down to `0`, we actually want to remove the item from the object altogether. You can do that with the `delete` keword. Check out the final code:
 
 ```js
 document.querySelector('.shoppingCart__remove--js').addEventListener('click', function(e) {
@@ -220,9 +220,12 @@ document.querySelector('.shoppingCart__remove--js').addEventListener('click', fu
   var itemName = e.target.dataset.name
   var cookieObj = {}
   cookieObj[itemName] = $numberOfItems.innerText
+  if($numberOfItems.innerText == 0) delete cookieObj[itemName]
   document.cookie = 'shoppingCart=' + JSON.stringify(cookieObj) + ';path=/'
 })
 ```
+
+After setting the number of items as the value, there is a simple condition that checks if the value is `0`. If it is, it'll delete the entire key-value pair.
 
 If you save everything now and reload the page, you can click the `+` and `-` buttons to increase or decrease the number of cookies in the shopping cart, and you can use the developer tools to confirm that they are actually written in the cookie.
 
@@ -234,6 +237,7 @@ Create a new function above the two event listeners:
 function updateCookie(itemName, numOfItems){
   var cookieObj = {}
   cookieObj[itemName] = numOfItems
+  if(numOfItems == 0) delete cookieObj[itemName]
   document.cookie = 'shoppingCart=' + JSON.stringify(cookieObj) + ';path=/'
 }
 ```
@@ -294,6 +298,7 @@ function updateCookie(itemName, numOfItems){
   var cookieString = getCookieByName('shoppingCart')
   var cookieObj = cookieString ? JSON.parse(cookieString) : {}
   cookieObj[itemName] = numOfItems
+  if(numOfItems == 0) delete cookieObj[itemName]
   document.cookie = 'shoppingCart=' + JSON.stringify(cookieObj) + ';path=/'
 }
 ```
