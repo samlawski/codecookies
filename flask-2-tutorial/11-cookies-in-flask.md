@@ -328,7 +328,7 @@ To do that, we can use the `request` object we've used before. In **/app/cookies
 print('SHOPPING CART COOKIE', request.cookies.get('shoppingCart'))
 ```
 
-If you now open an individual cookie page in the web browser and pay close attention to the terminal that's running your webserver, you should see the line printing out the contents of the `shoppingCart` cookie that was previously set on the frontend. (Note that this line will cause your app to break if no cookies have been set, yet. So after trying it out, you should immediately remove it from your code again.)
+If you now open an individual cookie page in the web browser and pay close attention to the terminal that's running your webserver, you should see the line printing out the contents of the `shoppingCart` cookie that was previously set on the frontend. (Note that this line will cause your app to break if no cookies have been set yet. So after trying it out, you should immediately remove it from your code again.)
 
 Now, however, we're in the same situation as previously on the frontend. The contents of the cookie are **look like** a dictionary, but in reality, they are just a **string**. So we need first to convert the string as we did on the frontend with `JSON.parse()`. Luckily Python has a very similar function!
 
@@ -362,6 +362,14 @@ def get_number_of_items_in_shopping_cart_cookie(item_name):
 
 `shopping_cart_string` will represent a string that looks like this: `'{"Oatmeal Raisin":"1"}'`
 
+`request.cookies` is dictionary. The `get()` function is just a regular Python function that allows you to get the value of a key in a dictionary. The code above will have the exact same result as if you were to write this: 
+
+```py
+shopping_cart_string = request.cookies['shoppingCart']
+```
+
+The main difference is that the second option (with square brackets `[]`) will break the entire application and show an error if the key `'shoppingCart'` isn't found. The `get()` method will simply return `None` as the value if the key doesn't exist. 
+
 Next, we need to convert it to a Python dictionary which we can do with `json.loads()`:
 
 ```py
@@ -378,10 +386,12 @@ And finally, we only want to return the number of items per cookie. So only the 
 def get_number_of_items_in_shopping_cart_cookie(item_name):
   shopping_cart_string = request.cookies.get('shoppingCart')
   shopping_cart = json.loads(shopping_cart_string)
-  return shopping_cart.get(item_name)
+  return shopping_cart.get(item_name, 0)
 ```
 
-As it's now, this function is extremely unstable! It would break our entire application if no cookie was set at all or if a cookie is set but not for the specific item we're looking at in the shop. 
+Above, I explained the `get()` function. In this new line, you can see one more nifty feature. You can pass a second argument to it (here, it's the `0`) that will act as the default value. If `get()` doesn't find a key based on the `item_name`, instead of returning `None`, it'll return the default value. Here, that's `0`. 
+
+Nonetheless, as it's now, this function is still very unstable! It would break our entire application if no cookie was set at all. 
 
 We could do similar logic as we did in the frontend with the ternary operator. Or we could just wrap everything inside a `try ... except ...` block. That's standard Python code. So make sure to look it up if you're not familiar with it. The `try ... except ...` block will allow us to say, "If anything goes wrong trying to get the cookie data, just return something else and don't throw an error."
 
@@ -392,9 +402,9 @@ def get_number_of_items_in_shopping_cart_cookie(item_name):
   try:
     shopping_cart_string = request.cookies.get('shoppingCart')
     shopping_cart = json.loads(shopping_cart_string)
-    return shopping_cart.get(item_name)
+    return shopping_cart.get(item_name, 0)
   except:
-    return '0'
+    return 0
 ```
 
 In this case, we'll just return a string with the number `0` if anything goes wrong. This way, the default value of our shopping cart will always be `0`.
@@ -433,7 +443,7 @@ Change it to this now:
 
 `num_in_cart` we just made available through the `render_template()` function. If you save everything now and reload the page, the shopping cart shouldn't anymore show just `0` but instead, show the number of items stored in the shopping cart cookie. 
 
-That's it! You know how to read and write cookies on the frontend as well as the backend of your application. And at the same time, you even learned about adding **helpers** and working with JavaScript in Flask. 
+That's it! You know how to read and write cookies on the frontend and the backend of your application. And at the same time, you even learned about adding **helpers** and working with JavaScript in Flask. 
 
 If you want to find out more, check out the [documentation](https://flask.palletsprojects.com/en/2.0.x/quickstart/#cookies).
 
