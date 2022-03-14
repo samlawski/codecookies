@@ -23,14 +23,21 @@ You can see which cookies a website has set by opening the developer tools (with
 
 To use cookies in our application, we'll build a shopping cart feature. Users will be able to add or remove items from the individual cookie page. For that, we need to use JavaScript. This tutorial assumes you have some basic knowledge of JavaScript. Particularly, it'll be helpful to know how to **select HTML elements** using `querySelector` and using **event listeners** to react to events such as button clicks. 
 
-To add JavaScript to our application, add a new folder and file with the following path: 
+To add JavaScript to our application, add a new folder **and file** with the following path: 
 
-* **/app/static/js/main.js**
+* **/app/static/js/cookies/show.js**
 
-For now, add a `console.log('hello world')` to the file so we can confirm it's working. Now, add that file to the **/app/templates/base.html** file. You can add it in your `block head` right below the `link` to your CSS file: 
+The name and path don't really matter at all. But we use the folder and file names to signal that this file is only intended to be loaded on the **show** page of the **cookies** blueprint.
+
+For now, add a `console.log('hello world')` to the file so we can confirm it's working. Now, add a `<script>` tag to the **/app/templates/cookies/show.html** file. We'd like to add the tag to the `<head>` of our HTML - but only on the **/cookies/show** page. For that, remember what you learned in the section on [templating](/flask-2-tutorial/templating-with-jinja/). If you have the `head` of your HTML in a **base.html** file and wrapped a `{% block head %}` around it, you can use the keyword `super()` to add code to the `head` without overwriting it.
+
+In the **/app/templates/cookies/show.html**, you can write the following right below the `{% extends 'base.html' %}` line:
 
 ```html
-<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+{% block head %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/cookies/show.js') }}" defer></script>
+{% endblock head %}
 ```
 
 The `defer` attribute is very important. It makes sure your JavaScript is only loaded once the rest of the page has been loaded. Alternatively, what many developers do is to add the `script` element all the way at the bottom and as the last element inside the `body` element. 
@@ -65,7 +72,7 @@ We can now target for example the `span` element and assign it to a variable:
 var $numberOfItems = document.querySelector('.shoppingCart__number--js')
 ```
 
-Add this line to your JavaScript file. _(Side note: The `$` in the beginning of the variable name is a pattern I use to recognize later that this variable represents a selector object easily. It's not necessary, though.)_
+Add this line to your JavaScript file. _(Side note: The `$` at the beginning of the variable name is a pattern I use to recognize later that this variable represents a selector object easily. It's not necessary, though.)_
 
 We want to increase the number of items in my shopping cart whenever the "+" button is clicked. The other button should always decrease the number of items in the shopping cart every time the button is clicked. But the number shouldn't be able to go below 0.
 
@@ -83,7 +90,7 @@ document.querySelector('.shoppingCart__remove--js').addEventListener('click', fu
 })
 ```
 
-Again, if any of this seems foreign to you, make sure to catch up on some JavaScript basics. These are just two event listeners (one for each button), and the contents of the `function` will be executed whenever a button is clicked. 
+Again, if any of this seems foreign to you, make sure to catch up on some JavaScript basics. These are just two event listeners (one for each button), and the contents of the `function` will be executed whenever a button is clicked.
 
 Now, we make use of the `$numberOfItems` selector variable we defined earlier. For the first function, we want to just increase the number every time the button is clicked:
 
