@@ -260,7 +260,7 @@ Now, save everything and try accessing [127.0.0.1:5000/cookies/chocolate-chip](h
 ```py
 @app.route('/cookies/<slug>')
 def cookie(slug):
-  return '<h1>' + cookies_data[slug]['name'] + '</h1><p>' + cookies_data[slug]['name'] + '</p>'
+  return '<h1>' + cookies_data[slug]['name'] + '</h1><p>' + cookies_data[slug]['price'] + '</p>'
 
 ```
 
@@ -272,7 +272,7 @@ To improve our program and avoid errors, we could even add some logic that check
 @app.route('/cookies/<slug>')
 def cookie(slug):
   if slug in cookies_data:
-    return '<h1>' + cookies_data[slug]['name'] + '</h1>' + '<p>' + cookies_data[slug]['name'] + '</p>'
+    return '<h1>' + cookies_data[slug]['name'] + '</h1>' + '<p>' + cookies_data[slug]['price'] + '</p>'
   else:
     return 'Sorry we could not find that cookie.' 
 ```
