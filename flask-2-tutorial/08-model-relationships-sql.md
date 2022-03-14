@@ -173,33 +173,34 @@ Both these statements are true:
 
 And there is one more problem. What if I want to add an extra piece of information that stores per order how many cookies have been ordered? 
 
-For this kind of setup, we need a **many-to-many** relationship. In SQL databases, those kinds of relationships are done using a third database table in the middle. This table's purpose is only to connect the two records. SQLAlchemy calls those **helper tables**. A helper table in SQLAlchemy is essentially a way to create a table without creating a model. 
+For this kind of setup, we need a **many-to-many** relationship. In SQL databases, those kinds of relationships are done using a third database table in the middle. This table's purpose is only to connect the two records. 
 
-In **/app/orders/models.py** add (above the other models): 
+One method to solve this would be to use a so-called **helper table**. That's also the approach you find in the [official documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#many-to-many-relationships).
+
+In our situation, we want to have a little more control over the table and be able to add more columns than just the `cookie_id` and the `order_id`. That's why instead, we'll be following the **association model pattern** as [described in the SQLAlchemy documentation](https://docs.sqlalchemy.org/en/13/orm/basic_relationships.html#association-object).
+
+In **/app/orders/models.py** add (above the other models):
 
 ```py
-cookie_orders = db.Table('cookie_orders',
-  db.Column('cookie_id', db.Integer, db.ForeignKey('cookie.id'), primary_key=True),
-  db.Column('order_id', db.Integer, db.ForeignKey('order.id'), primary_key=True),
-  db.Column('number_of_cookies', db.Integer)
-)
+class CookieOrder(db.Model):
+  cookie_id = db.Column(db.Integer, db.ForeignKey('cookie.id'), primary_key=True)
+  order_id = db.Column(db.Integer, db.ForeignKey('order.id'), primary_key=True)
+  number_of_cookies = db.Column(db.Integer)
 ```
 
 The two most important columns are `cookie_id` and `order_id`. If you create a many-to-many relationship, those are the only two columns you need. But because we want to also store how many cookies someone ordered, we added a third column that stores that exact number. 
 
-The variable name is lowercase as capitalized variable names are usually reserved for models, and this is not a model. The name `cookie_orders` is a combination of the two models the table is connecting. For many-to-many relationships, it's best practice to name the third table after the two tables it's connecting.
+_(Note that this model does not have an `id` field on its own. We don't need it because the whole purpose of this model is to be found based on the `cookie_id` and `order_id`.)_
 
-To make `orders` available through `cookies` and vice versa, you can use the `db.relationship` method again. In the `Order` model, add this line: 
+For many-to-many relationships, it's best practice to name the third table after the two tables it's connecting. That's why we named it `CookieOrder`.
+
+To also reference the `CookieOrder` model from the `Order` model, we can just add the following line at the bottom of the `Order` model and below its other properties: 
 
 ```py
-cookies = db.relationship('Cookie', secondary=cookie_orders, lazy='subquery', backref=db.backref('orders', lazy=True))
+cookie_orders = db.relationship('CookieOrder', backref='order', lazy=True)
 ```
 
-The first thing you may notice is the `secondary` parameter. This is set to the `cookie_orders` variable we defined earlier. This is the key in setting up the relationship as it tells SQLAlchemy that this is the helper table connecting the two models. 
-
-`lazy='subquery'` is just a more efficient way in handling the relationship here. Finally, the `backref` is a little more complex as we specifically set the `orders` here to be accessible through a single cookie instance. 
-
-This is slightly more complex. So it may help to have another look at the [official documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#many-to-many-relationships) to see another example.
+The relationship is defined with the name of the model **as a string**. The `backref` will allow us to also reference the `Order` back from a `CookieOrder`. The `lazy=True` is again not completely necessary but helpful to being explicit about your code. 
 
 ## Conclusion
 
