@@ -250,7 +250,7 @@ class Cookie(db.Model, CRUDMixin):
   price = db.Column(db.Numeric(10, 2))
 ```
 
-Now we can use the method with our `Cookie` class instance. Let's write a test to see if it worked. Create a new folder: **/app/tests/cookies** and in it a **__init__.py** file. Also, add a file called **test_models.py** in there.
+Now we can use the method with our `Cookie` class instance. Let's write a test to see if it worked. Create a new folder: **/app/tests/cookies** and in it a **\_\_init\_\_.py** file. Also, add a file called **test_models.py** in there.
 
 In that file, we need to `import` our model and `db`. So add:
 

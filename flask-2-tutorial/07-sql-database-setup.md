@@ -23,7 +23,7 @@ Models are usually represented as Python **classes**, and their name is defined 
 
 To kick things off, create a new file: **/app/cookies/models.py**
 
-You should also add it to the **/app/cookies/__init__.py** file:
+You should also add it to the **/app/cookies/\_\_init\_\_.py** file:
 
 ```py
 from . import routes, models

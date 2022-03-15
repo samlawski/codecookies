@@ -100,7 +100,7 @@ def checkout():
 
 This shouldn't include anything that's new to you. For practicing purposes, make sure to write the code by hand and not just copy and paste. 
 
-Next, change the **/app/orders/__init__.py** file to include the `routes`:
+Next, change the **/app/orders/\_\_init\_\_.py** file to include the `routes`:
 
 ```py
 from . import models, routes
@@ -297,7 +297,7 @@ You may have heard about **TDD** or **Test-Driven Development**. The idea of thi
 
 Create the files we need for testing the **order routes**: 
 
-* **/app/tests/orders/__init__.py** (this file will stay empty for now)
+* **/app/tests/orders/\_\_init\_\_.py** (this file will stay empty for now)
 * **/app/tests/orders/test_routes.py** (this file will contain our tests)
 
 Let's make sure our new test file works by adding a quick test that tests the `get_checkout` function: 

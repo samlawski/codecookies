@@ -49,14 +49,14 @@ One file note: When you run tests, pytest will create a temporary cache folder w
 
 When writing tests within a Flask application, there are a couple more steps before getting started. That's because our application technically needs a **server** to be running. So some parts (such as our routes) need additional setup. 
 
-First, create a new folder in the **/app** directory called **tests**. In that folder, add an empty **__init__.py** file. This file will turn the **tests** folder into a module and simplify importing. 
+First, create a new folder in the **/app** directory called **tests**. In that folder, add an empty **\_\_init\_\_.py** file. This file will turn the **tests** folder into a module and simplify importing. 
 
-Next, add another **__init__.py** file to the **/app** folder. This will turn your entire application into a module and allow us to easily import our blueprint folders and other files from our project in the tests. If you're a little confused about what's happening, I suggest reading up on Python modules and imports a little bit. 
+Next, add another **\_\_init\_\_.py** file to the **/app** folder. This will turn your entire application into a module and allow us to easily import our blueprint folders and other files from our project in the tests. If you're a little confused about what's happening, I suggest reading up on Python modules and imports a little bit. 
 
 The new paths of your project should be now: 
 
-* **/app/__init__.py**
-* **/app/tests/__init__.py**
+* **/app/\_\_init\_\_.py**
+* **/app/tests/\_\_init\_\_.py**
 
 Now we add a configuration file to the **/app/tests** folder. Call the file **conftest.py**. It must have that exact name to be recognized by `pytest`. 
 
@@ -229,5 +229,5 @@ Now you know how to write unit tests. It's good practice to keep your entire cod
 Now you know how to write unit tests for Flask routes. It's time to add test coverage to your application. 
 
 1. Install `pytest`, create a **/app/tests** folder, and add a `conftest.py` file.
-2. Add `__init__.py` files whenever necessary. 
+2. Add **\_\_init\_\_.py** files whenever necessary. 
 3. Create folders for different blueprints and add tests for your **routes**.

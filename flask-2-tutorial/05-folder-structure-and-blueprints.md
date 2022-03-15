@@ -137,7 +137,7 @@ As the last step, we want to be able to import the blueprint in our main **app.p
 
 We could do that like this: `from .cookies.routes import blueprint`. But that would cause issues later on if we add more blueprints. Because the `blueprint` variable is already imported from the `cookies` folder, we can't import it from other folders. We could solve that by just naming it more explicitly - for example: `cookies_blueprint`. That's a valid approach. But there is another more popular way. __
 
-Create a new file called **__init__.py** in the **app/cookies** folder. (Note there are **two** underscore before and after `init` - that's important).
+Create a new file called **\_\_init\_\_.py** in the **app/cookies** folder. (Note there are **two** underscore before and after `init` - that's important).
 
 In that file, add just this one line: 
 
@@ -145,7 +145,7 @@ In that file, add just this one line:
 from . import routes
 ```
 
-This is standard Python code. If you're not familiar with it, I recommend learning about Python **modules** and **imports**. But in short, Python treats folders like modules. Whenever you import a folder such as the **cookies** folder, if that folder contains an **__init__.py** file, that file is executed as the folder is imported. 
+This is standard Python code. If you're not familiar with it, I recommend learning about Python **modules** and **imports**. But in short, Python treats folders like modules. Whenever you import a folder such as the **cookies** folder, if that folder contains an **\_\_init\_\_.py** file, that file is executed as the folder is imported. 
 
 In our case, we use that to be able to just import the `cookies` folder and not `routes` or `blueprint` specifically. 
 

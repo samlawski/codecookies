@@ -69,12 +69,12 @@ In our cookie shop, we want users to be able to make orders, and each order shou
 
 Now, you could combine both those data sets into the same model. And that could be a valid choice. But maybe, later on, you want to allow orders without address because they are purchased in-store or for pick-up. In those cases, it might make sense not to have a bunch of empty address fields on the `Order` model. 
 
-Create a new **orders** folder with a **models.py** and **__init__.py** file:
+Create a new **orders** folder with a **models.py** and **\_\_init\_\_.py** file:
 
-* **/app/orders/__init__.py**
+* **/app/orders/\_\_init\_\_.py**
 * **/app/orders/models.py**
 
-The **__init__.py** should include:
+The **\_\_init\_\_.py** should include:
 
 ```py
 from . import models
@@ -126,7 +126,7 @@ The `db.relationship` will **not** add anything to the database. But it'll allow
 
 The first argument is the model's name you're setting the relationship up with. The second parameter, `backref` allows you to do the same the other way around. So it will allow you to do something like `my_address.order` in order to access the order related to a given address. `uselist=False` defines that we have a **one-to-one** relationship here. Without it, this would return a list (see below). Finally, `lazy=True` is technically the default value. So it's not quite necessary. But it's good practice to be explicit. This parameter defines how the data will be loaded. Find out more details [in the official documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#one-to-many-relationships). `lazy=True` will load the data immediately, while other settings could delay the loading a little bit in case you'd want to add queries dynamically. 
 
-This is a complete **one-to-one** relationship. To add it to a migration, we first need to import it into our app. If you added the model to the **__init__.py** file, you can just add `orders` to the import statement in your **/app/app.py** file: 
+This is a complete **one-to-one** relationship. To add it to a migration, we first need to import it into our app. If you added the model to the **\_\_init\_\_.py** file, you can just add `orders` to the import statement in your **/app/app.py** file: 
 
 ```py
 from . import cookies, simple_pages, orders
