@@ -200,7 +200,13 @@ To also reference the `CookieOrder` model from the `Order` model, we can just ad
 cookie_orders = db.relationship('CookieOrder', backref='order', lazy=True)
 ```
 
-The relationship is defined with the name of the model **as a string**. The `backref` will allow us to also reference the `Order` back from a `CookieOrder`. The `lazy=True` is again not completely necessary but helpful to being explicit about your code. 
+We can add a similar line to the `Cookie` model in **/app/cookies/models.py**:
+
+```py
+cookie_orders = db.relationship('CookieOrder', backref='cookie', lazy=True)
+```
+
+The relationship is defined with the name of the model **as a string**. The `backref` will allow us to also reference the `Order` back from a `CookieOrder`. The `lazy=True` is again not completely necessary but helpful to be explicit about your code. 
 
 ## Conclusion
 
