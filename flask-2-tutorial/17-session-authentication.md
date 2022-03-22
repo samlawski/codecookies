@@ -2,6 +2,7 @@
 title: Session-Based Authentication
 videoId:
 slug: "session-authentication"
+templateEngineOverride: md
 ---
 
 One common requirement of many web applications is an authentication system. The most standard way to authenticate a user is to ask them to enter an email address and password. In a blog, you could use authentication to allow only authors to log in and edit articles. In a shop, you can let users log in to view their previous orders.
