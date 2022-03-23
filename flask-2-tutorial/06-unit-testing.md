@@ -202,7 +202,7 @@ def test_index_content(client):
 
 Here we use the [`data` parameter of the response object](https://flask.palletsprojects.com/en/2.0.x/api/#flask.Response.data). `response.data` represents the contents of whatever the response returns. For an HTML response, that would be the entire HTML code of the requested page, for example. 
 
-The `assert` statement checks if the string `'this text does not exist'` is part of the HTML code that is represented by `response.data`. The `b` in front of the string makes sure the string is formatted correctly.
+The `assert` statement checks if the string `'this text does not exist'` is part of the HTML code that is represented by `response.data`. By default,`response.data` is formatted as **byte-type** (as opposed to being a string.) This is useful since a response could also contain files such as images. The `b` in front of the string formats it to **byte-type** as well. Alternatively, you could also just write `response.text` or `response.get_data(as_text=True)`.
 
 ## Testing Headers
 
