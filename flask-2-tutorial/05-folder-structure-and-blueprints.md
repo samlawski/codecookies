@@ -23,7 +23,7 @@ Additionally, move the following files in there:
 * **config.py**
 
 We purposely keep the **venv** folder separate. We also keep some general configuration files separate (such as **.env**, **.gitignore**, and **requirements.txt**). 
-ry
+
 Finally, create a new file in the root of our project and call it **run.py**. This file will be in charge of running our server. If we ever need to add configuration or parameters to the server, we can add them here. 
 
 This is what my folder structure now looks like: 
