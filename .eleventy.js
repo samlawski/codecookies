@@ -8,7 +8,7 @@ module.exports = eleventyConfig => {
   // Turn markdown headers into permalinks
   eleventyConfig.setLibrary("md", markdownIt({
     html: true,
-    linkify: true,
+    linkify: false,
     breaks: true
   }).use(markdownItAnchor, {
     permalink: true,
