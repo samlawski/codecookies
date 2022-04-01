@@ -89,6 +89,14 @@ exports.render = data => (/*html*/`
       padding: 10px;
     }
 
+    /* Nav */
+    body > nav {
+      font-size: .8rem;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, .7);
+      
+    }
+
     /* Header */
     body > header > h1 {
       font-weight: 900;
@@ -99,8 +107,26 @@ exports.render = data => (/*html*/`
       font-size: .8rem;
       line-height: 1.5;
       color: rgba(0, 0, 0, .7);
-      margin-top: 20px;
+      margin: 20px auto;
       text-align: center;
+    }
+
+    /* Reusable */
+    .button {
+      border: 2px solid black;
+      padding: 5px 10px;
+      border-radius: 3px;
+      transition: all .2s ease-in-out;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      display: inline-block;
+    }
+    .button:hover {
+      background-color: #0066A8;
+      color: white;
+      border-color: #0066A8;
     }
 
     /* Cookie Animation */

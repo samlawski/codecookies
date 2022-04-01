@@ -1,12 +1,4 @@
 const htmlStyles = /*css*/`
-article h2 a {
-  text-decoration: none;
-  opacity: .3;
-  transition: opacity .2s ease-in-out;
-}
-article h2 a:hover {
-  opacity: 1;
-}
 
 #video {
   position: relative;
@@ -50,6 +42,19 @@ article h2 a:hover {
   height: 100%;
 }
 
+header h1 {
+  margin: 4px 0;
+}
+
+article h2 a {
+  text-decoration: none;
+  opacity: .3;
+  transition: opacity .2s ease-in-out;
+}
+article h2 a:hover {
+  opacity: 1;
+}
+
 article ul,
 article ol {
   padding-left: 20px;
@@ -63,6 +68,7 @@ article h3 {
 article img {
   max-width: 100%;
   margin: auto;
+  display: block;
 }
 `
 
@@ -84,6 +90,20 @@ const videoEmbed = videoId => (/*html*/`
 `)
 
 
+const nextPageLink = data => {
+  const sortedPages = data.collections[data.tags].sort((a, b) => (a.filePathStem > b.filePathStem) ? 1 : -1)
+  const nextPage = sortedPages.find(page => page.filePathStem > data.page.filePathStem)
+
+  if(!nextPage) return ''
+
+  return (/*html*/`
+    <a class="button" href="${nextPage.url}">
+      Next: ${nextPage.data.title}
+    </a>
+  `)
+}
+
+
 exports.render = data => (/*html*/`
 <nav>
   <a href="/">Code Cookies</a> &gt; <a href="/${data.page.url.split('/')[1]}">${data.name}</a> &gt; ${data.title}
@@ -102,11 +122,12 @@ exports.render = data => (/*html*/`
 </main>
 
 <footer>
-  <nav>
-    Back to <a href="/${data.page.url.split('/')[1]}">${data.name}</a> 
-  </nav>
+  ${nextPageLink(data)}
 </footer>
 
+<nav>
+  <a href="/">Code Cookies</a> &gt; <a href="/${data.page.url.split('/')[1]}">${data.name}</a> &gt; ${data.title}
+</nav>
 `)
 
 
