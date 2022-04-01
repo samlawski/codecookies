@@ -46,12 +46,20 @@ header h1 {
   margin: 4px 0;
 }
 
-article h2 a {
+article h1 a,
+article h2 a,
+article h3 a,
+article h4 a,
+article h5 a {
   text-decoration: none;
   opacity: .3;
   transition: opacity .2s ease-in-out;
 }
-article h2 a:hover {
+article h1 a:hover,
+article h2 a:hover,
+article h3 a:hover,
+article h4 a:hover,
+article h5 a:hover {
   opacity: 1;
 }
 
