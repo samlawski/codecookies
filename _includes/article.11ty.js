@@ -1,4 +1,13 @@
 const htmlStyles = /*css*/`
+article h2 a {
+  text-decoration: none;
+  opacity: .3;
+  transition: opacity .2s ease-in-out;
+}
+article h2 a:hover {
+  opacity: 1;
+}
+
 #video {
   position: relative;
   padding-bottom: 56.25%;
