@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { 
+      "source": "/flask-tutorial",
+      "destination": "/flask-2-tutorial", 
+      "permanent": true
+    }
+  ]
+}
