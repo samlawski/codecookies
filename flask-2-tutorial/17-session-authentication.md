@@ -210,11 +210,11 @@ In the code above, `hashed_password` will result in something that looks like th
 pbkdf2:sha256:260000$qDhowSZPOtKIyHEg$f39726e0d6a1f149de76355bf3f583c760dbce1e82927ac1ccb6a5c8a65123c0
 ```
 
-Obviously, it's not at all anymore clear what the original password was. Your Flask application can still **decrypt** that password. But the key difference is that as a human looking at your database (or a hacker somehow gaining access to your database data), it won't be easy to get the actual password values.
+Obviously, it's not at all anymore clear what the original password was. 
 
-You may have guessed it already. You can use the second function, `check_password_hash`, to validate a password. This second password becomes important when someone wants to **login**. In that case, users type in a password, and in the backend, you'll have to compare the password the user typed in with what you have stored in the database. Since the password is stored in an encrypted way, you'd first have to decrypt it to compare. Or you can just use the `check_password_hash` function, which does that for you. 
+You may have guessed the purpose of the second function already. You can use `check_password_hash`, to validate a password. This second function becomes important when someone wants to **login**. In that case, users type in a password, and in the backend, you'll have to compare the password the user typed in with what you have stored in the database. Since the password is stored in an encrypted way, you cannot just compare the password the user typed in with the hashed password from the database. Instead, you need to hash again the password that the user typed in when trying to login and then compare that hashed string with whatever is stored in the database. The function `check_password_hash` is a shorthand for that.
 
-The `check_password_hash` functino takes two parameters:
+The `check_password_hash` function takes two parameters:
 
 ```py
 check_password_hash(hashed_password, password_to_check)
