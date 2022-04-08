@@ -4,6 +4,11 @@
       "source": "/flask-tutorial/:path*",
       "destination": "/flask-2-tutorial/:path*", 
       "permanent": true
+    },
+    { 
+      "source": "/flask-tutorial/:path*/",
+      "destination": "/flask-2-tutorial/:path*/", 
+      "permanent": true
     }
   ]
 }
