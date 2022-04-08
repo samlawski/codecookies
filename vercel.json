@@ -1,8 +1,8 @@
 {
   "redirects": [
     { 
-      "source": "/flask-tutorial/:path",
-      "destination": "/flask-2-tutorial/:path", 
+      "source": "/flask-tutorial/:path*",
+      "destination": "/flask-2-tutorial/:path*", 
       "permanent": true
     }
   ]
