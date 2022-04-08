@@ -1,17 +1,21 @@
 const htmlStyles = /*css*/`
 body > header > h1 {
   color: white;
-  background-color: #0066A8;
+  background-color: #78909C;
   font-weight: 800;
   padding: 10px 20px;
   margin: 0;
 }
 
-body > main ol {
+body > main ul {
+  padding-left: 20px;
+}
+
+body > main > ol {
   list-style: none;
 }
 
-body > main ol a {
+body > main > ol a {
   padding: 10px;
   display: block;
   margin-bottom: 10px;
@@ -20,11 +24,14 @@ body > main ol a {
   text-decoration: none;
   background-color: #BBF3E3;
   color: black;
+
+  transition: all 0.3s ease-in-out;
 }
 
-body > main ol a:hover {
-  background-color: #0094E8;
-  background-image: linear-gradient(to left, #0094E8, #00FFAF);
+body > main > ol a:hover {
+  background-color: #0066A8;
+  color: white;
+  box-shadow: 6px 6px 0px #4DD0E1;
 }
 `
 
@@ -39,7 +46,9 @@ exports.render = data => (/*html*/`
 </header>
 
 <main>
-  ${data.content}
+  <header>
+    ${data.content}
+  </header>
 
   <ol>
     ${data.collections[data.tags]

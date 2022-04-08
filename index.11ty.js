@@ -10,13 +10,15 @@ body > main a {
   margin-bottom: 10px;
 
   text-decoration: none;
-  background-image: linear-gradient(black, black);
+  background-color: #78909C;
   color: white;
+
+  transition: all 0.3s ease-in-out;
 }
 
 body > main a:hover {
-  background-color: #0094E8;
-  background-image: linear-gradient(to right, #0094E8, #00FFAF);
+  background-color: black;
+  box-shadow: 6px 6px 0px #00FFAF;
 }
 
 /* Hand Animation */
