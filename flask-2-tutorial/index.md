@@ -1,6 +1,6 @@
 ---
 layout: articles.11ty.js
-tag: flask_2_tutorial
+tag: flask-2-tutorial
 title: Flask 2 Tutorials
 ---
 
