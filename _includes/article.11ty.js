@@ -97,6 +97,12 @@ const videoEmbed = videoId => (/*html*/`
 </div>
 `)
 
+const breadcrumbs = data => (/*html*/`
+<nav>
+  <a href="/">Code Cookies</a> &gt; <a href="/${data.tags}">${data.name}</a> &gt; ${data.title}
+</nav>
+`)
+
 
 const nextPageLink = data => {
   const sortedPages = data.collections[data.tags].sort((a, b) => (a.filePathStem > b.filePathStem) ? 1 : -1)
@@ -113,9 +119,7 @@ const nextPageLink = data => {
 
 
 exports.render = data => (/*html*/`
-<nav>
-  <a href="/">Code Cookies</a> &gt; <a href="/${data.page.url.split('/')[1]}">${data.name}</a> &gt; ${data.title}
-</nav>
+${breadcrumbs(data)}
 
 <header>
   <h1>${data.title}</h1>
@@ -133,9 +137,7 @@ exports.render = data => (/*html*/`
   ${nextPageLink(data)}
 </footer>
 
-<nav>
-  <a href="/">Code Cookies</a> &gt; <a href="/${data.page.url.split('/')[1]}">${data.name}</a> &gt; ${data.title}
-</nav>
+${breadcrumbs(data)}
 `)
 
 

@@ -42,7 +42,7 @@ exports.render = data => (/*html*/`
   ${data.content}
 
   <ol>
-    ${data.collections[data.tag]
+    ${data.collections[data.tags]
       .sort((a, b) => (a.filePathStem > b.filePathStem) ? 1 : -1)
       .map((article, i) => `<li><a href="${article.url}">${i + 1}. ${article.data.title}</a></li>`).join("\n")
     }

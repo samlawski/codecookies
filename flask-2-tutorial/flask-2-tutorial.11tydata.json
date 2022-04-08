@@ -1,6 +1,0 @@
-{
-  "layout": "article.11ty.js",
-  "tags": "flask-2-tutorial",
-  "name": "Flask 2 Tutorials",
-  "permalink": "flask-2-tutorial/{{ slug }}/"
-}

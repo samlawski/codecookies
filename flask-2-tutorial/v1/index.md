@@ -1,7 +1,6 @@
 ---
 layout: articles.11ty.js
-tag: flask-2-tutorial
-title: Flask 2 Tutorials
+title: Flask 2 Tutorial
 ---
 
 Flask is a micro framework providing you with functions for building backends and full-stack applications using Python. 
