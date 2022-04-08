@@ -11,6 +11,11 @@
       "permanent": true
     },
     { 
+      "source": "/flask-2-tutorial",
+      "destination": "/flask-2-tutorial/v1/",
+      "permanent": true
+    },
+    { 
       "source": "/flask-2-tutorial/:path((?!v1).*)",
       "destination": "/flask-2-tutorial/v1/:path*",
       "permanent": true
