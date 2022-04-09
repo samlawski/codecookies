@@ -158,6 +158,8 @@ exports.render = data => (/*html*/`
 
     ${data.htmlStyles || ''}
   </style>
+  <!-- Analytics -->
+  <script src="https://swetrix.org/swetrix.js" defer></script>
 </head>
 <body>
   ${data.content || ''}
@@ -171,6 +173,21 @@ exports.render = data => (/*html*/`
     })
   </script>
   ${data.htmlScripts || ''}
+
+  <!-- Analytics -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      swetrix.init('OcW6tyYA4RXd')
+      swetrix.trackViews()
+    })
+  </script>
+  <noscript>
+    <img
+      src="https://api.swetrix.com/log/noscript?pid=OcW6tyYA4RXd"
+      alt=""
+      referrerpolicy="no-referrer-when-downgrade"
+    />
+  </noscript>
 </body>
 </html>
 `)
