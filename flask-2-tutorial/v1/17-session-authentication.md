@@ -317,7 +317,7 @@ def post_login():
 
     if not user:
       raise Exception('No user with the given email address was found.')
-    elif check_password_hash(request.form.get('password'), user.password):
+    elif not check_password_hash(user.password, request.form.get('password')):
       raise Exception('The password does not appear to be correct.')
     
     return redirect(url_for('cookies.cookies'))
@@ -330,6 +330,8 @@ def post_login():
 Don't just copy and paste the code. Write it by hand and try to understand every single part of it. First, we try to query a user based on the email address provided by the form. If no user was found, we throw an error with a proper error message. 
 
 Then, we use the `check_password_hash()` function we learned about earlier to check if the typed-in password matches the hashed password in the database. If it doesn't, we throw an error. 
+
+_(**Important side note**: The order of parameters in the `check_password_hash()` function matters! The first parameter should be the existing hashed password. The second parameter should be the one that you want to check.)_
 
 Finally, if no error occurs, we `redirect` the user to the `/cookies` page.
 
