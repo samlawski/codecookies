@@ -32,11 +32,13 @@ from app.extensions.database import db, CRUDMixin
 
 class User(db.Model, CRUDMixin):
   id = db.Column(db.Integer, primary_key = True)
-  email = db.Column(db.String(120), index = True, unique = True)
-  password = db.Column(db.String(120))
+  email = db.Column(db.String(128), index = True, unique = True)
+  password = db.Column(db.String(1024))
 ```
 
 For now, let's only add `email` and `password`. Important to note: The email should be marked as `unique`. Otherwise, we'd have problems if users try to register two accounts with the same email address.
+
+Another important note: The password string length should be quite long to allow for long and encrypted passwords. 
 
 Remember, whenever we add a new model, we also need to create a migration. In the command line run the following two commands: 
 
