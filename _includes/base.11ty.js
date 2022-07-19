@@ -50,31 +50,34 @@ exports.render = data => (/*html*/`
       color: #0066A8;
     }
     code {
-      background-color: #f5f5f5;
-      color: #333;
+      background-color: #78909C;
+      color: white;
       padding: 3px 5px;
       border-radius: 3px;
-      font-size: .9em;
-      font-weight: bold;
+      font-size: .8em;
     }
     pre {
-      background-color: #f5f5f5;
-      color: #333;
-      padding: 3px 5px;
+      background-color: #78909C;
+      color: white;
+      padding: 8px 5px;
       border-radius: 3px;
-      font-size: .9em;
-      font-weight: bold;
+      font-size: 1rem;
       overflow-x: auto;
       margin-top: 10px;
       margin-bottom: 10px;
 
-      border: 1px solid #ccc;
-      box-shadow: inset 0 0 3px #ccc;
-      
+      border: 2px solid #666;
     }
     pre code {
       padding: 0;
       background-color: transparent;
+    }
+    blockquote {
+      background-color: #BBF3E3;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      font-size: .9rem;
     }
 
     /* Layout */
@@ -201,5 +204,9 @@ light blue: 4DD0E1
 neon green (fade): 00FFAF
 light green: BBF3E3
 gray green: 78909C
+
+Gray 1: 212121
+Gray 2: 666666
+Gray 3: adadad
 
 */
