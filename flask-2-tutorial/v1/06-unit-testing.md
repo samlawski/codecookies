@@ -8,7 +8,11 @@ When it comes to clean code and scalable applications, **testing** is an importa
 
 If you're not familiar with testing, it might seem like a lot of extra work. But the main point of testing is to have a little more work in the beginning so that you have a lot less work later on. Especially with growing applications, tests will help you avoid bugs and issues because they tell you if the new code you wrote broke the existing code. 
 
-We're not going to go into the exact benefits of testing in this exercise. We're just going to learn about writing them - whether you want it or not. 
+We're not going to go into the exact benefits of testing in this exercise. We're just going to learn about writing them.
+
+>🤔 **Why is this relevant so early?**
+>A good programming practice is to write even before writing the main functionality. This is called **Test-Driven Development**. Tests serve as a way to verify that you code works. They can also help you as a programmer to keep track of all the cases that your code needs to cover. 
+>Throughout the tutorial, we're going to use **Test-Driven Development** to implement some features.
 
 ## pytest
 
