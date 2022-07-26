@@ -76,8 +76,9 @@ exports.render = data => (/*html*/`
       background-color: #BBF3E3;
       padding: 10px 15px;
       margin: 10px 0;
-      border-radius: 5px;
+      border-radius: 3px;
       font-size: .9rem;
+      border: 2px solid #78909C;
     }
 
     /* Layout */
@@ -130,6 +131,127 @@ exports.render = data => (/*html*/`
       background-color: #0066A8;
       color: white;
       border-color: #0066A8;
+    }
+
+    /* Reusable: File Browser Visual */
+    .filebrowser {
+      display: block;
+      margin: 30px auto;
+      max-width: 400px;
+
+      font-size: .8rem;
+
+      border-radius: 12px;
+      border: 1px solid #bbb;
+      box-shadow: 0 5px 20px #aaa;
+      overflow: hidden;
+    }
+    .filebrowser header {
+      background-color: #dedede;
+      color: #666;
+      font-weight: bold;
+      
+      padding: 10px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .filebrowser main {
+      padding: 10px 0;
+    }
+    .filebrowser__windowBtn {
+      height: 14px;
+      width: 14px;
+      border-radius: 50%;
+      border: 1px solid #bbb;
+      background-color: #78909C;
+      margin-right: 6px;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+    .filebrowser__windowBtn:nth-of-type(2) {
+      background-color: #0094E8;
+    }
+    .filebrowser__windowBtn:nth-of-type(3) {
+      background-color: #00FFAF;
+    }
+    .filebrowser__title {
+      flex-grow: 1;
+      text-align: center; 
+      padding-right: 60px; /* to make up for the space taken by the buttons */
+    }
+    .filebrowser main ul {
+      padding: 0 10px;
+      margin: 0;
+    }
+    .filebrowser main ul ul {
+      padding: 0 20px;
+    }
+    .filebrowser main li {
+      list-style: none;
+      padding: 2px 0;
+
+      border-radius: 5px;
+      transition: all .2s ease-in-out;
+    }
+    /* Reusable: Web Browser Visual */
+    .webbrowser {
+      display: block;
+      margin: 30px auto;
+      max-width: 500px;
+
+      font-size: .8rem;
+
+      border-radius: 12px;
+      border: 1px solid #bbb;
+      box-shadow: 0 5px 20px #aaa;
+      overflow: hidden;
+    }
+    .webbrowser header {
+      background-color: #dedede;
+      color: #666;
+      font-weight: bold;
+      
+      padding: 10px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .webbrowser main {
+      padding: 5px;
+      min-height: 80px;
+    }
+    .webbrowser__windowBtn {
+      height: 14px;
+      width: 14px;
+      border-radius: 50%;
+      border: 1px solid #bbb;
+      background-color: #78909C;
+      margin-right: 6px;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+    .webbrowser__windowBtn:nth-of-type(2) {
+      background-color: #0094E8;
+    }
+    .webbrowser__windowBtn:nth-of-type(3) {
+      background-color: #00FFAF;
+    }
+    .webbrowser__title {
+      flex-grow: 1;
+      background-color: white;
+      border-radius: 3px;
+      padding: 3px 4px;
+      box-shadow: inset 0px 0px 2px #666;
+
+      font-weight: 300;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .webbrowser__title a {
+      color: inherit;
+      text-decoration: none;
     }
 
     /* Cookie Animation */
