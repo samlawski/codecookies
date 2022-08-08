@@ -2,6 +2,7 @@
 title: "Model Relationships in SQL Databases"
 videoId:
 slug: "model-relationships-sql"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

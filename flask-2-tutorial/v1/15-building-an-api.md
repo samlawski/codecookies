@@ -2,6 +2,7 @@
 title: Building an API
 videoId:
 slug: "flask-to-build-an-api"
+lastUpdate: April 8th, 2022
 ---
 
 ## What's An API?

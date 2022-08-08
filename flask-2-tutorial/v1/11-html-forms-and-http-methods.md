@@ -2,6 +2,7 @@
 title: HTML Forms and HTTP Methods
 videoId:
 slug: "html-forms-and-http-methods"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

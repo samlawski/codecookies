@@ -78,6 +78,12 @@ article img {
   margin: auto;
   display: block;
 }
+
+/* Heading */
+body > header > a {
+  color: #adadad;
+  font-size: .7rem;
+}
 `
 
 const htmlScripts = /*html*/`
@@ -123,6 +129,9 @@ ${breadcrumbs(data)}
 
 <header>
   <h1>${data.title}</h1>
+  <a href="https://github.com/samlawski/codecookies/commits/main/${data.page.filePathStem}.md" target="_blank">
+    Last content update ${data.lastUpdate || ''}
+  </a>
 </header>
 
 <main>

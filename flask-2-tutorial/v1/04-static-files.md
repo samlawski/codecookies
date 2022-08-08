@@ -2,6 +2,7 @@
 title: Static Files
 videoId:
 slug: "static-files"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

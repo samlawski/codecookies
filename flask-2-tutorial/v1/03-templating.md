@@ -2,6 +2,7 @@
 title: Templating
 videoId:
 slug: "templating-with-jinja"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

@@ -2,6 +2,7 @@
 title: Validation and Exception Handling
 videoId:
 slug: "validation-and-exception-handling"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

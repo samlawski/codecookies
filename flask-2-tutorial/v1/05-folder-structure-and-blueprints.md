@@ -2,6 +2,7 @@
 title: Folder Structures & Blueprints
 videoId:
 slug: "folder-structure-and-blueprints"
+lastUpdate: April 8th, 2022
 ---
 
 In this exercise, we'll do some refactoring. Previously, you've put all your Flask code in a single **app.py** file. That was fine as long as you were learning. But it's really not a good idea for most applications that have more than one or two routes. Additionally, you'll start working with database records soon, and as your codebase grows, it's a good idea to structure it nicely. 

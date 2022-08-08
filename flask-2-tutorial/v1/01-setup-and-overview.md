@@ -2,6 +2,7 @@
 title: Overview and Setup
 videoId:
 slug: "setup-and-overview"
+lastUpdate: April 8th, 2022
 ---
 
 Welcome to a short series on learning how to build Flask web applications! 👋

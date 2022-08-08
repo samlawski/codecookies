@@ -2,6 +2,7 @@
 title: SQL Database Setup
 videoId:
 slug: "sql-database-setup"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

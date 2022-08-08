@@ -2,6 +2,7 @@
 title: CRUD
 videoId:
 slug: "crud"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

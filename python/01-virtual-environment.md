@@ -2,6 +2,7 @@
 title: The Virtual Environment
 videoId: PZB_fFYjvj8
 slug: virtual-environment
+lastUpdate: January 21st, 2022
 ---
 
 The virtual environment is a sandbox for your Python projects. It allows you to install an exact version of Python and all your project's packages in a specific folder. This way each of your projects is it's own sandbox with its own Python version. Additionally, you can maintain a list of packages and their versions specific to this project. 

@@ -1,6 +1,7 @@
 ---
 title: cURL
 videoId: rvQmSuPq-D4
+lastUpdate: March 16th, 2022
 ---
 
 With cURL, you can make HTTP requests to APIs, backends, or simply URLs from the command line. 

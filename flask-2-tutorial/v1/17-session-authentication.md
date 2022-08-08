@@ -2,6 +2,7 @@
 title: Session-Based Authentication
 videoId:
 slug: "session-authentication"
+lastUpdate: April 8th, 2022
 templateEngineOverride: md
 ---
 

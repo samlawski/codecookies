@@ -2,6 +2,7 @@
 title: Routing
 videoId:
 slug: "routing"
+lastUpdate: April 8th, 2022
 ---
 
 Routing is one of the core features of any web application. Routes define how clients can access an application. 

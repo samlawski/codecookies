@@ -2,6 +2,7 @@
 title: Server and Deployment
 videoId:
 slug: "server-and-deployment"
+lastUpdate: April 8th, 2022
 ---
 
 You now have learned about all the fundamental concepts of building a web application with Flask. You can create routes, views, models, connect a database, perform CRUD operations, and paginate your content. In future exercises, we'll learn to put all of that together and refine some more aspects of it. But in this exercise, we're going to learn about the final step of building a basic application: uploading it to the internet. 
