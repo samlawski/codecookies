@@ -133,11 +133,10 @@ exports.render = data => (/*html*/`
       border-color: #0066A8;
     }
 
-    /* Reusable: File Browser Visual */
-    .filebrowser {
+    /* Visual Components */
+    .demowindow {
       display: block;
       margin: 30px auto;
-      max-width: 400px;
 
       font-size: .8rem;
 
@@ -145,8 +144,10 @@ exports.render = data => (/*html*/`
       border: 1px solid #bbb;
       box-shadow: 0 5px 20px #aaa;
       overflow: hidden;
+
+      max-width: 500px;
     }
-    .filebrowser header {
+    .demowindow header {
       background-color: #dedede;
       color: #666;
       font-weight: bold;
@@ -156,10 +157,10 @@ exports.render = data => (/*html*/`
       align-items: center;
       justify-content: center;
     }
-    .filebrowser main {
-      padding: 10px 0;
+    .demowindow main {
+      min-height: 60px;
     }
-    .filebrowser__windowBtn {
+    .demowindow__btn {
       height: 14px;
       width: 14px;
       border-radius: 50%;
@@ -169,79 +170,26 @@ exports.render = data => (/*html*/`
       flex-grow: 0;
       flex-shrink: 0;
     }
-    .filebrowser__windowBtn:nth-of-type(2) {
+    .demowindow__btn:nth-of-type(2) {
       background-color: #0094E8;
     }
-    .filebrowser__windowBtn:nth-of-type(3) {
+    .demowindow__btn:nth-of-type(3) {
       background-color: #00FFAF;
     }
-    .filebrowser__title {
+    .demowindow__title {
       flex-grow: 1;
       text-align: center; 
       padding-right: 60px; /* to make up for the space taken by the buttons */
     }
-    .filebrowser main ul {
-      padding: 0 10px;
-      margin: 0;
-    }
-    .filebrowser main ul ul {
-      padding: 0 20px;
-    }
-    .filebrowser main li {
-      list-style: none;
-      padding: 2px 0;
 
-      border-radius: 5px;
-      transition: all .2s ease-in-out;
-    }
-    /* Reusable: Web Browser Visual */
-    .webbrowser {
-      display: block;
-      margin: 30px auto;
-      max-width: 500px;
+    /* Variation: Web Browser */
+    .demowindow--web .demowindow__title {
+      padding: 3px 4px;
+      text-align: left; 
+      height: 21px;
 
-      font-size: .8rem;
-
-      border-radius: 12px;
-      border: 1px solid #bbb;
-      box-shadow: 0 5px 20px #aaa;
-      overflow: hidden;
-    }
-    .webbrowser header {
-      background-color: #dedede;
-      color: #666;
-      font-weight: bold;
-      
-      padding: 10px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .webbrowser main {
-      padding: 5px;
-      min-height: 80px;
-    }
-    .webbrowser__windowBtn {
-      height: 14px;
-      width: 14px;
-      border-radius: 50%;
-      border: 1px solid #bbb;
-      background-color: #78909C;
-      margin-right: 6px;
-      flex-grow: 0;
-      flex-shrink: 0;
-    }
-    .webbrowser__windowBtn:nth-of-type(2) {
-      background-color: #0094E8;
-    }
-    .webbrowser__windowBtn:nth-of-type(3) {
-      background-color: #00FFAF;
-    }
-    .webbrowser__title {
-      flex-grow: 1;
       background-color: white;
       border-radius: 3px;
-      padding: 3px 4px;
       box-shadow: inset 0px 0px 2px #666;
 
       font-weight: 300;
@@ -249,9 +197,42 @@ exports.render = data => (/*html*/`
       overflow: hidden;
       white-space: nowrap;
     }
-    .webbrowser__title a {
+    .demowindow--web .demowindow__title a {
       color: inherit;
       text-decoration: none;
+    }
+    .demowindow--web main {
+      padding: 5px;
+      min-height: 60px;
+    }
+
+    /* Variation: Command Line */
+    .demowindow--cl main {
+      padding: 5px;
+      background-color: #212121;
+      color: white;
+      font-family: monospace;
+    }
+
+    /* Variation: File Browser */
+    .demowindow--files {
+      max-width: 400px;
+    }
+    .demowindow--files main {
+      padding: 10px 0;
+    }
+    .demowindow--files main ul {
+      padding: 0 10px;
+      margin: 0;
+    }
+    .demowindow--files main ul ul {
+      padding: 0 20px;
+    }
+    .demowindow--files main li {
+      list-style: none;
+      padding: 2px 0;
+
+      border-radius: 5px;
     }
 
     /* Cookie Animation */
