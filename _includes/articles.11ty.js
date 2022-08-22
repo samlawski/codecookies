@@ -3,7 +3,7 @@ body > header > h1 {
   color: white;
   background-color: #78909C;
   font-weight: 800;
-  padding: 10px 20px;
+  padding: 10px;
   margin: 0;
 }
 

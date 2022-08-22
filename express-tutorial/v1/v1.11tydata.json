@@ -1,0 +1,22 @@
+{
+  "layout": "article.11ty.js",
+  "tags": "express-tutorial/v1",
+  "name": "Express 5 Tutorial",
+  "permalink": "express-tutorial/v1/{{ slug }}/",
+  "sections": [
+    {
+      "title": "🐷 Quick and Dirty - A complete beginner's guide",
+      "groups": [
+        "",
+        "Controller & Requests Basics",
+        "Views & Response Basics",
+        "Models & Database Basics",
+        "Wrap-Up"
+      ]
+    },
+    {
+      "title": "🚧 More tutorials in the works ...",
+      "groups": []
+    }
+  ]
+}

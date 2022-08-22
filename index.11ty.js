@@ -82,8 +82,13 @@ exports.render = data => (/*html*/`
 <main>
   <ul role="list">
     <li>
-      <a href="/development-basics">
-        <h2>Development Basics</h2>
+      <a href="/express-tutorial/v1">
+        <h2>Express 5 Tutorial</h2>
+      </a>
+    </li>
+    <li>
+      <a href="/flask-2-tutorial/v1">
+        <h2>Flask 2 Tutorial</h2>
       </a>
     </li>
     <li>
@@ -92,8 +97,8 @@ exports.render = data => (/*html*/`
       </a>
     </li>
     <li>
-      <a href="/flask-2-tutorial/v1">
-        <h2>Flask 2 Tutorial</h2>
+      <a href="/development-basics">
+        <h2>Development Basics</h2>
       </a>
     </li>
   </ul>

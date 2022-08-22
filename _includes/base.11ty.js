@@ -182,6 +182,16 @@ exports.render = data => (/*html*/`
       padding-right: 60px; /* to make up for the space taken by the buttons */
     }
 
+    /* Variant: No Header Buttons */
+    .demowindow--noheaderbtn > header {
+      background-color: transparent;
+      color: black;
+      padding-bottom: 0;
+    }
+    .demowindow--noheaderbtn .demowindow__title {
+      padding-right: initial;
+    }
+
     /* Variation: Web Browser */
     .demowindow--web .demowindow__title {
       padding: 3px 4px;
