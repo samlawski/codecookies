@@ -111,7 +111,9 @@ const breadcrumbs = data => (/*html*/`
 
 
 const nextPageLink = data => {
-  const sortedPages = data.collections[data.tags].sort((a, b) => (a.filePathStem > b.filePathStem) ? 1 : -1)
+  const sortedPages = data.collections[data.tags]
+    .filter(article => !article.data.unlisted)
+    .sort((a, b) => (a.filePathStem > b.filePathStem) ? 1 : -1)
   const nextPage = sortedPages.find(page => page.filePathStem > data.page.filePathStem)
 
   if(!nextPage) return ''

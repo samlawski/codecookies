@@ -71,6 +71,7 @@ const renderArticles = (articles) => articles.map((article, i) => {
 
 const renderSections = data => data.sections.map((section, sectionIndex) => {
   const articlesOfThisSectionSortedByFileName = data.collections[data.tags]
+    .filter(article => !article.data.unlisted)
     .filter(article => article.data.sectionIndex === sectionIndex)
     .sort((a, b) => (a.filePathStem > b.filePathStem) ? 1 : -1)
 
