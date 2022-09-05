@@ -4,10 +4,13 @@ slug: deployment-to-heroku
 lastUpdate: September 5th, 2022
 sectionIndex: 0
 groupIndex: 4
+unlisted: true
 ---
 
->🚨 **Attention: Outdated Content!** 
->On August 25th, Heroku has announced to discontinue their free plan. Therefore, many statements made in this lesson aren't true anymore. I am currently looking into alternatives and will update this tutorial once I have come up with a suitable alternative lesson. 
+>🚨 **Attention: Outdated Content!**
+>This lesson has been delisted from the official tutorial. It's still available as a reference for those who bookmarked the page. **However, this page will not receive any more updates!**
+>On August 25th, Heroku has announced to discontinue their free plan. Therefore, many statements made in this lesson aren't true anymore.
+>The main tutorial has been changed not to focus on a single hosting provider anymore.
 
 Most web applications are built to be hosted and available **on the web**. This might be obvious. But you could also use web backends in local company networks, at home, or on hardware (or IoT) devices. 
 
@@ -75,9 +78,6 @@ _(If you have `git` already set up for your project, you can skip these steps. I
 This will commit everything as it currently is using `git`. If you're not familiar with git, it's quite important that you learn about it now as it's relevant for the deployment from now on. 
 
 ## Create a new application on Heroku
-
->🚨 **Attention: Outdated Content!** 
->On August 25th, Heroku has announced to discontinue their free plan. Therefore, many statements made in this lesson aren't true anymore. I am currently looking into alternatives and will update this tutorial once I have come up with a suitable alternative lesson. 
 
 To create a new application on Heroku, make sure you are within your project's folder in the command line. Then, run:
 
