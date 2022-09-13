@@ -61,7 +61,7 @@ When you deploy your application to a web server, it's considered good practice 
 
 Instead, it's common practice to run separate services for each of these features. For example, in addition to your web application, you have a separate service that's only in charge of hosting a database. You have yet another service that's in charge of logging and, finally, another service for storing files uploaded by your users. 
 
-As an **example**, this might mean that you use Google App Engine to host your application. You use MongoDB Atlas (a separate cloud service) to host your database. You use Google's native cloud logging service. And you may use Google Cloud Storage or Amazon's AWS S3 to store file uploads. For each of these examples, there are hundreds of alternatives. You could also use Google's own Firestore database instead of MongoDB. Or you use an entirely different provider. 
+As an **example**, this might mean that you use Google App Engine to host your application. You use MongoDB Atlas (a separate cloud service) to host your database. You use Google's native cloud logging service. And you may use Google Cloud Storage or Amazon's AWS S3 to store file uploads. For each of these examples, there are hundreds of alternatives. You could also use Google's own Firestore database instead of MongoDB. If you use a relational database, you may use [Elephant SQL](https://www.elephantsql.com/) or Supabase. 
 
 When working with the cloud, it's important to understand which part is stateless and part of your code and which part is **stateful** and should exist within its own service.
 
