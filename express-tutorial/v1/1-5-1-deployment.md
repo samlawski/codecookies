@@ -20,13 +20,13 @@ Most large-scale cloud providers offer a service that requires low configuration
 
 To list a few options:
 
-- [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
-- [Google App Engine](https://cloud.google.com/appengine)
-- [Azure App Service](https://azure.microsoft.com/en-us/services/app-service/)
-- [IBM Cloud Foundry](https://www.ibm.com/cloud/cloud-foundry)
-- [Heroku](https://heroku.com)
+- [Google App Engine (tutorial available)](/express-tutorial/v1/deployment-to-app-engine/)
+- [Heroku (tutorial available)](/express-tutorial/v1/deployment-to-heroku/)
+- AWS Elastic Beanstalk
+- Azure App Service
+- IBM Cloud Foundry
 
-This tutorial will **not** go into detail about how to deploy your application to a specific one of the providers above. But all of them have their own tutorials on deploying your application. I suggest searching the web for "[name of provider] Express."
+This tutorial will **not** go into detail about how to deploy your application to a specific one of the providers above. But for some of them, there are follow-up tutorials you can complete after completing this lesson. Also, all of them have their own tutorials on deploying your application. I suggest searching the web for "[name of provider] Express."
 
 Instead, the rest of this lesson will focus on getting your application ready for deployment.
 
@@ -237,6 +237,8 @@ MDN has some [resources](https://developer.mozilla.org/en-US/docs/Learn/Tools_an
 ## Recap
 
 In this lesson, we did not look into deploying your application to a specific provider. Instead, we looked at all the different concepts you should know about in preparation for deploying your app.
+
+There are two separate tutorials that you can follow **after** completing this lesson if you want to deploy to either [Google App Engine (link)](/express-tutorial/v1/deployment-to-app-engine/) or [Heroku (link)](/express-tutorial/v1/deployment-to-heroku/).
 
 There are many different hosting providers, and a quick web search will result in great instructions on how to deploy your application with those providers. The nice thing about Express is that it's one of the less complicated frameworks to run.
 
