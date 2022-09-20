@@ -113,7 +113,6 @@ exports.render = data => (/*html*/`
 
 exports.data = {
   layout: 'base.11ty.js',
-  title: '🍪',
   htmlStyles,
   htmlScripts
 }
