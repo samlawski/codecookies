@@ -194,7 +194,7 @@ Lastly, the **.env** file should **not** be part of the git repository. It often
 
 ### Setting the port from the environment variable
 
-Remember how your Express application has a `PORT` variable set to `3000`? The port is kind of like a door to the network. If you host a web server on your local computer at home, you could open up that door (aka **port**) in the settings of the **router** that you connect to via WiFi. The specific port number often doesn't really matter. You can also set it to `1234`. Then, your server is available at `localhost:1234`. And if you wanted to make that server available to the internet, you'd have to configure your router to **open the port `1234`** - which means to open that particular door to the internet. 
+Remember how your Express application has a `PORT` variable set to `3000`? The port is kind of like a door to the network. If you host a web server on your local computer at home, you could open up that door (aka **port**) in the settings of the **router** that you connect to via WiFi. The specific port number often doesn't really matter. You can also set it to `1234`. Then, your server is available at `localhost:1234`. And if you wanted to make that server available to the internet, you'd have to configure your router to **open the port** `1234` - which means to open that particular door to the internet. 
 
 Different hosting providers have different configurations when it comes to ports. So it's a good idea to put the port in an **environment variable**.
 
