@@ -1,7 +1,8 @@
 ---
 title: Query Strings & Form Data
 slug: query-strings-and-form-data
-lastUpdate: August 22nd, 2022
+description: Learn to send data from any frontend or client to an Express backend via HTML forms or URL parameters.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 1
 ---

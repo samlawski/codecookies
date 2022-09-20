@@ -1,7 +1,8 @@
 ---
 title: MongoDB Database and ODM Setup
 slug: mongodb-database-and-odm-setup
-lastUpdate: August 22nd, 2022
+description: Learn about how to set up MongoDB and mongoose with Express 5 while you find out more about the purpose and use of object-document-models.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 3
 ---

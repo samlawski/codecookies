@@ -7,8 +7,11 @@ exports.render = data => (/*html*/`
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Cookies ${data.title ? `| ${data.title}` : ''}</title>
-  <meta name="description" content="Short and friendly tutorials attempting to explain development topics in simple terms and with beginenrs in mind.">
+  <title>${data.name && data.name != data.title ? data.name : 'Code Cookies'}${data.title ? ` | ${data.title}` : ''}</title>
+  <meta property="og:title" content="${data.name && data.name != data.title ? data.name : 'Code Cookies'}${data.title ? ` | ${data.title}` : ''}">
+  <meta name="description" content="${data.description ? data.description : 'Beginner-friendly coding tutorials - free of charge, ads, or email-collection.'}">
+  <meta property="og:description" content="${data.description ? data.description : 'Beginner-friendly coding tutorials - free of charge, ads, or email-collection.'}">
+  <meta property="og:image" content="/assets/favicons/apple-touch-icon-152x152.png">
 
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/apple-touch-icon-57x57.png" />
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/apple-touch-icon-114x114.png" />

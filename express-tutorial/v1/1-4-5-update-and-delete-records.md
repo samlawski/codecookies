@@ -1,7 +1,8 @@
 ---
 title: "CRUD 3: Update & Delete Records"
 slug: update-and-delete-records
-lastUpdate: August 22nd, 2022
+description: Learn to update and delete database entries when working with mongoose, MongoDB, and Express.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 3
 ---

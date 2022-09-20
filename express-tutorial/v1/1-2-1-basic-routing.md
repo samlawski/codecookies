@@ -1,7 +1,8 @@
 ---
 title: Basic Routing
 slug: basic-routing
-lastUpdate: August 22nd, 2022
+description: Learn how basic routing works in Express and how to use different HTTP methods for different routes.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 1
 ---

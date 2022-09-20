@@ -1,7 +1,8 @@
 ---
 title: Schema & Models with MongoDB
 slug: schema-and-models-with-mongodb
-lastUpdate: August 22nd, 2022
+description: Learn to define data structures and create models in Express with MongoDB and mongoose.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 3
 ---

@@ -1,7 +1,8 @@
 ---
 title: HTML Response & Templating Basics
 slug: html-response-and-templating
-lastUpdate: August 22nd, 2022
+description: Learn how to server-render HTML in Express using templating languages like EJS.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 2
 ---

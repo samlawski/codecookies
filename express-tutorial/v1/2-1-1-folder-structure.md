@@ -1,6 +1,7 @@
 ---
 title: Express Folder Structure
 slug: folder-structure
+description: Learn about the MVC pattern and how to apply it in an Express application. Learn how to structure your folders and files in any Express project.
 lastUpdate: September 20th, 2022
 sectionIndex: 1
 groupIndex: 0

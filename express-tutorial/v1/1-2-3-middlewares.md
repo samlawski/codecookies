@@ -1,7 +1,8 @@
 ---
 title: Middlewares
 slug: middlewares
-lastUpdate: August 22nd, 2022
+description: Learn about the purpose of middlewares by adding a logger to an Express backend.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 1
 ---

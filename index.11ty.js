@@ -76,7 +76,9 @@ exports.render = data => (/*html*/`
 <header>
   <h1>Welcome to Code Cookies. <span id="jsHand">👋</span></h1>
   <p>I create short and <strong>friendly tutorials</strong> attempting to explain development topics in simple terms and with beginenrs in mind.</p>
-  <p>Come in, have a cookie <span id="jsCookie">🍪 </span> , and click on any of the categories below.</p>
+  <p>In my courses, I try to give thorough explanations for why things are the way they are - instead of just giving you the solution.</p>
+  <p>Everything is <strong>free of charge, ads, email-collection, or cookies</strong> - except for the one below.</p>
+  <p>Come in, have a cookie <span id="jsCookie">🍪 </span>, and click on any of the categories below.</p>
 </header>
 
 <main>

@@ -1,7 +1,8 @@
 ---
 title: Deployment to Heroku
 slug: deployment-to-heroku
-lastUpdate: September 13th, 2022
+description: Learn to deploy an Express application to Heroku.
+lastUpdate: September 20th, 2022
 sectionIndex: 2
 groupIndex: 0
 ---

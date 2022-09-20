@@ -1,7 +1,8 @@
 ---
 title: Control flow in EJS Templates
 slug: control-flow-in-ejs-templates
-lastUpdate: August 22nd, 2022
+description: Write complex programming logic in EJS to dynamically server-render views in Express.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 2
 ---

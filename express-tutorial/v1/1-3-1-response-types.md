@@ -1,7 +1,8 @@
 ---
 title: Response Types
 slug: response-types
-lastUpdate: August 22nd, 2022
+description: Learn about the various ways an Express route can respond, e.g., with JSON or HTML.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 2
 ---

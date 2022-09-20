@@ -1,7 +1,8 @@
 ---
 title: Serving Static Files
 slug: serving-static-files
-lastUpdate: August 22nd, 2022
+description: Learn to run a web server for static files (such as images or CSS files) with Express.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 1
 ---

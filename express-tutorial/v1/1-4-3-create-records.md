@@ -1,7 +1,8 @@
 ---
 title: "CRUD 1: Create Records"
 slug: create-records
-lastUpdate: August 22nd, 2022
+description: Learn how to create new database records when working with mongoose, MongoDB, and Express.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 3
 ---

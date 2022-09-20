@@ -1,6 +1,7 @@
 ---
 title: REST & Dynamic Routing
 slug: rest-and-dynamic-routing
+description: Learn handle multiple pages with the same layout but different content and URL - such as blogs or shops.
 lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 1

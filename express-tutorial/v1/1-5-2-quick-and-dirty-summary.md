@@ -1,7 +1,8 @@
 ---
 title: Summary & Recap
 slug: quick-and-dirty-summary
-lastUpdate: August 22nd, 2022
+description: A quick summary of everything covered in the previous Express tutorial lessons.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 4
 ---

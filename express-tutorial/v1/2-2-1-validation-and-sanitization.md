@@ -1,6 +1,7 @@
 ---
 title: Validation & Sanitization
 slug: validation-and-sanitization
+description: Learn how to keep an Express backend more secure by only allowing requests and data formatted a certain way.
 lastUpdate: September 20th, 2022
 sectionIndex: 1
 groupIndex: 1

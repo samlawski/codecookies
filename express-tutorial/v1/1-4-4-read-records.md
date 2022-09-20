@@ -1,7 +1,8 @@
 ---
 title: "CRUD 2: Read Records"
 slug: read-records
-lastUpdate: August 22nd, 2022
+description: Learn to find and filter one or more records from the a MongoDB database with mongoose and Express.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 3
 ---

@@ -1,7 +1,8 @@
 ---
 title: Deployment to Google App Engine
 slug: deployment-to-app-engine
-lastUpdate: September 13th, 2022
+description: Learn to deploy an Express application to Googler App Engine.
+lastUpdate: September 20th, 2022
 sectionIndex: 2
 groupIndex: 0
 ---

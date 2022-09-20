@@ -8,6 +8,12 @@
 - 2-5-3 Unit Testing authenticated routes
 - 2-5-4 Unit testing with MongoDB and mongoose
 
+https://fullstackopen.com/en/part4/testing_the_backend#supertest
+https://github.com/nodkz/mongodb-memory-server
+
+https://github.com/visionmedia/supertest
+https://www.mongodb.com/docs/manual/core/inmemory/
+
 # Sooner rather than later
 
 - Controller & Requests Continued: Pagination

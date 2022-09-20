@@ -1,7 +1,8 @@
 ---
 title: Setup & Overview
 slug: setup-and-overview
-lastUpdate: August 22nd, 2022
+description: Learn to set up a Node and Express application from scratch and start a server for the first time.
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 0
 ---

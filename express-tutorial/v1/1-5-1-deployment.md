@@ -1,6 +1,7 @@
 ---
 title: Deployment
 slug: deployment
+description: Learn how to prepare any Express application for easy deployment to the cloud.
 lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 4
