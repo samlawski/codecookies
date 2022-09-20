@@ -1,7 +1,7 @@
 ---
 title: REST & Dynamic Routing
 slug: rest-and-dynamic-routing
-lastUpdate: August 22nd, 2022
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 1
 ---
@@ -123,6 +123,13 @@ app.get('/cookies/:shazam', (request, response) => {
 ```
 
 Remember, parameters are like variables or like parameters in functions. _You_, as the developer, define what they are called. 
+
+>💡 **Importantt**: The order at which you write your dynamic functions matters! Express will try to interpret routes in the order you wrote them. 
+>Sometimes you want all routes that start with `/cookies/` to go to dynamic pages **except for some specific ones**. For example, maybe you want to allow users to access a page called `/cookies/how-they-are-made`.
+>
+>If, in your code, you wrote `app.get('/cookies/:slug'` first and further below you have a function `app.get('/cookies/how-they-are-made'`, that second function will actually never be called. Because if a user types `/cookies/how-they-are-made` in the web browser, it'll be matched by the function that you wrote targeting `/cookies/:slug`. `'how-they-are-made'` will represent the `slug`.
+>But if you write the `app.get('/cookies/how-they-are-made'` function **above** the `app.get('/cookies/:slug'` function in your code, this route will be interpreted first and therefore take priority over `/cookies/:slug`. 
+>Keep that in mind whenever you use parameters and dynamic URLs. The order matters. 
 
 ## Types of route parameters
 

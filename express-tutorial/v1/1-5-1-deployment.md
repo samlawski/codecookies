@@ -1,7 +1,7 @@
 ---
 title: Deployment
 slug: deployment
-lastUpdate: September 5th, 2022
+lastUpdate: September 20th, 2022
 sectionIndex: 0
 groupIndex: 4
 ---
