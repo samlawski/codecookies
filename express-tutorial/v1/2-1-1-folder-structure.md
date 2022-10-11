@@ -2,7 +2,7 @@
 title: Express Folder Structure
 slug: folder-structure
 description: Learn about the MVC pattern and how to apply it in an Express application. Learn how to structure your folders and files in any Express project.
-lastUpdate: September 20th, 2022
+lastUpdate: October 11th, 2022
 sectionIndex: 1
 groupIndex: 0
 ---
@@ -432,7 +432,7 @@ router.get('/cookies', async (request, response) => {
 
 Repeat this process for all controller actions. Do the same thing by creating a **/controllers/simple-pages.js** file. This controller will hold all the general pages of our website. 
 
->💡 **Importantt**: The order at which you write your dynamic functions matters! Express will try to interpret routes in the order you wrote them. 
+>💡 **Important**: The order at which you write your dynamic functions matters! Express will try to interpret routes in the order you wrote them. 
 >So for example, if higher up in your code file you have a route like this: `/cookies/:slug`, `:slug` will be a dynamic parameter. That means **any** URL with a string following `/cookies` will be matched to **this route function**. This includes `/cookies/chocolate-chip`, `/cookies/hello`, but also `/cookies/new`. 
 >If you want to match **all** URLs **except** for `/cookies/new`, you have to make sure to write that route function **above** `/cookies/:slug` in your code.
 >
