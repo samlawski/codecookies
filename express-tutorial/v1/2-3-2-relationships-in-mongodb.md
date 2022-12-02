@@ -5,7 +5,6 @@ description: Learn to create relationships between data objects in a MongoDB dat
 lastUpdate: October 17th, 2022
 sectionIndex: 1
 groupIndex: 2
-templateEngineOverride: md
 ---
 
 >This lesson assumes you have [set up a MongoDB database with mongoose](/express-tutorial/v1/mongodb-database-and-odm-setup/) and know the basics of **CRUD** to interact with the database. 

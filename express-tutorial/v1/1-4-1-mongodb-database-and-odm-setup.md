@@ -90,7 +90,7 @@ After you've gone through the process, you should be able to type `mongod --vers
   </main>
 </div>
 
-The instructions linked above also include instructions on "Run MongoDB." Whenever you want to work with the database, you need to make sure it's running. You cannot interact with the database if the database software is not currently running. Keep that also in mind for later.
+**Important:** The instructions linked above also include instructions on **"Run MongoDB."** Whenever you want to work with the database, you need to make sure it's running. You cannot interact with the database if the database software is not currently running. Keep that also in mind for later.
 
 To test whether or not the database is running, you can try to connect to it on the command line by typing in: 
 
