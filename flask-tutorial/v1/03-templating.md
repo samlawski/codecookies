@@ -134,7 +134,7 @@ Now, you can use the function. To demonstrate what it does, create a new folder 
 
 Your folder structure should look something like this now: 
 
-![Screenshot showing templates folder within project root including an index.html file](/assets/content/flask-2-tutorial/03-templating/folder-screenshot-1.png)
+![Screenshot showing templates folder within project root including an index.html file](/assets/content/flask-tutorial/03-templating/folder-screenshot-1.png)
 
 Back in your Python code, change one of your routes to return the `render_template` function with a string as parameter: `'index.html'`. It could look like this: 
 

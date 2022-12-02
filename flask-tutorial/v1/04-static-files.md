@@ -14,7 +14,7 @@ Similar to the **templates** folder, Flask has another folder it automatically l
 
 It may look like this: 
 
-![screenshot of folder structure with a static folder, a css folder inside and a main.css file inside of that](/assets/content/flask-2-tutorial/04-static-files/folder-screenshot-2.png)
+![screenshot of folder structure with a static folder, a css folder inside and a main.css file inside of that](/assets/content/flask-tutorial/04-static-files/folder-screenshot-2.png)
 
 Add some CSS rules to that folder to give your page some basic styling. 
 

@@ -25,7 +25,7 @@ Whenever a person navigates to the **root** of your website, the function `index
 
 ## More Routes
 
-Other routes are usually defined by different strings following after the slash `/`. For example, the route of this page is `/flask-2-tutorial/routing/`. You can see it in your web browser.
+Other routes are usually defined by different strings following after the slash `/`. For example, the route of this page is `/flask-tutorial/v1/routing/`. You can see it in your web browser.
 
 To define more routes in Flask, you can just add more functions and decorator methods and change the parameter of the `.route('/')` method to whatever route you would like to define. 
 It's **important**, though, that the function name is different for each route!

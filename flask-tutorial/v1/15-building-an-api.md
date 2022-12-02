@@ -348,7 +348,7 @@ def serialize_orders(orders):
 
 If you refresh the page now, it should render the full data structure as we had it defined before. 
 
-In a real-world application, you'd probably want to implement some **pagination** and not just return all orders at once. You can follow the instructions of the [pagination exercise](https://codecookies.xyz/flask-2-tutorial/pagination-and-query-parameters/) and apply the exact same principles here. The difference is that you won't need to add any HTML. But splitting your data into pages is just as possible with JSON as it is with HTML. 
+In a real-world application, you'd probably want to implement some **pagination** and not just return all orders at once. You can follow the instructions of the [pagination exercise](/flask-tutorial/v1/pagination-and-query-parameters/) and apply the exact same principles here. The difference is that you won't need to add any HTML. But splitting your data into pages is just as possible with JSON as it is with HTML. 
 
 ## API Key in The Header to Protect The API
 

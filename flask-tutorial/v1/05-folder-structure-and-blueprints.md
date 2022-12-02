@@ -29,7 +29,7 @@ Finally, create a new file in the root of our project and call it **run.py**. Th
 
 This is what my folder structure now looks like: 
 
-![folder structure with a new app and scripts folder](/assets/content/flask-2-tutorial/09-blueprints/folder-screenshot-3.png)
+![folder structure with a new app and scripts folder](/assets/content/flask-tutorial/09-blueprints/folder-screenshot-3.png)
 
 We also need to make some adjustments to our code. Because we moved some files around, some imports will no longer point to the right place. Also, the **run.py** file should now have some of our server logic. 
 

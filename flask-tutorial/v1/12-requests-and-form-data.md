@@ -18,7 +18,7 @@ In a previous exercise, you defined the attribute `method='POST'` for the `<form
 
 If you look closely, you'll see that the `/checkout` route just got all the form field values attached to it. This is called a **query string** or **query parameters**. Whenever you submit an HTML form, the browser will automatically add all the values that were added to the form fields as **query string** to the URL. 
 
-You've actually done this before in the [exercise on pagination](/flask-2-tutorial/pagination-and-query-parameters). You can access the query string using the **request** object.
+You've actually done this before in the [exercise on pagination](/flask-tutorial/v1/pagination-and-query-parameters). You can access the query string using the **request** object.
 
 If you set the `method='POST'`, load the page again (**without query parameters in the URL!**) [http://127.0.0.1:5000/checkout](http://127.0.0.1:5000/checkout), and submit the form, you won't see any query string in the logs anymore.
 
