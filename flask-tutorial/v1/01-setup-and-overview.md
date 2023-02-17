@@ -2,7 +2,7 @@
 title: Overview and Setup
 videoId:
 slug: "setup-and-overview"
-lastUpdate: April 8th, 2022
+lastUpdate: Feb 17th, 2023
 ---
 
 Welcome to a short series on learning how to build Flask web applications! 👋
@@ -15,11 +15,11 @@ Larger frameworks like Django or Ruby on Rails additionally have very opinionate
 
 I'll assume you have some previous knowledge to keep this course focused. If any of the following topics seem foreign to you, make sure to catch up on them before continuing with this tutorial. 
 
-* Using the command line
-* Using git
-* How the internet works (client-server relationship)
-* HTML (CSS, and JavaScript are optional but helpful)
-* Python (particularly functions, for-loops, object-oriented programming with classes)
+* Using the [command line](https://web.mit.edu/mprat/Public/web/Terminus/Web/main.html) (on your operating system)
+* [Using git](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/GitHub)
+* [How the internet works](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work) ([client-server relationship](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Client-Server_overview))
+* [HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML) ([CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS) and [JavaScript](https://javascript.info/) are optional but helpful)
+* [Python](https://www.freecodecamp.org/learn/scientific-computing-with-python/#python-for-everybody) (particularly functions, for-loops, object-oriented programming with classes)
 
 ## Setup
 
@@ -106,6 +106,8 @@ There are many ways to define environment variables. But one way is to use the `
 
 Install it, running `pip install python-dotenv`. To make use of the package, we're going to create a separate config file. 
 
+(Don't forget to run `pip freeze > requirements.txt` afterward!)
+
 Create a file called **config.py**. In it, import `load_dotenv` from `dotenv` and execute that function. It should look like this: 
 
 ```py
@@ -127,10 +129,14 @@ The code above tells Flask where to find your config file. The `'config'` is the
 Now, we can actually create a **.env** file in our project folder. In it, add the line: 
 
 ```
-FLASK_ENV=development
+FLASK_DEBUG=True
 ```
 
-`FLASK_ENV` is a predefined variable that Flask will automatically look for. If it's set to `development`, Flask knows we're in a development environment. On your server, you could set it to `production`. 
+>💡 If you're using using a version of Flask older than **2.2** you have to either upgrade to the newest version of Flask for this to work or instead use the environment variable `FLASK_ENV=development`. 
+
+`FLASK_DEBUG` is a [predefined variable](https://flask.palletsprojects.com/en/2.2.x/config/#DEBUG) that Flask will automatically look for. If it's set to `True`, Flask knows we're in a development environment. This will tell Flask that it's ok to automatically restart the server whenever changes are made to the code. if you don't set this variable, the server has to be restarted by hand every time you make a change. 
+
+In a later exercise, you'll learn to deploy your application to a server. You should never set this environment variable to `True` on a server where real users interact with your website!
 
 Lastly, it's very important that your **.env** file is not part of your git repository. So make sure to add it in a new line to your **.gitignore** file. Many people store passwords and keys in the .env file later on. Those should never show up in your repository. 
 
@@ -142,6 +148,35 @@ As soon as you start importing different files (aka modules), you may see a fold
 
 That's it. You have set up your Flask application. You can now stop the server with the keys Ctrl + C. Then, start it again with `python app.py`. Whenever you make changes, the server will automatically reload from now on. 
 
+## Recap
+
+That's it! You created a brand new **virtual environment** for your project and installed the **Flask** package using **pip**.
+
+You created your first **route** and now know how to start a simple web server that comes with Flask. You also know how to run the web server in debug mode to make sure it restarts automatically whenever you make changes. 
+
+You also set up your project to be used with other developers (or your future self) through **git** by adding `venv`, `__pycache__`, and `.DS_Store` to a **.gitignore** file and created a **requirements.txt** file with the installed packages.
+
+This is what your project folder should look like now:
+
+<div class="demowindow demowindow--files" aria-hidden="true" tabindex="-1">
+  <header>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__title">📁 cookieshop</div>
+  </header>
+  <main>
+    <ul>
+      <li>📁 venv</li>
+      <li>📁 .env</li>
+      <li>📄 .gitignore</li>
+      <li>📄 app.py</li>
+      <li>📄 config.py</li>
+      <li>📄 requirements.txt</li>
+    </ul>
+  </main>
+</div>
+
 ## 🛠  Practice 
 
 As you go through the tutorials, I recommend you follow along and write the code as you go through the material. Don't copy and paste but type everything by hand. 
@@ -151,3 +186,54 @@ Once you have completed an exercise and written the tutorial code, I recommend y
 This section was about setting up a Flask project from scratch. To practice that a little more, set up a couple more projects entirely from scratch (including the virtual environment). 
 
 _Whenever you start a new project, make sure you're not still within the active environment of another project!!_ To deactivate the environment, simply type `deactivate` in your command line and hit "Enter". 
+
+
+### Cheat Sheet
+
+**Create a new Python virtual enviornment** (Do only once in the beginning)
+
+```
+python3 -m venv venv
+```
+
+**Activate the virtual environment** (It's active if you see `(venv)` in the terminal)
+
+macOS & linux:
+```
+source venv/bin/activate
+```
+
+Windows:
+```
+venv\Scripts\activate.bat
+```
+
+**Deactivate the virtual environment** (e.g., when switching folders/projects)
+
+```
+deactivate
+```
+
+**Install pip packages** (e.g., Flask)
+
+```
+pip install flask
+```
+
+**Update requirements.txt file with installed packages**
+
+```
+pip freeze > requirements.txt
+```
+
+**Install packages _from_ a requirements.txt** (e.g., after downloading the repo)
+
+```
+python -m pip install -r requirements.txt
+```
+
+**Run the server** (while the virtual environment is active)
+
+```
+python app.py
+```
