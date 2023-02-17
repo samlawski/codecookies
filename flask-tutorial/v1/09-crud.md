@@ -2,7 +2,7 @@
 title: CRUD
 videoId:
 slug: "crud"
-lastUpdate: April 8th, 2022
+lastUpdate: Feb 17th, 2023
 templateEngineOverride: md
 ---
 
@@ -33,11 +33,16 @@ We need `create_app` because we want to perform actions that take place within o
 Below the imports add: 
 
 ```py
-app = create_app()
-app.app_context().push()
+if __name__ == '__main__':
+  app = create_app()
+  app.app_context().push()
 ```
 
-This will allow the following code to be run within the application context and give us access to the Flask app. 
+The two last lines create an app instance and initialize an **application context**. This is a bit confusing and you don't have to understand the details. But in essence, this allows you to run the script as a single file without starting the Flask application server. It kind of simulates running the application just for the duration the Python script is being executed. 
+
+The line `__name__ == '__main__'` should look familiar. It checks if the seed.py file is the one that's executed directly from the command line. If it is this will evaluate as `True`. If it isn't the code in the condition will be ignored. This is important because sometimes you want to run script files like this one while your Flask application is running. So this makes sure you only simulate an app context if you execute this file directly and not if you run the script while the app is running anyway. 
+
+Again, this can be very confusing and is relatively advanced. So don't worry if you still don't fully understand the application context. The important part is that you need to "fake" an application context if you run this script outside of your regular Flask application. 
 
 Next up, add the `cookies_data` from the previous exercises. We'll use it to populate our database. The file should look like this now: 
 
@@ -46,8 +51,9 @@ from app.app import create_app
 from app.cookies.models import Cookie
 from app.extensions.database import db
 
-app = create_app()
-app.app_context().push()
+if __name__ == '__main__':
+  app = create_app()
+  app.app_context().push()
 
 cookies_data = {
   'chocolate-chip' : {'name': 'Chocolate Chip', 'price': 1.50},

@@ -2,7 +2,7 @@
 title: Building an API
 videoId:
 slug: "flask-to-build-an-api"
-lastUpdate: April 8th, 2022
+lastUpdate: Feb 17th, 2023
 ---
 
 ## What's An API?
@@ -363,6 +363,8 @@ API_KEY=OI2QHUlmiHrJSQWJ14d2xocafGm15QDq
 ```
 
 It's best practice to keep secret keys always in your environment variables and make sure they are **never** committed to a git repository.
+
+>💡 Don't forget to add your `API_KEY` environment variable on a production server in case you have your app already deployed. 
 
 You can access the environment within the **/app/api/routes.py** file by first importing `environ`
 

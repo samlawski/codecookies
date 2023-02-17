@@ -2,11 +2,8 @@
 title: Server and Deployment
 videoId:
 slug: "server-and-deployment"
-lastUpdate: September 5th, 2022
+lastUpdate: Feb 17th, 2023
 ---
-
->🚨 **Attention: Outdated Content!** 
->On August 25th, Heroku has announced to discontinue their free plan. Therefore, many statements made in this lesson aren't true anymore. I am currently looking into alternatives and will update this tutorial once I have come up with a suitable alternative lesson. 
 
 You now have learned about all the fundamental concepts of building a web application with Flask. You can create routes, views, models, connect a database, perform CRUD operations, and paginate your content. In future exercises, we'll learn to put all of that together and refine some more aspects of it. But in this exercise, we're going to learn about the final step of building a basic application: uploading it to the internet. 
 
@@ -14,9 +11,12 @@ You now have learned about all the fundamental concepts of building a web applic
 
 Flask is a Python framework. So when you think about where to host your application, you should make sure that platform lets you run Python 3 applications. This means shared hosting providers that only let you run PHP on the server are unsuitable. Also, static hosts and object storage (like Netlify or AWS S3) cannot run your application. 
 
-Providers like Google App Engine or Digital ocean require a little more setup. By all means, try it out, and there are lots of great tutorials out there to help you deploy your Flask application to almost any of those providers. 
+Providers like Google App Engine or Digital Ocean require a little more setup. By all means, try it out, and there are lots of great tutorials out there to help you deploy your Flask application to almost any of those providers. 
 
-In this tutorial, my focus is to help you learn Flask and not server administration. So I chose to go with [heroku.com](https://heroku.com) as it offers a free tier and is one of the easiest **PaaS** (platform-as-a-service) providers out there. This may change in the future, though. Especially when it comes to free products, make sure not to build your business on one specific provider. They could always change their business model, and you should be prepared for that. 
+In this tutorial, my focus is to help you learn Flask and not server administration. So I chose to go with [render.com](https://render.com) as it offers a free tier and is one of the easiest **PaaS** (platform-as-a-service) providers out there. This may change in the future, though. Especially when it comes to free products, make sure not to build your business on one specific provider. They could always change their business model, and you should be prepared for that.
+
+>💡 A prominent example of a a company changing their business model is Heroku. A previous version of this tutorial (and many other tutorials) used to use Heroku.com for free hosting. They used to offer a free plan and a very simple deployment process. That's how they became very popular and eventually got bought. So in 2022, they [announced](https://blog.heroku.com/next-chapter) to stop their free plan. 
+>This is just one example and a good lesson on being aware of whom your application (and maybe business) is dependent on. 
 
 ## The Web Server
 
@@ -30,7 +30,9 @@ If you want to learn more about the topic [check out this article](https://www.f
 
 We're going to go with [Gunicorn](https://gunicorn.org/).
 
-To install it, run `pip install gunicorn` while your virtual environment is active. (Don't forget to freeze the requirements.txt file.)
+To install it, run `pip install gunicorn` while your virtual environment is active. 
+
+_(Don't forget to run `pip freeze > requirements.txt`! This is particularly important now because once you deploy your application to a server, you'll need the **requirements.txt** file to install all the package dependencies on the server.)_
 
 To use _Gunicorn_ to run your web server, instead of running `python run.py` in the terminal, you just run: 
 
@@ -38,43 +40,15 @@ To use _Gunicorn_ to run your web server, instead of running `python run.py` in 
 gunicorn run:app
 ```
 
+The `run` is the name of your **run.py** file. `app` is the `app` variable within that file. This tells the _Gunicorn_ server where to find your application. 
+
 That's it. Now you have your application running with the _Gunicorn_ web server instead of the built-in Flask server. (Note that the port of the IP might be different. Instead of 127.0.0.1:5000 it might be 127.0.0.1:8000. Check the output in the Terminal to see the link to your application.)
 
-While you develop your application, that doesn't really matter much. You can continue to use the built-in Flask server. But you can also use it locally. It can be a good idea in larger applications to use the same software on your computer as you do on the server. This way, you catch issues specific to, e.g., the webserver early. 
+While you develop your application, that doesn't really matter much. You can continue to use the built-in Flask server. But you can also use it locally. It can be a good idea in larger applications to use the same software on your computer as you do on the server. This way, you catch issues specific to, e.g., the web server early. 
 
-## The Database
+After making those updates don't forget to commit those changes with **git** and upload them to a remote git host (like GitHub, Gitlab, etc.). This will become very important in a minute because render.com uses git for deployment. 
 
-As mentioned in previous exercises, you can't use _sqlite_ on providers like Heroku because all records are stored in a file, and Heroku doesn't let you write data to the file system. 
-
-Instead, we're going to use Postgres on Heroku. Postgres is a separate piece of software running on your server. You can think of it as another mini web app with its own web server and URL. For Flask to interact with it, you don't need much except to tell _SQLAlchemy_ what the URL is to the database. 
-
-Remember, in our **.env** file we defined the `DATABASE_URL` to be `'sqlite:///database.db'`. That's the URL of our _sqlite_ database. So that's the URL we want to be different on Heroku.
-
-Because we're already using an **environment variable** here, there isn't actually much we need to do here. Heroku will automatically set the **environment variable** `DATABASE_URL` to be the URL of our database on Heroku. 
-
-There is, however, one thing we need to do, and it's a little bit silly. Postgres made an update to the default prefix for its databases. In the past, it was `postgres://` (remember: just like `sqlite://`). They changed it in newer versions to `postgresql://`. _SQLAlchemy_ has adjusted their code accordingly. But _Heroku_ has not. That will lead to your database not being recognized by default. You can write a little "hack" to fix that issue. In your **/a[[/config.py** change the line of `SQLALCHEMY_DATABASE_URI` to look like this: 
-
-```py
-SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL').replace('postgres://', 'postgresql://', 1)
-```
-
-We use Python's native `.replace()` method to check the environment variable if it includes the string `'postgres://'`. The nice thing about this method is that it just doesn't do anything with our `sqlite` URL because it doesn't include that string. On Heroku, however, it'll replace the string with `'postgresql://'` and fix the issue. Hopefully, this issue will be fixed by Heroku at some point. But as of _Feb 16th, 2022_ it's not. 
-
-Also, note that if you ever want to use Postgres locally on your computer, you should adjust that logic and make sure to call the `replace` method only on Heroku. A simple condition should do the trick. 
-
-_Side Note: Because the database and the web application are both on the same server, it's totally fine to just use a URL to connect the application with the database. It's, however, also possible to host the database on a separate server from the actual application. In that case, you cannot just use the URL to connect. That would be extremely insecure! Instead, you need some secret keys or other credentials to verify the connection._
-
-## Preparing Deployment to Heroku
-
-Our application is ready to go in terms of the webserver and the database. But we need a few more steps specific for Heroku. 
-
-1. First, create an account on [heroku.com](https://heroku.com)
-2. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli). With that, you can deploy your application from the command line. 
-3. Afterwards, run `heroku login` in the command line and follow the steps to log in to the CLI. 
-
-The Heroku CLI uses **git** for deployment. So if you haven't already, make sure to create a `git commit` of your current project version. 
-
-Navigate to your project in the command line. Then run:
+If you haven't used **git** until now run the following commands in your project folder:
 
 ```
 git init
@@ -82,161 +56,111 @@ git add .
 git commit -am 'initial commit'
 ```
 
-_(If you have `git` already set up for your project, you can skip these steps. Instead, make sure that the current version of your code is committed.)_
+Then, find a host like GitHub or GitLab and upload your repository there. 
 
-This will commit everything as it currently is using `git`. If you're not familiar with git, it's quite important that you learn about it now as it's relevant for the deployment from now on. 
+## Deployment to render.com
 
-### Create your application on Heroku
+Render.com is a hosting provider like many others. One reason I picked it for this tutorial is that it offers a free plan and is easy to use. 
 
-To create a new application on Heroku, make sure you are within your project's folder in the command line. Then, run:
+First, go to [render.com](https://render.com/) and create a free account. If you're using GitHub or GitLab to host your project it might be a good idea to already connect your account since that's what you need to do later on anyway. 
 
-```
-heroku create
-```
+Once you end up on the dashboard you can click the "New +" button at the top and select "Web Service". If you have already paired your GitHub/Gitlab account you'll now see your repositories show up in the middle. If they don't show up you may have to click "Configure account" on the right and manually allow access to specific repositories. 
 
-Once the app is created, you'll see an output like this:
+Once your account is connected properly you should be able to find your code repository in the middle of the screen and click the "**Connect**" button. 
 
-```
-Creating app... done, ⬢ your-app-name-123
-https://your-app-name-123.herokuapp.com/ | https://git.heroku.com/your-app-name-123.git
-```
+Next, you'll have to pick a name for your project (that will also be the URL to your app) and a few more things. Most fields should already contain the right information. 
 
-The first line shows the application name. That's important for later!
-On the second line, the first item is the URL of your application on Heroku. The second one is the git remote link used to deploy your application. 
+- Region: Pick one that makes sense based on where you expect your users to be from
+- Branch: Probably already picked by default the one that your main version is on
+- Root Directory: Should stay empty if you've been following the tutorial and don't have a custom subfolder for your app
+- **Build Command**: This needs to be updated! It probably already shows the right command to install packages from the _requirements.txt_ file. But what we also want to do is add the migration script here. This makes sure the migrations also run every time automatically when the app is deployed. So update the line to this: 
 
-To access your application on the server, you can now use the first URL. But for now, it'll not show anything. There are still a few more things we have to do. 
+`pip install -r requirements.txt; flask db upgrade`
 
-### Activate Postgres on Heroku
+- **Start Command**: This also likely needs to be adjusted. If you have a **run.py** file that starts your server you'll need to change this line to the following: `gunicorn run:app`
 
-As mentioned above, Postgres is a separate piece of software running on our server. To install it on Heroku, we also just need a simple command: 
+Further down you can keep the "Free" instance type selected and finally click "Create Web Service" at the bottom. 
 
-```
-heroku addons:create heroku-postgresql:hobby-dev --app your-app-name-123
-```
+Now your application code will automatically be pulled from GitHub/Gitlab. Render.com takes care of installing the right version of Python 3, installing all the packages, and running the migrations. Usually, you'd have to do all these things by hand. 
 
-Replace `your-app-name-123` with the name of your app that you got in the previous step. 
+>⚠️ Your code will now start deploying and installing the application on render.com. But since we're still missing a few steps, the application will probably **fail**! That's ok. Don't worry. In fact it really should fail at this point. Look through the **logs** and try to understand the error. You may have to scroll up a bit and read carefully to find some helpful information. Can you guess what we're missing?
 
-Great! Now you have an app and Postgres setup in Heroku (you can actually see the current configuration if you log in on heroku.com).
+## The Database
 
-### Setting Environment Variables on Heroku
+As mentioned in previous exercises, you can't use _sqlite_ on providers like render.com because all records are stored in a file, and render.com doesn't let you write data to the file system. 
 
-Remember, we said Heroku would set the `DATABASE_URL` environment variable for us? You can check and see all environment variables by running the following: 
+Instead, we're going to use the SQL database called **Postgres** on render.com. Postgres is a separate piece of software running on your server. You can think of it as another mini web app with its own web server and URL. 
 
-```sh
-heroku config
-```
-
-You'll see that only one variable is set so far. That's the variable of the database we just created in the previous step. But if you look at your **.env** file, you'll see that we have a couple more variables defined. So we need to make sure to set those also on Heroku. 
-
-Setting them is just as easy as getting them. Write:
-
-```sh
-heroku config:set FLASK_APP=run.py
-```
-
-and
-
-```sh
-heroku config:set FLASK_ENV=production
-```
-
-If you run `heroku config` now, you'll see the updated environment variables. 
-
-### Prepare the application for deployment
-
-There are still a couple of adjustments we have to make to our code before we can deploy our application. 
-
-Heroku requires a file with the name **Procfile** in our project's root. This file includes instructions on how to run the webserver. So create a file with that exact name (and no file extension!) and add to it just a single line: 
-
-```
-web: gunicorn run:app
-```
-
-Next, we need to install the **psycopg2** package because Heroku uses it to interact with the Postgres database. It's extremely important that this package is listed in the **requirements.txt** file so that Heroku knows to install it. Just run these two commands:
+For Flask to work with Postgres you need to install the package `psycopg2`. That's quite straight-forward, though:
 
 ```
 pip install psycopg2
 pip freeze > requirements.txt
 ```
 
-### Deployment to Heroku
+_(Don't forget to commit those changes with **git** and upload them to GitHub/Gitlab!)_
 
-Now, your code is ready to be deployed. Remember, deployment works with git. So, after all the changes you just made, you need to make sure to have all the code committed to git. 
+That's it. no additional configuration required. Now, _SQLAlchemy_ just needs to be told the URL to the database and it'll be able to work with Postgres.
 
-For example:
+Remember, in our **.env** file we defined the `DATABASE_URL` to be `'sqlite:///database.db'`. That's the URL of our _sqlite_ database. So that's the URL we want to be different on render.com.
 
-```sh
-git add .
-git commit -am 'add Heroku configuration'
+But first, we actually need a database on render.com. To create a new database go to the [render.com dashboard](https://dashboard.render.com/) and click on "New +" at the top. Select "PostgreSQL". You can give it any name you like. As a region, you should select the same one as the region of the application. The rest you can leave as is.
+
+Finally, click "Create Database". Once created, you should end up on an "Info" page about the database and when you scroll down you should see a section with information about "Connections". One of the points is "Internal Database URL". There is a little button to reveal the URL and another button to copy it. Copy that entire URL (make sure not to miss a part)!
+
+## Environment Variables
+
+Now go back to the render.com dashboard. Click on your application. Then, in the sidebar, click on "Environment". That's where you can define the environment variables on the server. Remember the **.env** file in our project? This should be part of the **.gitignore** file. So it was (hopefully!) never deployed to GitHub/Gitlab or render.com. But we still need those variables. So this is the place where you can set those variables on render.com. 
+
+As a "key" add `DATABASE_URL` and as a value paste the URL you just copied from the database earlier. (Don't be surprised. It will be hidden shortly afterward.)
+
+Then, make sure to add the other environment variables and their values (you find the keys and values in the **.env** file of your project.) Those should probably be `FLASK_APP` (with the value `run.py`) and `SECRET_KEY`. Do **not** set a `FLASK_DEBUG` variable! That's very important. 
+
+Finally, click "Save Changes" and click "Manual Deploy" at the top right. This should redeploy the application. 
+
+Watch the logs to see how things go and if any other errors come up. But technically now everything should be ready to go. 
+
+You can click on the URL to your website on the top left once the deployment is done and click around to see if everything works. 
+
+>💡 **Debugging on render.com**
+>
+>On render.com you can click on the "Logs" tab on the left to see the logs of the server. This is extremely helpful whenever something doesn't work. Scroll through the list and read carefully so you don't miss anything. Usually, you'll find any error messages here that'll tell you what went wrong. 
+
+## Running a script on the server
+
+If you click around your website and have been following the tutorial, you'll probably notice quickly that the cookie records are not there. That makes sense. We created a brand new database on the server. All the cookie records we worked with before were in our local database on our computer. 
+
+Remember, at one point we created a **seed file**, a script to populate our database with a few cookie records. Locally, we executed that script by running `python -m app.scripts.seed`. And if you had a paid plan with render.com you could do the same thing through the "Shell" on the render.com dashboard. But we're on a free plan. So we have to get a bit creative. 
+
+To make this fully clear: The following approach is a **hacky workaround**. In a real-world application, you should go with a paid plan and use either the "Shell" in the browser, a "Job", or an **SSH** connection to execute scripts on the server. 
+
+So what you can do as a **hack** is just add a _secret_ route in your application **temporarily**. When that route is called in a web browser, the seed script is executed. This is obviously not a secure solution! So you should make sure this can only be called once and ideally you just remove the route immediately afterward again.
+
+To make sure the route can only be called once let's add it to the **cookies** blueprint. So in **/cookies/routes.py**, at the bottom add this route:
+
+```py
+@blueprint.route('/run-seed')
+def run_seed():
+  if not Cookie.query.filter_by(slug='chocolate-chip').first():
+    import app.scripts.seed
+    return 'Database seed completed!'
+  else:
+    return 'Nothing to run.'
 ```
 
-To deploy, all you have to do is run: 
+This adds a route `/run-seed` to your application. The file should already import the `Cookie` model at the top. Using the model we can check if a record with the slug `chocolate-chip` already exists. If your seed contains different files, you should adjust this line to check if a record from the seed file already exists. Any record should be fine. 
 
-```sh
-git push heroku main
-```
+The condition makes sure to only run the line `import app.scripts.seed` (and therefore execute the seed script) if a record with the given slug does **not** yet exist. If it _does_ find a record with that slug, it will not do anything and just return "Nothing to run". This makes sure the seed can only be executed once. 
 
-(Or if your main branch is `master`, you should run `git push heroku master`. You aren't sure? Just run `git branch` to find out what your main branch is called. You can also use this to deploy specific branches. That's why deployment with git is so powerful!)
+>💡 Make sure the seed file, the seed file uses the condition `if __name__ == '__main__':` to only run `create_app()` if the file is executed directly. This is now very important because we'll execute the script within the context of a running application. 
 
-Once the deployment is done, you can run `heroku open` to open the application in your web browser. Or you use the URL from above. 
+After adding this route, you can commit the changes using **git** and upload them to GitHub/Gitlab. This should automatically trigger a deployment to render.com. Once the deployment is done, you should now be able to access the `/run-seed` route on the server (using the URL you got from the render.com dashboard).
 
-### Side Note: Debugging on Heroku
+If everything went well you should now see either `Database seed completed!` the first time you access that route on the server. The second time you should see `Nothing to run.`. And on the `/cookies` route, you should now see the cookies created. 
 
-So your application is deployed, but an important step is still missing. If you go to the /cookies route of the application, you'll notice an error. 
+If something went wrong check the logs on render.com. They should help you identify what the issue is. 
 
-To see an error message, you can take a look at the logs on Heroku by running this in the command line:
-
-```
-heroku logs
-```
-
-That's extremely useful whenever you have errors on Heroku. It'll show you what error messages were thrown on the server. 
-
-You can also watch the logs live as they come in by running:
-
-```
-heroku logs --tail
-```
-
-That will keep the connection open, and as you navigate your side, you'll see new logs pop up (just like when you run the server locally).
-
-To stop logging, just use the keys Ctrl + C.
-
-### Running code on the server
-
-So we know we have an issue. And if you read the error, you might have guessed already. We have connected the database, but we haven't actually created the tables yet for our application. Remember, the database on the server is separate from our local database. We just created a complete blank and new database. So we need to again to through the steps of the previous exercise to actually create the database tables in Postgres on the server.
-
-Fortunately, we have migration files that already include what tables need to be created. We even have a seed file with data ready to go. So how do I execute both the migrations and the seed file on Heroku? 
-
-Heroku lets you run command-line commands on the server! All you have to do is prefix them with `heroku run`. 
-
-Let's start by running the migrations: 
-
-```sh
-heroku run flask db upgrade
-```
-
-_(It's important that your environment variables are set correctly for this step.)_
-
-Once that's done running, you can also execute the seed file: 
-
-```sh
-heroku run python -m app.scripts.seed
-```
-
-If you go to the /cookies route on Heroku now, you should see our cookies! 
-
-You can use the same command to even run the python console on Heroku by running:
-
-```sh
-heroku run python
-```
-
-If you quickly `import` your models and just run simple queries or CRUD operations, you can also use the `flask shell` for the by running:
-
-```sh
-heroku run flask shell
-```
+>🐛 To debug this locally, rename or delete the **database.db** file in your project folder. Then run `flask db upgrade` to generate a new blank database locally. Now, start the server locally and try to access [http://127.0.0.1:8000/run-seed](http://127.0.0.1:8000/run-seed. Try to use the logs and error messages to debug the issue. 
 
 ## Side Note on localhost and 127.0.0.1
 
