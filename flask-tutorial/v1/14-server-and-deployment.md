@@ -160,7 +160,7 @@ If everything went well you should now see either `Database seed completed!` the
 
 If something went wrong check the logs on render.com. They should help you identify what the issue is. 
 
->🐛 To debug this locally, rename or delete the **database.db** file in your project folder. Then run `flask db upgrade` to generate a new blank database locally. Now, start the server locally and try to access [http://127.0.0.1:8000/run-seed](http://127.0.0.1:8000/run-seed. Try to use the logs and error messages to debug the issue. 
+>🐛 To debug this locally, rename or delete the **database.db** file in your project folder. Then run `flask db upgrade` to generate a new blank database locally. Now, start the server locally and try to access [http://127.0.0.1:8000/run-seed](http://127.0.0.1:8000/run-seed). Try to use the logs and error messages to debug the issue. 
 
 ## Side Note on localhost and 127.0.0.1
 
