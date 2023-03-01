@@ -2,7 +2,7 @@
 title: Session-Based Authentication
 videoId:
 slug: "session-authentication"
-lastUpdate: April 8th, 2022
+lastUpdate: Mar 1st, 2023
 templateEngineOverride: md
 ---
 
@@ -41,17 +41,13 @@ For now, let's only add `email` and `password`. Important to note: The email sho
 
 Another important note: The password string length should be quite long to allow for long and encrypted passwords. 
 
-Remember, whenever we add a new model, we also need to create a migration. In the command line run the following two commands: 
-
-```sh
-flask db migrate -m 'create user model'
-flask db upgrade
-```
+>💡 Remember, whenever we add a new model, we also need to create a migration. However, the migration script will only be able to _find_ the **model** if the model is actually **imported** in a file that's somehow connected with your `app`. That means we will not yet generate a migration but do that a little bit later, after we **imported** the model.
 
 Let's create a barebone **routes.py** file with just the basic structure but without any functionality yet: 
 
 ```py
 from flask import Blueprint, render_template
+from app.users.models import User
 
 blueprint = Blueprint('users', __name__)
 
@@ -82,6 +78,13 @@ Now, we need to `import` `users` in our **/app/app.py** file (in the same line a
 
 ```py
 app.register_blueprint(users.routes.blueprint)
+```
+
+Above, we already added the `User` model in the **routes.py** file even though we don't technically use it just yet. However, importing it makes the model discoverable by the migration script. Now, you can actually generate the migration script. In the command line run the following two commands: 
+
+```sh
+flask db migrate -m 'create user model'
+flask db upgrade
 ```
 
 Lastly, let's create the HTML templates. They will be just basic HTML forms, and for the sake of this tutorial, we'll keep them as simple as possible. 
