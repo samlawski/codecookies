@@ -2,7 +2,7 @@
 title: SQL Database Setup
 videoId:
 slug: "sql-database-setup"
-lastUpdate: April 8th, 2022
+lastUpdate: Mar 1st, 2023
 templateEngineOverride: md
 ---
 
@@ -254,12 +254,16 @@ from app.extensions.database import db, migrate
 Then, initialize it in the `register_extensions` function you created before right below the existing `db.init_app(app)`:
 
 ```py
-migrate.init_app(app, db)
+migrate.init_app(app, db, compare_type=True)
 ```
 
-Note that you need to pass two parameters: `app` and `db`. That's because you also want to connect the migration package to SQLAlchemy and the database. 
+The first parameter `app` tells the migration package where to look for the **models**. The migration package is configured to automatically scan your Flask application for any models. It will automatically generate a script for you based on the models that are **imported** in your app. That also means that if you create a model in a .py-file in your project but never import it anywhere, the package will also not find it!
 
-As the final step, because we refactored our app to be started with the **run.py** file, we need to tell FlaskMigrate where it can find out app. We do that by adding `FLASK_APP=run.py` to a new line to our **.env** file.
+The second parameter, `db`, as you might have guessed, tells the script where to find the database that should be dated with the new database tables. 
+
+And finally, the parameter `compare_type=True` is a [configuration option](https://flask-migrate.readthedocs.io/en/latest/#alembic-configuration-options). That means it's optional and you could leave it out. But I do recommend adding it here. This option will enable any changes you make to column types in your models and allow you to create migrations for it. Let's say you have a `User` model with a `name` that's configured to be a string of 50 characters. But later you realize that's too short and you want to increase the number to 200. Without this option, the migration script wouldn't notice when you make that change. But with this option, you can make the change, then generate a migration file and update the database. 
+
+As the final step, because we refactored our app to be started with the **run.py** file, we need to tell FlaskMigrate where it can find our app. We do that by adding `FLASK_APP=run.py` to a new line in our **.env** file.
 
 Once you've done that, you can use the command line to create migrations. 
 

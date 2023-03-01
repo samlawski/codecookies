@@ -121,7 +121,15 @@ Now go back to the render.com dashboard. Click on your application. Then, in the
 
 As a "key" add `DATABASE_URL` and as a value paste the URL you just copied from the database earlier. (Don't be surprised. It will be hidden shortly afterward.)
 
-Then, make sure to add the other environment variables and their values (you find the keys and values in the **.env** file of your project.) Those should probably be `FLASK_APP` (with the value `run.py`) and `SECRET_KEY`. Do **not** set a `FLASK_DEBUG` variable! That's very important. 
+Looking at that URL, you'll notice that it starts with `postgres://`. _SQLAlchemy_, however, is configured, to automatically try and prefix a _Postgres_ database URL with `postgresql://`. So in order to make the database connection work with _SQLAlchemy_ you need to make a small change to the URL you just copied and pasted. Change the beginning of the text to this: 
+
+```
+postgresql://
+```
+
+Everything afterward has to stay the same. 
+
+Next, make sure to add the other environment variables and their values (you find the keys and values in the **.env** file of your project.) Those should probably be `FLASK_APP` (with the value `run.py`) and `SECRET_KEY`. Do **not** set a `FLASK_DEBUG` variable! That's very important. 
 
 >💡 You may have other environment variables (such as an `API_KEY` from the API-building exercise). Make sure to add all the environment variables that are required to run your code.
 >
