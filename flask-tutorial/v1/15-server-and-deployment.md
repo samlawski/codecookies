@@ -2,10 +2,10 @@
 title: Server and Deployment
 videoId:
 slug: "server-and-deployment"
-lastUpdate: Feb 22nd, 2023
+lastUpdate: Mar 1st, 2023
 ---
 
-You now have learned about all the fundamental concepts of building a web application with Flask. You can create routes, views, models, connect a database, perform CRUD operations, and paginate your content. In future exercises, we'll learn to put all of that together and refine some more aspects of it. But in this exercise, we're going to learn about the final step of building a basic application: uploading it to the internet. 
+You now have learned about all the fundamental concepts of building a web application with Flask. You can create routes, views, and models, connect a database, perform CRUD operations, and paginate your content. In future exercises, we'll learn to put all of that together and refine some more aspects of it. But in this exercise, we're going to learn about the final step of building a basic application: uploading it to the internet. 
 
 ## Choosing a Host
 
@@ -39,6 +39,13 @@ To use _Gunicorn_ to run your web server, instead of running `python run.py` in 
 ```sh
 gunicorn run:app
 ```
+
+>💡 **Important note for Windows users**
+>
+>_Gunicorn_ is designed to run on _Unix_ systems. This refers to distributions of _Linux_ and _macOS_. It does not run on _Windows_. 
+>That's not much of a problem right now, though, because the purpose of using _Gunicorn_ is to run it on the web server. On your personal computer you can continue to use the default Flask server with `python run.py`.
+>
+>Alternatively to _Gunicorn_ you could also use another web server that does run on Windows such as [uWSGI](https://flask.palletsprojects.com/en/2.2.x/deploying/uwsgi/) or [Waitress](https://flask.palletsprojects.com/en/2.2.x/deploying/waitress/). Either of those are fine. The reason we use [Gunicorn](https://flask.palletsprojects.com/en/2.2.x/deploying/gunicorn/) in the tutorial is because of its popularity.
 
 The `run` is the name of your **run.py** file. `app` is the `app` variable within that file. This tells the _Gunicorn_ server where to find your application. 
 
