@@ -62,13 +62,13 @@ body {
 
 Now, save the file. 
 
-Next, we'll use the `url_for` function again. Remember, we've added that before to get the URL of specific routes. 
+Next, we'll use the `url_for` function again. Remember, when you learned about [routing](/flask-tutorial/v1/routing/#more-routes) you added the `url_for` function to your application's Python code to get the URL of specific routes.
 
 ```py
 from flask import Flask, redirect, url_for, render_template
 ```
 
-You can also use it to get the URL of static files! Just as a reminder: `url_for` will return a URL as a string. In our case, we want it to return the URL to a static file in our **static** folder. To do that, we would write this: 
+You can also use it to get the URL of static files! Just as a reminder: `url_for` is a Python function that is built into Flask and will return a URL as a string. In our case, we want it to return the URL to a static file in our **static** folder. To do that, we would write this: 
 
 ```py
 url_for('static', filename='css/main.css')
