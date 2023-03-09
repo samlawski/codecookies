@@ -2,7 +2,7 @@
 title: Overview and Setup
 videoId:
 slug: "setup-and-overview"
-lastUpdate: Feb 17th, 2023
+lastUpdate: March 9th, 2023
 ---
 
 Welcome to a short series on learning how to build Flask web applications! 👋
@@ -168,7 +168,7 @@ This is what your project folder should look like now:
   <main>
     <ul>
       <li>📁 venv</li>
-      <li>📁 .env</li>
+      <li>📄 .env</li>
       <li>📄 .gitignore</li>
       <li>📄 app.py</li>
       <li>📄 config.py</li>

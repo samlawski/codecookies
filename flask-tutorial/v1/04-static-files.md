@@ -37,7 +37,7 @@ It may look like this:
       </li>
       <li>📁 templates</li>
       <li>📁 venv</li>
-      <li>📁 .env</li>
+      <li>📄 .env</li>
       <li>📄 .gitignore</li>
       <li>📄 app.py</li>
       <li>📄 config.py</li>

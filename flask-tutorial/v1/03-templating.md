@@ -2,7 +2,7 @@
 title: Templating
 videoId:
 slug: "templating-with-jinja"
-lastUpdate: April 8th, 2022
+lastUpdate: March 9th, 2023
 templateEngineOverride: md
 ---
 
@@ -134,7 +134,31 @@ Now, you can use the function. To demonstrate what it does, create a new folder 
 
 Your folder structure should look something like this now: 
 
-![Screenshot showing templates folder within project root including an index.html file](/assets/content/flask-tutorial/03-templating/folder-screenshot-1.png)
+<div class="demowindow demowindow--files" aria-hidden="true" tabindex="-1">
+  <header>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__title">📁 cookieshop</div>
+  </header>
+  <main>
+    <ul>
+      <li>📁 __pycache__</li>
+      <li>
+        📁 templates
+        <ul>
+          <li>📄 index.html</li>
+        </ul>
+      </li>
+      <li>📁 venv</li>
+      <li>📄 .env</li>
+      <li>📄 .gitignore</li>
+      <li>📄 app.py</li>
+      <li>📄 config.py</li>
+      <li>📄 requirements.txt</li>
+    </ul>
+  </main>
+</div>
 
 Back in your Python code, change one of your routes to return the `render_template` function with a string as parameter: `'index.html'`. It could look like this: 
 
