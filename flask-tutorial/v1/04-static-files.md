@@ -2,7 +2,7 @@
 title: Static Files
 videoId:
 slug: "static-files"
-lastUpdate: April 8th, 2022
+lastUpdate: March 9th, 2023
 templateEngineOverride: md
 ---
 
@@ -14,7 +14,37 @@ Similar to the **templates** folder, Flask has another folder it automatically l
 
 It may look like this: 
 
-![screenshot of folder structure with a static folder, a css folder inside and a main.css file inside of that](/assets/content/flask-tutorial/04-static-files/folder-screenshot-2.png)
+<div class="demowindow demowindow--files" aria-hidden="true" tabindex="-1">
+  <header>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__btn"></div>
+    <div class="demowindow__title">📁 cookieshop</div>
+  </header>
+  <main>
+    <ul>
+      <li>📁 __pycache__</li>
+      <li>
+        📁 static
+        <ul>
+          <li>
+            📁 css
+            <ul>
+              <li>📄 main.css</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>📁 templates</li>
+      <li>📁 venv</li>
+      <li>📁 .env</li>
+      <li>📄 .gitignore</li>
+      <li>📄 app.py</li>
+      <li>📄 config.py</li>
+      <li>📄 requirements.txt</li>
+    </ul>
+  </main>
+</div>
 
 Add some CSS rules to that folder to give your page some basic styling. 
 
