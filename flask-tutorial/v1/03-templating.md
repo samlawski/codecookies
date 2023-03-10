@@ -2,7 +2,7 @@
 title: Templating
 videoId:
 slug: "templating-with-jinja"
-lastUpdate: March 9th, 2023
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 
@@ -211,13 +211,15 @@ The variables you assign in the `render_template` functions are now available to
 
 Give it a try! Try out different parameters and values and see what happens. Don't be afraid to break your app!
 
-## Jinja: Loops and hidden code
+## Jinja: Loops
 
-There are **two ways to insert code** in your template in jinja. We just looked at the first method. It's the double curly braces `{{ }}`. Those will automatically try to insert anything into your template that's written inside of them. 
+There are **two main ways to insert code** in your template in jinja. _(There is technically a [third one for comments](https://jinja.palletsprojects.com/en/3.1.x/templates/#comments) in case you were wondering.)_ We just looked at the first method. It's the double curly braces `{{ }}`. Those will automatically try to insert anything into your template that's written inside of them. For example by writing `{{ 4 + 3}}` in your template file, you'll see only the result `7` printed out in the generated HTML.
 
-Alternatively, you can also use a single curly brace combined with a percentage sign like this: `{% %}`
+The second main way to use code in your HTML templates using jinja is to use single curly braces combined with a percentage sign like this: `{% %}`
 
-Any code written within those kinds of braces will be executed but **not inserted** into the template. One use case of that is adding more programming logic to your code, such as loops. 
+Jinja uses this type of opening and closing braces for **statements**. That means the code in there is used for programming logic like loops, conditions, and more. Whatever you write in those kinds of braces will **not be visible** in the HTML. You can use them to only display a certain part of your HTML if a particular condition is met. There is a lot you can do and if you're interested scroll through the [official documentation](https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-control-structures) a bit to get an idea. 
+
+One thing you can do with those braces is to **use loops to repeatedly insert the same general HTML multiple times in the template**.
 
 Remember our cookie shop? In the last exercise, we created individual pages for each of our cookies. Let's now create an index page for our cookies that will display links to every single cookie in our shop. 
 
