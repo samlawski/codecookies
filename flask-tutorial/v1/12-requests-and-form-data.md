@@ -2,7 +2,8 @@
 title: Forms and Request Data
 videoId:
 slug: "forms-and-request-data"
-lastUpdate: April 8th, 2022
+description: Learn how to receive and process data from HTML forms on a Flask backend. 
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

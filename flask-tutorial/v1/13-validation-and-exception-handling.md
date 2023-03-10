@@ -2,7 +2,8 @@
 title: Validation and Exception Handling
 videoId:
 slug: "validation-and-exception-handling"
-lastUpdate: April 8th, 2022
+description: Learn to secure a Flask backend a bit by validating what kind of data can be submitted to the backend.
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

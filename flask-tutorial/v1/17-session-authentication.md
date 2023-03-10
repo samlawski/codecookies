@@ -2,7 +2,8 @@
 title: Session-Based Authentication
 videoId:
 slug: "session-authentication"
-lastUpdate: Mar 1st, 2023
+description: Learn to secure a Flask backend and provide access to certain parts only to specific users.
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

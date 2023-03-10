@@ -2,7 +2,8 @@
 title: Routing
 videoId:
 slug: "routing"
-lastUpdate: April 8th, 2022
+description: Learn to set up routes in Flask and make them dynamic with typed parameters.
+lastUpdate: March 10th, 2023
 ---
 
 Routing is one of the core features of any web application. Routes define how clients can access an application. 

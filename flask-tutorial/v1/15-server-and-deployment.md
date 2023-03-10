@@ -2,7 +2,8 @@
 title: Server and Deployment
 videoId:
 slug: "server-and-deployment"
-lastUpdate: Mar 1st, 2023
+description: Learn how to deploy a Flask application to a production server.
+lastUpdate: March 10th, 2023
 ---
 
 You now have learned about all the fundamental concepts of building a web application with Flask. You can create routes, views, and models, connect a database, perform CRUD operations, and paginate your content. In future exercises, we'll learn to put all of that together and refine some more aspects of it. But in this exercise, we're going to learn about the final step of building a basic application: uploading it to the internet. 

@@ -2,6 +2,7 @@
 title: Templating
 videoId:
 slug: "templating-with-jinja"
+description: Learn to use the templating language jinja2 within Flask to dynamically generate HTML.
 lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---

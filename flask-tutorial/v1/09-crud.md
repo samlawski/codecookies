@@ -2,7 +2,8 @@
 title: CRUD
 videoId:
 slug: "crud"
-lastUpdate: Feb 17th, 2023
+description: Learn how to create, read, update, and delete database records in Flask using SQLAlchemy.
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

@@ -2,7 +2,8 @@
 title: "Model Relationships in SQL Databases"
 videoId:
 slug: "model-relationships-sql"
-lastUpdate: April 8th, 2022
+description: Learn about relationships between data sets and how to define them in Flask and SQLAlchemy.
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

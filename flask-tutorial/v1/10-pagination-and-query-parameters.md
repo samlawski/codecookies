@@ -2,7 +2,8 @@
 title: "Pagination and Query Parameters"
 videoId:
 slug: "pagination-and-query-parameters"
-lastUpdate: April 8th, 2022
+description: Learn to use query strings in URLs in Flask and how to use them to create a pagination system.
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

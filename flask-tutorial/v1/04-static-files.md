@@ -2,7 +2,8 @@
 title: Static Files
 videoId:
 slug: "static-files"
-lastUpdate: March 9th, 2023
+description: Learn to serve static files such as CSS from a Flask application.
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

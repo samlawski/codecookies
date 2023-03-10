@@ -2,7 +2,8 @@
 title: Unit Testing
 videoId:
 slug: "unit-testing"
-lastUpdate: July 26th, 2022
+description: Learn to create more stable backend code within Flask by writing unit tests with pytest.
+lastUpdate: March 10th, 2023
 ---
 
 When it comes to clean code and scalable applications, **testing** is an important topic. When people talk about testing, they usually refer to **automated tests**, so pieces of code that you write to automatically execute your main application code and see if it does what it's supposed to do.

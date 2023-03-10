@@ -2,7 +2,8 @@
 title: SQL Database Setup
 videoId:
 slug: "sql-database-setup"
-lastUpdate: Mar 1st, 2023
+description: Learn to set up a relational database and migrations with SQLAlchemy in Flask. 
+lastUpdate: March 10th, 2023
 templateEngineOverride: md
 ---
 

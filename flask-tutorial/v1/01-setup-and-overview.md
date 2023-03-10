@@ -2,7 +2,8 @@
 title: Overview and Setup
 videoId:
 slug: "setup-and-overview"
-lastUpdate: March 9th, 2023
+description: Learn to set up a Python and Flask application from scratch and start a server for the first time.
+lastUpdate: March 10th, 2023
 ---
 
 Welcome to a short series on learning how to build Flask web applications! 👋

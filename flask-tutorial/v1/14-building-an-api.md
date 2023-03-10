@@ -2,7 +2,8 @@
 title: Building an API
 videoId:
 slug: "flask-to-build-an-api"
-lastUpdate: Feb 22nd, 2023
+description: Learn how to use Flask routes as an API that returns structured JSON data. 
+lastUpdate: March 10th, 2023
 ---
 
 ## What's An API?
