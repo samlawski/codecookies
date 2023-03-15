@@ -1,5 +1,5 @@
 ---
-import Tutorial from '../../../layouts/Tutorial.astro'
+import Base from '../../../layouts/Base.astro'
 import { getCollection } from 'astro:content'
 
 export async function getStaticPaths(){
@@ -24,14 +24,119 @@ export async function getStaticPaths(){
 const { tutorial, version } = Astro.params
 const { tutorialData, lessons } = Astro.props
 const { Content } = await tutorialData.render()
+
+const path = `/${tutorial}/${version}`
+
+const sectionsGroupsLessons = tutorialData.data.sections.map((section, sectionIndex) => ({
+  title: section.title,
+  groups: section.groups.map((groupTitle, groupIndex) => ({
+    title: groupTitle,
+    lessons: lessons
+      .filter(lesson => lesson.data.sectionIndex == sectionIndex)
+      .filter(lesson => lesson.data.groupIndex == groupIndex)
+      .sort((a, b) => (a.id > b.id) ? 1 : -1)
+      .map(lesson => ({
+        title: lesson.data.title,
+        url: `${path}/${lesson.slug}`
+      }))
+  }))
+}))
+
+let lessonCounter = 0
 ---
 
-<Tutorial 
-  title={tutorialData.data.title} 
-  description={tutorialData.data.description}
-  lessons={lessons}
-  path={`/${tutorial}/${version}`}
-  sections={tutorialData.data.sections}
->
-  <Content />
-</Tutorial>
+<Base title={`${tutorialData.data.title} | Code Cookies`} description={tutorialData.data.description}>
+  <nav>
+    <a href="/">Code Cookies</a> &gt; {tutorialData.data.title}
+  </nav>
+  
+  <header>
+    <h1>{tutorialData.data.title}</h1>
+  </header>
+  
+  <main>
+    <header>
+      <Content />
+    </header>
+  
+    {!!tutorialData.data.sections.length && sectionsGroupsLessons.map(section => (
+      <h2>{section.title}</h2>
+      <ol>
+        {section.groups.map(group => (
+          <div>
+            {group.title.length > 0 && group.lessons.length > 0 ? 
+              <h3><small>{group.title}:</small></h3> : ''}
+
+            {group.lessons.map(lesson => {
+              lessonCounter += 1
+              return (
+                <li><a href={lesson.url}>{lessonCounter}. {lesson.title}</a></li>
+              )
+            })}
+          </div>
+        ))}
+      </ol>
+    ))}
+
+    {!tutorialData.data.sections.length && (
+      <ol>
+        {lessons.map((lesson, lessonIndex) => (
+          <li><a href={`${path}/${lesson.slug}`}>{lessonIndex + 1}. {lesson.data.title}</a></li>
+        ))}
+      </ol>
+    )}
+  </main>
+</Base>
+
+
+<style is:global>
+  body > header > h1 {
+    color: white;
+    background-color: #78909C;
+    font-weight: 800;
+    padding: 10px;
+    margin: 0;
+  }
+
+  body > main > header ul {
+    padding-left: 20px;
+  }
+
+  body > main > h2 {
+    padding-top: 20px;
+  }
+
+  body > main h3 {
+    padding: 15px 0;
+    font-size: 1rem;
+  }
+
+  body > main > ol {
+    list-style: none;
+  }
+
+  body > main > ol a {
+    padding: 10px;
+    display: block;
+    font-weight: 700;
+    text-decoration: none;
+
+    transition: all 0.3s ease-in-out;
+  }
+
+  body > main > ol a small {
+    font-weight: 300;
+    color: #78909C;
+
+    transition: all 0.3s ease-in-out;
+  }
+
+  body > main > ol a:hover {
+    background-color: #0066A8;
+    color: white;
+    box-shadow: 6px 6px 0px #4DD0E1;
+  }
+  body > main > ol a:hover small {
+    color: white;
+  }
+</style>
