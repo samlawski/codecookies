@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro'
+---
+
+<Base title="Privacy Policy | Code Cookies" description="The code cookies privacy policy is short.">
+  <main>
+    <h1>🕵️ Privacy Policy: <a href="/">codecookies.xyz</a></h1>
+
+    <article>
+      <h2>How this website works</h2>
+      <p>The Code Cookies website is a <strong>static website</strong>. The Code Cookies developers are not running any server-side code or data processing of incoming requests. This also means Code Cookies <strong>does not process or store any data</strong> of individual users.</p>
+      <p>The website is hosted on <strong>Vercel</strong>. For processing of data such as server access logs etc. please refer to their <a href="https://vercel.com/legal/privacy-policy" target="_blank">privacy policy</a> for further details.</p>
+
+      <h2>Cookies, user data, and tracking</h2>
+      <p>There are no tracking or marketing cookies set by Code Cookies. The only cookie that is set comes from the user clicking on this cookie Emoji <span id="jsCookie">🍪 </span>. The cookie itself does not contain any information beyond the emoji character.</p>
+      <p>To see all the cookies currently set on this website click the following button: <button onclick="viewCookies()">View cookies</button></p>
+      <p id="jsViewCookies"></p>
+
+      <p>Code Cookies uses an <strong>open-source, light-weight, anonymous, and cookie-free</strong> analytics system called <strong>Swetrix</strong> (<a href="https://swetrix.com/privacy" target="_blank">privacy policy</a>) to keep track generally of how many users are accessing which page of the website from which country. None of the tracked information can be used to identify individual users.</p>
+    </article>
+
+    <footer>
+      <h2>That's it.</h2>
+      <p>That's about it in terms of privacy. Now, back to the main contents of this website?</p>
+      <nav>
+        <p>👉 Find <a href="/flask-tutorial/v1">the Flask tutorial here</a>.</p>
+        <p>👉 Or check out <a href="/express-tutorial/v1">the Express tutorial here</a>.</p>
+        <p>🏠 Or go back to the <a href="/">home page</a>.</p>
+      </nav>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  button {
+    cursor: pointer;
+  }
+</style>
+
+<script is:inline>
+  function viewCookies(){
+    console.log('hi')
+    document.getElementById('jsViewCookies').innerHTML = 'Cookies currently set: ' + (document.cookie || 'None. Try clicking on the emoji above. Then, click the "View cookies" button again.')
+  }
+</script>

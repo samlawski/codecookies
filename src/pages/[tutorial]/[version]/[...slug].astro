@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content'
+import Lesson from '../../../layouts/Lesson.astro'
+
+export async function getStaticPaths(){
+  const tutorials = await getCollection('tutorials', ({ data }) => data.version)
+
+  const lessonsPerTutorial = await Promise.all(tutorials.map(async tutorial => {
+    // example id: v1/1-1-1-setup-and-overview (it includes the path of sub directories)
+    const tutorialLessons = await getCollection(tutorial.slug, ({ id }) => id.startsWith(tutorial.data.version) + '/' )
+
+    return tutorialLessons.map(lesson => {
+      const nextLesson = tutorialLessons
+        .sort((a, b) => (a.id > b.id) ? 1 : -1)
+        .find(scanningLesson => scanningLesson.id > lesson.id)
+      const nextLessonPath = nextLesson?.slug ? `/${tutorial.data.slug}/${tutorial.data.version}/${nextLesson.slug}` : ''
+      const nextLessonTitle = nextLesson?.data?.title || ''
+
+      return {
+        params: { tutorial: tutorial.slug, version: tutorial.data.version, slug: lesson.slug }, props: { lesson, tutorial, nextLessonPath, nextLessonTitle }
+      }
+    })
+  }))
+
+  return lessonsPerTutorial.flat()
+}
+
+const { lesson, tutorial, nextLessonPath, nextLessonTitle } = Astro.props
+const { Content } = await lesson.render()
+---
+
+<Lesson
+  title={lesson.data.title}
+  description={lesson.data.description}
+  lastUpdate={lesson.data.lastUpdate}
+  videoId={lesson.data.videoId}
+  tutorialTitle={tutorial.data.title}
+  tutorialSlug={tutorial.data.slug}
+  tutorialPath={`/${tutorial.data.slug}/${tutorial.data.version}`}
+  nextLessonPath={nextLessonPath}
+  nextLessonTitle={nextLessonTitle}
+  filePath={lesson.id}
+>
+  <Content />
+</Lesson>
+

@@ -1,19 +1,17 @@
 {
-  "name": "codecookies",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "codecookies-astro",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "build": "npx @11ty/eleventy",
-    "serve": "npx @11ty/eleventy --serve",
-    "dev": "npm run serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "astro dev",
+    "serve": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@11ty/eleventy": "^1.0.0-canary.44",
-    "markdown-it-anchor": "^8.4.1"
+  "dependencies": {
+    "@astrojs/sitemap": "^1.2.1",
+    "astro": "^2.0.18"
   }
 }

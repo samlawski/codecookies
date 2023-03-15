@@ -9,6 +9,36 @@
       "source": "/flask-2-tutorial/v1/:path*/",
       "destination": "/flask-tutorial/v1/:path*/",
       "permanent": true
+    },
+    { 
+      "source": "/development-basics",
+      "destination": "/development-basics/v1/",
+      "permanent": true
+    },
+    { 
+      "source": "/development-basics/:path((?!v1).*)",
+      "destination": "/development-basics/v1/:path*",
+      "permanent": true
+    },
+    { 
+      "source": "/development-basics/:path((?!v1).*\/)",
+      "destination": "/development-basics/v1/:path*/", 
+      "permanent": true
+    },
+    { 
+      "source": "/python",
+      "destination": "/python/v1/",
+      "permanent": true
+    },
+    { 
+      "source": "/python/:path((?!v1).*)",
+      "destination": "/python/v1/:path*",
+      "permanent": true
+    },
+    { 
+      "source": "/python/:path((?!v1).*\/)",
+      "destination": "/python/v1/:path*/", 
+      "permanent": true
     }
   ]
 }

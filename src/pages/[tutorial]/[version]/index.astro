@@ -1,0 +1,37 @@
+---
+import Tutorial from '../../../layouts/Tutorial.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths(){
+  const tutorials = await getCollection('tutorials', ({ data }) => data.version)
+
+  return await Promise.all(tutorials.map(async tutorialData => {
+    const lessons = await getCollection(tutorialData.slug, ({ id }) => id.startsWith(tutorialData.data.version) + '/' )
+
+    return {
+      params: {
+        tutorial: tutorialData.slug, 
+        version: tutorialData.data.version
+      }, 
+      props: { 
+        tutorialData,
+        lessons
+      }
+    }
+  }))
+}
+
+const { tutorial, version } = Astro.params
+const { tutorialData, lessons } = Astro.props
+const { Content } = await tutorialData.render()
+---
+
+<Tutorial 
+  title={tutorialData.data.title} 
+  description={tutorialData.data.description}
+  lessons={lessons}
+  path={`/${tutorial}/${version}`}
+  sections={tutorialData.data.sections}
+>
+  <Content />
+</Tutorial>

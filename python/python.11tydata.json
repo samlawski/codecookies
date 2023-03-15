@@ -1,6 +1,0 @@
-{
-  "layout": "article.11ty.js",
-  "tags": "python",
-  "name": "Python Short-Tutorials",
-  "permalink": "python/{{ slug }}/"
-}
