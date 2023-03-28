@@ -6,7 +6,7 @@ export async function getStaticPaths(){
   const tutorials = await getCollection('tutorials', ({ data }) => data.version)
 
   return await Promise.all(tutorials.map(async tutorialData => {
-    const lessons = await getCollection(tutorialData.slug, ({ id }) => id.startsWith(tutorialData.data.version) + '/' )
+    const lessons = await getCollection(tutorialData.slug, ({ id }) => id.startsWith(tutorialData.data.version + '/' ))
 
     return {
       params: {

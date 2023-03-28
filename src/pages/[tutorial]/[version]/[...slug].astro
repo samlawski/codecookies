@@ -7,7 +7,7 @@ export async function getStaticPaths(){
 
   const lessonsPerTutorial = await Promise.all(tutorials.map(async tutorial => {
     // example id: v1/1-1-1-setup-and-overview (it includes the path of sub directories)
-    const tutorialLessons = await getCollection(tutorial.slug, ({ id }) => id.startsWith(tutorial.data.version) + '/' )
+    const tutorialLessons = await getCollection(tutorial.slug, ({ id }) => id.startsWith(tutorial.data.version + '/') )
 
     return tutorialLessons.map(lesson => {
       const nextLesson = tutorialLessons
