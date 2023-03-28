@@ -131,14 +131,23 @@ const tutorialPath = `/${tutorial.data.slug}/${tutorial.data.version}`
   article h4 a,
   article h5 a {
     text-decoration: none;
+    color: #212121;
+  }
+  article h1 a::after,
+  article h2 a::after,
+  article h3 a::after,
+  article h4 a::after,
+  article h5 a::after {
+    content: ' 🔗';
     opacity: .3;
     transition: opacity .2s ease-in-out;
   }
-  article h1 a:hover,
-  article h2 a:hover,
-  article h3 a:hover,
-  article h4 a:hover,
-  article h5 a:hover {
+  article h1 a:hover::after,
+  article h2 a:hover::after,
+  article h3 a:hover::after,
+  article h4 a:hover::after,
+  article h5 a:hover::after {
+    content: ' 🔗';
     opacity: 1;
   }
 
