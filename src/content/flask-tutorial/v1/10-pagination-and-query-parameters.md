@@ -2,7 +2,7 @@
 title: "Pagination and Query Parameters"
 slug: "pagination-and-query-parameters"
 description: Learn to use query strings in URLs in Flask and how to use them to create a pagination system.
-lastUpdate: March 10th, 2023
+lastUpdate: April 18th, 2023
 ---
 
 In the previous exercise, we created some models and started interacting with the database using **CRUD** operations. 
@@ -139,14 +139,19 @@ With that we can access the config variables with `current_app.config['POSTS_PER
 Next, we'll make use of the `paginate` method built into `flask_sqlalchemy`. Add the `paginate` method to the line where you define `Cookie.query.all()` like this: 
 
 ```py
-all_cookies = Cookie.query.paginate(page_number, current_app.config['COOKIES_PER_PAGE'])
+all_cookies = Cookie.query.paginate(page=page_number, per_page=current_app.config['COOKIES_PER_PAGE'])
 ```
 
-The first argument defines the current page number. We have defined that above using the query parameters. 
+As of SQLAlchemy version 3, the parameters of the `paginate()` method are so-called **keyword-only parameters**. That means, you define each individual parameter of the function _not_ by its position but by keywords predefined by the person who defined the function.
 
-The second argument defines the maximum number of items per page. We've defined that above in the config file. 
+>💡 If you're using an older version of SQLAlchemy, those parameters were simply defined by their position. So instead of the code above, you'd have to write:
+>`paginate(page=page_number, per_page=current_app.config['COOKIES_PER_PAGE'])`
 
-Find a full definition of the method and its arguments [in the documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/#flask_sqlalchemy.BaseQuery.paginate).
+So in this case, the authors of the SQLAlchemy library have defined the keywords `page` and `per_page` as parameters to be defined within the `paginate()` function. You can find the exact definition [in the official documentation](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/api/#flask_sqlalchemy.query.Query.paginate).
+
+The `page` parameter defines the current page number. We have defined that above using the query parameters. 
+
+The `per_page` parameter defines the maximum number of items per page. We've defined that above in the config file. 
 
 If you were to save and reload the page now, you'll see this error on the `/cookies` page: 
 
@@ -160,7 +165,7 @@ That's because the `.paginate()` method doesn't return a list of objects (like `
 @blueprint.route('/cookies')
 def cookies():
   page_number = request.args.get('page', 1, type=int)
-  cookies_pagination = Cookie.query.paginate(page_number, current_app.config['COOKIES_PER_PAGE'])
+  cookies_pagination = Cookie.query.paginate(page=page_number, per_page=current_app.config['COOKIES_PER_PAGE'])
   return render_template('cookies/index.html', cookies_pagination=cookies_pagination)
 ```
 
