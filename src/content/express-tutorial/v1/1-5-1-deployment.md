@@ -2,7 +2,7 @@
 title: Deployment
 slug: deployment
 description: Learn how to prepare any Express application for easy deployment to the cloud.
-lastUpdate: September 20th, 2022
+lastUpdate: October 6th, 2023
 sectionIndex: 0
 groupIndex: 4
 ---
@@ -21,6 +21,7 @@ Most large-scale cloud providers offer a service that requires low configuration
 
 To list a few options:
 
+- [render.com (external documentation)](https://render.com/docs/deploy-node-express-app)
 - [Google App Engine (tutorial available)](/express-tutorial/v1/deployment-to-app-engine/)
 - [Heroku (tutorial available)](/express-tutorial/v1/deployment-to-heroku/)
 - AWS Elastic Beanstalk
@@ -239,7 +240,7 @@ MDN has some [resources](https://developer.mozilla.org/en-US/docs/Learn/Tools_an
 
 In this lesson, we did not look into deploying your application to a specific provider. Instead, we looked at all the different concepts you should know about in preparation for deploying your app.
 
-There are two separate tutorials that you can follow **after** completing this lesson if you want to deploy to either [Google App Engine (link)](/express-tutorial/v1/deployment-to-app-engine/) or [Heroku (link)](/express-tutorial/v1/deployment-to-heroku/).
+There are two separate tutorials that you can follow **after** completing this lesson if you want to deploy to either [Google App Engine (link)](/express-tutorial/v1/deployment-to-app-engine/) or [Heroku (link)](/express-tutorial/v1/deployment-to-heroku/). As of October 6th, 2023, [render.com (link)](https://render.com/docs/deploy-node-express-app) also offers a free hosting plan and has a quite easy deployment set-up. So if you're looking for a simple and free hosting solution just to try out deployment that's a very good option.
 
 There are many different hosting providers, and a quick web search will result in great instructions on how to deploy your application with those providers. The nice thing about Express is that it's one of the less complicated frameworks to run.
 
