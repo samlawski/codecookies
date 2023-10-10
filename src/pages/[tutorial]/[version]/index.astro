@@ -1,6 +1,9 @@
 ---
-import Base from '../../../layouts/Base.astro'
+import BaseHtml from '../../../layouts/BaseHtml.astro'
+import BaseHead from '../../../layouts/BaseHead.astro'
+import BaseBody from '../../../layouts/BaseBody.astro'
 import { getCollection } from 'astro:content'
+import { ViewTransitions } from 'astro:transitions'
 
 export async function getStaticPaths(){
   const tutorials = await getCollection('tutorials', ({ data }) => data.version)
@@ -45,48 +48,53 @@ const sectionsGroupsLessons = tutorialData.data.sections.map((section, sectionIn
 let lessonCounter = 0
 ---
 
-<Base title={`${tutorialData.data.title} | Code Cookies`} description={tutorialData.data.description}>
-  <nav>
-    <a href="/">Code Cookies</a> &gt; {tutorialData.data.title}
-  </nav>
-  
-  <header>
-    <h1>{tutorialData.data.title}</h1>
-  </header>
-  
-  <main>
+<BaseHtml>
+  <BaseHead title={`${tutorialData.data.title} | Code Cookies`} description={tutorialData.data.description}>
+    <ViewTransitions />
+  </BaseHead>
+  <BaseBody>
+    <nav>
+      <a href="/">Code Cookies</a> &gt; {tutorialData.data.title}
+    </nav>
+    
     <header>
-      <Content />
+      <h1>{tutorialData.data.title}</h1>
     </header>
+    
+    <main>
+      <header>
+        <Content />
+      </header>
+    
+      {!!tutorialData.data.sections.length && sectionsGroupsLessons.map(section => (
+        <h2>{section.title}</h2>
+        <ol>
+          {section.groups.map(group => (
+            <div>
+              {group.title.length > 0 && group.lessons.length > 0 ? 
+                <h3><small>{group.title}:</small></h3> : ''}
   
-    {!!tutorialData.data.sections.length && sectionsGroupsLessons.map(section => (
-      <h2>{section.title}</h2>
-      <ol>
-        {section.groups.map(group => (
-          <div>
-            {group.title.length > 0 && group.lessons.length > 0 ? 
-              <h3><small>{group.title}:</small></h3> : ''}
-
-            {group.lessons.map(lesson => {
-              lessonCounter += 1
-              return (
-                <li><a href={lesson.url}>{lessonCounter}. {lesson.title}</a></li>
-              )
-            })}
-          </div>
-        ))}
-      </ol>
-    ))}
-
-    {!tutorialData.data.sections.length && (
-      <ol>
-        {lessons.map((lesson, lessonIndex) => (
-          <li><a href={`${path}/${lesson.slug}`}>{lessonIndex + 1}. {lesson.data.title}</a></li>
-        ))}
-      </ol>
-    )}
-  </main>
-</Base>
+              {group.lessons.map(lesson => {
+                lessonCounter += 1
+                return (
+                  <li><a href={lesson.url}>{lessonCounter}. {lesson.title}</a></li>
+                )
+              })}
+            </div>
+          ))}
+        </ol>
+      ))}
+  
+      {!tutorialData.data.sections.length && (
+        <ol>
+          {lessons.map((lesson, lessonIndex) => (
+            <li><a href={`${path}/${lesson.slug}`}>{lessonIndex + 1}. {lesson.data.title}</a></li>
+          ))}
+        </ol>
+      )}
+    </main>
+  </BaseBody>
+</BaseHtml>
 
 
 <style is:global>

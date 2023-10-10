@@ -1,0 +1,32 @@
+<body>
+  <slot />
+
+  <footer>
+    <a href="/privacy">privacy policy</a>
+  </footer>
+
+  <!-- Easter Egg -->
+  <script>
+    // Cookie Animation
+    document.getElementById('jsCookie') && document.getElementById('jsCookie').addEventListener('click', function(e){
+      console.info('🍪 Cookie was added. Enjoy!')
+      document.cookie += '🍪'
+      e.target.classList.add('cookie--animated')
+    })
+  </script>
+
+  <!-- Analytics -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      swetrix.init('OcW6tyYA4RXd')
+      swetrix.trackViews()
+    })
+  </script>
+  <noscript>
+    <img
+      src="https://api.swetrix.com/log/noscript?pid=OcW6tyYA4RXd"
+      alt=""
+      referrerpolicy="no-referrer-when-downgrade"
+    />
+  </noscript>
+</body>

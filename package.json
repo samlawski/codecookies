@@ -11,8 +11,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^1.2.1",
-    "astro": "^2.0.18"
+    "@astrojs/sitemap": "^3.0.1",
+    "astro": "^3.2.3"
   },
   "devDependencies": {
     "rehype-autolink-headings": "^6.1.1",

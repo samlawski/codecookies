@@ -1,16 +1,21 @@
 ---
-import Base from '../layouts/Base.astro'
+import BaseHtml from '../layouts/BaseHtml.astro'
+import BaseHead from '../layouts/BaseHead.astro'
+import BaseBody from '../layouts/BaseBody.astro'
 ---
 
-<Base title="No cookie found.">
-  <main>
-    <h1>404</h1>
-    <p>Hm. This page does not seem to exist (anymore?). But no need to worry. Just have a cookie <span id="jsCookie">🍪 </span>.</p>
-    <p></p>
-    <nav>
-      <p>👉 Find <a href="/flask-tutorial/v1">the Flask tutorial here</a>.</p>
-      <p>👉 Or check out <a href="/express-tutorial/v1">the Express tutorial here</a>.</p>
-      <p>🏠 Or go back to the <a href="/">home page</a>.</p>
-    </nav>
-  </main>
-</Base>
+<BaseHtml>
+  <BaseHead title="No cookie found." />
+  <BaseBody>
+    <main>
+      <h1>404</h1>
+      <p>Hm. This page does not seem to exist (anymore?). But no need to worry. Just have a cookie <span id="jsCookie">🍪 </span>.</p>
+      <p></p>
+      <nav>
+        <p>👉 Find <a href="/flask-tutorial/v1">the Flask tutorial here</a>.</p>
+        <p>👉 Or check out <a href="/express-tutorial/v1">the Express tutorial here</a>.</p>
+        <p>🏠 Or go back to the <a href="/">home page</a>.</p>
+      </nav>
+    </main>
+  </BaseBody>
+</BaseHtml>

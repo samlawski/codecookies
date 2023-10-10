@@ -1,6 +1,9 @@
 ---
+import BaseHtml from '../../../layouts/BaseHtml.astro'
+import BaseHead from '../../../layouts/BaseHead.astro'
+import BaseBody from '../../../layouts/BaseBody.astro'
 import { getCollection } from 'astro:content'
-import Base from '../../../layouts/Base.astro'
+import { ViewTransitions } from 'astro:transitions'
 
 export async function getStaticPaths(){
   const tutorials = await getCollection('tutorials', ({ data }) => data.version)
@@ -31,46 +34,51 @@ const { Content } = await lesson.render()
 const tutorialPath = `/${tutorial.data.slug}/${tutorial.data.version}`
 ---
 
-<Base title={`${lesson.data.title} | ${tutorial.data.title}`} description={lesson.data.description}>
-  <nav>
-    <a href="/">Code Cookies</a> &gt; <a href={tutorialPath}>{tutorial.data.title}</a> &gt; {lesson.data.title}
-  </nav>
-
-  <header>
-    <h1>{lesson.data.title}</h1>
-
-    {lesson.data.lastUpdate && (
-      <a href={`https://github.com/samlawski/codecookies/commits/main/src/content/${tutorial.data.slug}/${lesson.id}`} target="_blank">
-        Last content update {lesson.data.lastUpdate}
-      </a>
-    )}
-  </header>
-
-  <main>
-    {lesson.data.videoId && (
-      <div id="video">
-        <p>
-          <button onclick={`showVideo('${lesson.data.videoId}')`} name="Play" title="Play YouTube Video">&#9658;</button>
-          <small>Clicking the <i>Play</i> button above will load a video from YouTube. For playing YouTube videos, <a rel="noreferrer" href="https://policies.google.com/privacy" target="_blank">Google's privacy policy</a> applies.</small>
-        </p>
-      </div>
-    )}
-
-    <article>
-      <Content />
-    </article>
-  </main>
-
-  <footer>
-    {nextLessonPath && (<a class="button" href={nextLessonPath}>
-      Next: {nextLessonTitle}
-    </a>)}
-  </footer>
-
-  <nav>
-    <a href="/">Code Cookies</a> &gt; <a href={tutorialPath}>{tutorial.data.title}</a> &gt; {lesson.data.title}
-  </nav>
-</Base>
+<BaseHtml>
+  <BaseHead title={`${lesson.data.title} | ${tutorial.data.title}`} description={lesson.data.description}>
+    <ViewTransitions />
+  </BaseHead>
+  <BaseBody>
+    <nav>
+      <a href="/">Code Cookies</a> &gt; <a href={tutorialPath}>{tutorial.data.title}</a> &gt; {lesson.data.title}
+    </nav>
+  
+    <header>
+      <h1>{lesson.data.title}</h1>
+  
+      {lesson.data.lastUpdate && (
+        <a href={`https://github.com/samlawski/codecookies/commits/main/src/content/${tutorial.data.slug}/${lesson.id}`} target="_blank">
+          Last content update {lesson.data.lastUpdate}
+        </a>
+      )}
+    </header>
+  
+    <main>
+      {lesson.data.videoId && (
+        <div id="video">
+          <p>
+            <button onclick={`showVideo('${lesson.data.videoId}')`} name="Play" title="Play YouTube Video">&#9658;</button>
+            <small>Clicking the <i>Play</i> button above will load a video from YouTube. For playing YouTube videos, <a rel="noreferrer" href="https://policies.google.com/privacy" target="_blank">Google's privacy policy</a> applies.</small>
+          </p>
+        </div>
+      )}
+  
+      <article>
+        <Content />
+      </article>
+    </main>
+  
+    <footer>
+      {nextLessonPath && (<a class="button" href={nextLessonPath}>
+        Next: {nextLessonTitle}
+      </a>)}
+    </footer>
+  
+    <nav>
+      <a href="/">Code Cookies</a> &gt; <a href={tutorialPath}>{tutorial.data.title}</a> &gt; {lesson.data.title}
+    </nav>
+  </BaseBody>
+</BaseHtml>
 
 <script is:inline>
   function showVideo(videoId){
