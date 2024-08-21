@@ -6,9 +6,9 @@ import { getCollection } from 'astro:content'
 import { ViewTransitions } from 'astro:transitions'
 
 export async function getStaticPaths(){
-  const tutorials = await getCollection('tutorials', ({ data }) => data.version)
+  const categories = await getCollection('categories', ({ data }) => data.version)
 
-  const lessonsPerTutorial = await Promise.all(tutorials.map(async tutorial => {
+  const lessonsPerTutorial = await Promise.all(categories.map(async tutorial => {
     // example id: v1/1-1-1-setup-and-overview (it includes the path of sub directories)
     const tutorialLessons = await getCollection(tutorial.slug, ({ id }) => id.startsWith(tutorial.data.version + '/') )
 

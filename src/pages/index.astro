@@ -4,7 +4,7 @@ import BaseHead from '../layouts/BaseHead.astro'
 import BaseBody from '../layouts/BaseBody.astro'
 import { getCollection } from 'astro:content'
 
-const tutorials = await getCollection('tutorials')
+const categories = await getCollection('categories')
 ---
 
 <BaseHtml>
@@ -20,7 +20,7 @@ const tutorials = await getCollection('tutorials')
 		
 		<main>
 			<ul role="list">
-				{tutorials.map(tutorial => (
+				{categories.map(tutorial => (
 					<li>
 						<a href={`/${tutorial.slug}${tutorial.data.version ? '/' + tutorial.data.version : ''}`}>
 							<h2>{tutorial.data.title}</h2>

@@ -6,9 +6,9 @@ import { getCollection } from 'astro:content'
 import { ViewTransitions } from 'astro:transitions'
 
 export async function getStaticPaths(){
-  const tutorials = await getCollection('tutorials', ({ data }) => data.version)
-
-  return await Promise.all(tutorials.map(async tutorialData => {
+  const categories = await getCollection('categories', ({ data }) => data.version)
+categories
+  return await Promise.all(categories.map(async tutorialData => {
     const lessons = await getCollection(tutorialData.slug, ({ id }) => id.startsWith(tutorialData.data.version + '/' ))
 
     return {
