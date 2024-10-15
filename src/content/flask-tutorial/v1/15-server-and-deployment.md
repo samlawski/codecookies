@@ -42,8 +42,7 @@ gunicorn run:app
 
 >💡 **Important note for Windows users**
 >
->_Gunicorn_ is designed to run on _Unix_ systems. This refers to distributions of _Linux_ and _macOS_. It does not run on _Windows_. 
->That's not much of a problem right now, though, because the purpose of using _Gunicorn_ is to run it on the web server. On your personal computer you can continue to use the default Flask server with `python run.py`.
+>_Gunicorn_ is designed to run on _Unix_ systems. This refers to distributions of _Linux_ and _macOS_. It does not run on _Windows_. That's not much of a problem right now, though, because the purpose of using _Gunicorn_ is to run it on the web server. On your personal computer you can continue to use the default Flask server with `python run.py`.
 >
 >Alternatively to _Gunicorn_ you could also use another web server that does run on Windows such as [uWSGI](https://flask.palletsprojects.com/en/2.2.x/deploying/uwsgi/) or [Waitress](https://flask.palletsprojects.com/en/2.2.x/deploying/waitress/). Either of those are fine. The reason we use [Gunicorn](https://flask.palletsprojects.com/en/2.2.x/deploying/gunicorn/) in the tutorial is because of its popularity.
 
@@ -51,7 +50,36 @@ The `run` is the name of your **run.py** file. `app` is the `app` variable withi
 
 That's it. Now you have your application running with the _Gunicorn_ web server instead of the built-in Flask server. (Note that the port of the IP might be different. Instead of 127.0.0.1:5000 it might be 127.0.0.1:8000. Check the output in the Terminal to see the link to your application.)
 
-While you develop your application, that doesn't really matter much. You can continue to use the built-in Flask server. But you can also use it locally. It can be a good idea in larger applications to use the same software on your computer as you do on the server. This way, you catch issues specific to, e.g., the web server early. 
+While you develop your application, that doesn't really matter much. You can continue to use the built-in Flask server. But you can also use it locally. It can be a good idea in larger applications to use the same software on your computer as you do on the server. This way, you catch issues specific to, e.g., the web server early.
+
+>🪵 **Logging with Gunicorn**
+>
+>After switching to _Gunicorn_ you may notice that logging like this `current_app.logger.info('Some text')` does not work anymore. That's because _Gunicorn_ requires you to explicitely configure how logging should be handled. That's generally a good idea because on a production server you usually want fine-grained control over how logs are handled. In large applications with a lot of traffic, logs can get pretty long pretty fast. So you usually use either an external logging service or come up with a way of deleting old logs. 
+>
+>For now, however, let's make sure the logs are working in the first place. To do that, open your **run.py** file. In there, we have this condition `if __name__ == "__main__":` that checks if the app is run directly by calling `python run.py`. We would like to add an additional condition that is only true if the application is run using _Gunicorn_. _Gunicorn_ automatically sets an **environment variable** called `"GUNICORN_CMD_ARGS"`. So we can check if that variable is present and configure the logger only in that case.
+>
+>At the top of the **run.py** file import `logging` (which we need for the logger configuration) and `os` (which we need to read environment variables). 
+>
+>```python
+>import logging
+>import os
+>```
+>
+>Then, add an `elif` to the aforementioned condition and add the logger configuration like this:
+>
+>```python
+>import logging
+>import os
+>
+>if __name__ == "__main__":
+>    app.run()
+>elif "GUNICORN_CMD_ARGS" in os.environ:
+>    gunicorn_logger = logging.getLogger("gunicorn.error")
+>    app.logger.handlers = gunicorn_logger.handlers
+>    app.logger.setLevel(gunicorn_logger.level)
+>```
+>
+>You can read about the details of configuring the Flask logger [in the official documentation](https://flask.palletsprojects.com/en/latest/logging/). But essentially, what we're doing, is to connect the built-in _Gunicorn_ logger with the logs of your application and making sure that it dynamically sets the right logging "level" (i.e., error, warning, info, etc.)
 
 After making those updates don't forget to commit those changes with **git** and upload them to a remote git host (like GitHub, Gitlab, etc.). This will become very important in a minute because render.com uses git for deployment. 
 
