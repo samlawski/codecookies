@@ -44,6 +44,6 @@ import BaseBody from '../layouts/BaseBody.astro'
 
 <script is:inline>
   function viewCookies(){
-    document.getElementById('jsViewCookies').innerHTML = 'Cookies currently set: ' + (document.cookie || 'None. Try clicking on the emoji above. Then, click the "View cookies" button again.')
+    document.getElementById('jsViewCookies').innerText = 'Cookies currently set: ' + (document.cookie || 'None. Try clicking on the emoji above. Then, click the "View cookies" button again.')
   }
 </script>
